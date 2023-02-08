@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register Description &mdash; AS6581  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Pinout" href="pinout.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> AS6581
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="pinout.html">Pinout</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Register Description</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#standard-sid-registers">Standard SID Registers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#freq-lo"><code class="docutils literal notranslate"><span class="pre">Freq</span> <span class="pre">Lo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#freq-hi"><code class="docutils literal notranslate"><span class="pre">Freq</span> <span class="pre">Hi</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pw-lo"><code class="docutils literal notranslate"><span class="pre">PW</span> <span class="pre">Lo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pw-hi"><code class="docutils literal notranslate"><span class="pre">PW</span> <span class="pre">Hi</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#control-reg"><code class="docutils literal notranslate"><span class="pre">Control</span> <span class="pre">Reg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#attack-decay"><code class="docutils literal notranslate"><span class="pre">Attack/Decay</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sustain-release"><code class="docutils literal notranslate"><span class="pre">Sustain/Release</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">Freq</span> <span class="pre">Lo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">Freq</span> <span class="pre">Hi</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">PW</span> <span class="pre">Lo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">PW</span> <span class="pre">Hi</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">Control</span> <span class="pre">Reg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">Attack/Decay</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7"><code class="docutils literal notranslate"><span class="pre">Sustain/Release</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8"><code class="docutils literal notranslate"><span class="pre">Freq</span> <span class="pre">Lo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9"><code class="docutils literal notranslate"><span class="pre">Freq</span> <span class="pre">Hi</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10"><code class="docutils literal notranslate"><span class="pre">PW</span> <span class="pre">Lo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11"><code class="docutils literal notranslate"><span class="pre">PW</span> <span class="pre">Hi</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12"><code class="docutils literal notranslate"><span class="pre">Control</span> <span class="pre">Reg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13"><code class="docutils literal notranslate"><span class="pre">Attack/Decay</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14"><code class="docutils literal notranslate"><span class="pre">Sustain/Release</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fc-lo"><code class="docutils literal notranslate"><span class="pre">FC</span> <span class="pre">Lo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fc-hi"><code class="docutils literal notranslate"><span class="pre">FC</span> <span class="pre">Hi</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#res-filt"><code class="docutils literal notranslate"><span class="pre">RES/Filt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mode-vol"><code class="docutils literal notranslate"><span class="pre">Mode/Vol</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#potx"><code class="docutils literal notranslate"><span class="pre">POTX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#poty"><code class="docutils literal notranslate"><span class="pre">POTY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#osc3-random"><code class="docutils literal notranslate"><span class="pre">OSC3/Random</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#env3"><code class="docutils literal notranslate"><span class="pre">ENV3</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sid-fine-tune-registers">SID Fine-Tune registers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#filter-offset-hi"><code class="docutils literal notranslate"><span class="pre">Filter</span> <span class="pre">offset</span> <span class="pre">hi</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#filter-offset-lo"><code class="docutils literal notranslate"><span class="pre">Filter</span> <span class="pre">offset</span> <span class="pre">lo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#filter-amplitude-adjust"><code class="docutils literal notranslate"><span class="pre">Filter</span> <span class="pre">amplitude</span> <span class="pre">adjust</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#global-configuration-register">Global Configuration Register</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AS6581</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Register Description</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/registers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="register-description">
+<h1>Register Description<a class="headerlink" href="#register-description" title="Permalink to this heading"></a></h1>
+<p>Notice:
+This documentation does not serve to repeat any information on the original SID architecture. Please see the original 6581 datasheet for this information.</p>
+<p>This page mostly serves to document any registers specific to the AS6581, and to highlight differences between the MOS 6581 and AS6581.</p>
+<p>All registers are read/write unless otherwise specified (even those designated write-only in the MOS 6581’s datasheet).</p>
+<section id="standard-sid-registers">
+<h2>Standard SID Registers<a class="headerlink" href="#standard-sid-registers" title="Permalink to this heading"></a></h2>
+<p><strong>Voice 1 Registers</strong></p>
+<section id="freq-lo">
+<h3><code class="docutils literal notranslate"><span class="pre">Freq</span> <span class="pre">Lo</span></code><a class="headerlink" href="#freq-lo" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x00</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "FREQ[7:0]", "bits": 8}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Low byte of Voice 1 frequency setting.</p>
+</section>
+<section id="freq-hi">
+<h3><code class="docutils literal notranslate"><span class="pre">Freq</span> <span class="pre">Hi</span></code><a class="headerlink" href="#freq-hi" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x01</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "FREQ[15:8]", "bits": 8}],
+  "config": {"hspace": 700}
+}
+</script>
+</div>
+<p>High byte of Voice 1 frequency setting.</p>
+</section>
+<section id="pw-lo">
+<h3><code class="docutils literal notranslate"><span class="pre">PW</span> <span class="pre">Lo</span></code><a class="headerlink" href="#pw-lo" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x02</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "PW[7:0]", "bits": 8}],
+   "config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Low byte of Voice 1 pulse-width setting.</p>
+</section>
+<section id="pw-hi">
+<h3><code class="docutils literal notranslate"><span class="pre">PW</span> <span class="pre">Hi</span></code><a class="headerlink" href="#pw-hi" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x03</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "PW[11:8]", "bits": 4},
+    {"type": 1, "bits": 4}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>High nibble of Voice 1 pulse-width setting.</p>
+</section>
+<section id="control-reg">
+<h3><code class="docutils literal notranslate"><span class="pre">Control</span> <span class="pre">Reg</span></code><a class="headerlink" href="#control-reg" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x04</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "GATE", "bits": 1},
+    {"name": "SYNC", "bits": 1},
+    {"name": "RING MOD", "bits": 1},
+    {"name": "TEST", "bits": 1},
+    {"name": "TRIANGLE", "bits": 1},
+    {"name": "SAWTOOTH", "bits": 1},
+    {"name": "SQUARE", "bits": 1},
+    {"name": "NOISE", "bits": 1}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Control reg for Voice 1. Each bit controls a setting for Voice 1.</p>
+</section>
+<section id="attack-decay">
+<h3><code class="docutils literal notranslate"><span class="pre">Attack/Decay</span></code><a class="headerlink" href="#attack-decay" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x05</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "DCY[3:0]", "bits": 4},
+    {"name": "ATK[3:0]", "bits": 4}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Attack and Decay time settings for Voice 1.</p>
+</section>
+<section id="sustain-release">
+<h3><code class="docutils literal notranslate"><span class="pre">Sustain/Release</span></code><a class="headerlink" href="#sustain-release" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x06</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+        {"name": "RIS[3:0]", "bits": 4},
+        {"name": "STN[3:0]", "bits": 4}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Sustain level and Release time settings for Voice 1.</p>
+<p><strong>Voice 2 Registers</strong></p>
+</section>
+<section id="id1">
+<h3><code class="docutils literal notranslate"><span class="pre">Freq</span> <span class="pre">Lo</span></code><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x07</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "FREQ[7:0]", "bits": 8}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Low byte of Voice 2 frequency setting.</p>
+</section>
+<section id="id2">
+<h3><code class="docutils literal notranslate"><span class="pre">Freq</span> <span class="pre">Hi</span></code><a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x08</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "FREQ[15:8]", "bits": 8}],
+  "config": {"hspace": 700}
+}
+</script>
+</div>
+<p>High byte of Voice 2 frequency setting.</p>
+</section>
+<section id="id3">
+<h3><code class="docutils literal notranslate"><span class="pre">PW</span> <span class="pre">Lo</span></code><a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x09</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "PW[7:0]", "bits": 8}],
+   "config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Low byte of Voice 2 pulse-width setting.</p>
+</section>
+<section id="id4">
+<h3><code class="docutils literal notranslate"><span class="pre">PW</span> <span class="pre">Hi</span></code><a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x0A</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "PW[11:8]", "bits": 4},
+    {"type": 1, "bits": 4}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>High nibble of Voice 2 pulse-width setting.</p>
+</section>
+<section id="id5">
+<h3><code class="docutils literal notranslate"><span class="pre">Control</span> <span class="pre">Reg</span></code><a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x0B</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "GATE", "bits": 1},
+    {"name": "SYNC", "bits": 1},
+    {"name": "RING MOD", "bits": 1},
+    {"name": "TEST", "bits": 1},
+    {"name": "TRIANGLE", "bits": 1},
+    {"name": "SAWTOOTH", "bits": 1},
+    {"name": "SQUARE", "bits": 1},
+    {"name": "NOISE", "bits": 1}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Control reg for Voice 2. Each bit controls a setting for Voice 2.</p>
+</section>
+<section id="id6">
+<h3><code class="docutils literal notranslate"><span class="pre">Attack/Decay</span></code><a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x0C</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "DCY[3:0]", "bits": 4},
+    {"name": "ATK[3:0]", "bits": 4}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Attack and Decay time settings for Voice 2.</p>
+</section>
+<section id="id7">
+<h3><code class="docutils literal notranslate"><span class="pre">Sustain/Release</span></code><a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x0D</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+        {"name": "RIS[3:0]", "bits": 4},
+        {"name": "STN[3:0]", "bits": 4}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Sustain level and Release time settings for Voice 2.</p>
+<p><strong>Voice 3 Registers</strong></p>
+</section>
+<section id="id8">
+<h3><code class="docutils literal notranslate"><span class="pre">Freq</span> <span class="pre">Lo</span></code><a class="headerlink" href="#id8" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x0E</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "FREQ[7:0]", "bits": 8}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Low byte of Voice 3 frequency setting.</p>
+</section>
+<section id="id9">
+<h3><code class="docutils literal notranslate"><span class="pre">Freq</span> <span class="pre">Hi</span></code><a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x0F</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "FREQ[15:8]", "bits": 8}],
+  "config": {"hspace": 700}
+}
+</script>
+</div>
+<p>High byte of Voice 3 frequency setting.</p>
+</section>
+<section id="id10">
+<h3><code class="docutils literal notranslate"><span class="pre">PW</span> <span class="pre">Lo</span></code><a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x10</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "PW[7:0]", "bits": 8}],
+   "config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Low byte of Voice 3 pulse-width setting.</p>
+</section>
+<section id="id11">
+<h3><code class="docutils literal notranslate"><span class="pre">PW</span> <span class="pre">Hi</span></code><a class="headerlink" href="#id11" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x11</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "PW[11:8]", "bits": 4},
+    {"type": 1, "bits": 4}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>High nibble of Voice 3 pulse-width setting.</p>
+</section>
+<section id="id12">
+<h3><code class="docutils literal notranslate"><span class="pre">Control</span> <span class="pre">Reg</span></code><a class="headerlink" href="#id12" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x12</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "GATE", "bits": 1},
+    {"name": "SYNC", "bits": 1},
+    {"name": "RING MOD", "bits": 1},
+    {"name": "TEST", "bits": 1},
+    {"name": "TRIANGLE", "bits": 1},
+    {"name": "SAWTOOTH", "bits": 1},
+    {"name": "SQUARE", "bits": 1},
+    {"name": "NOISE", "bits": 1}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Control reg for Voice 3. Each bit controls a setting for Voice 3.</p>
+</section>
+<section id="id13">
+<h3><code class="docutils literal notranslate"><span class="pre">Attack/Decay</span></code><a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x13</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "DCY[3:0]", "bits": 4},
+    {"name": "ATK[3:0]", "bits": 4}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Attack and Decay time settings for Voice 3.</p>
+</section>
+<section id="id14">
+<h3><code class="docutils literal notranslate"><span class="pre">Sustain/Release</span></code><a class="headerlink" href="#id14" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x14</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+        {"name": "RIS[3:0]", "bits": 4},
+        {"name": "STN[3:0]", "bits": 4}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Sustain level and Release time settings for Voice 3.</p>
+<p><strong>Filter registers</strong></p>
+</section>
+<section id="fc-lo">
+<h3><code class="docutils literal notranslate"><span class="pre">FC</span> <span class="pre">Lo</span></code><a class="headerlink" href="#fc-lo" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x15</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "FC[2:0]", "bits": 3},
+    {"type": 1, "bits": 5}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Lowest 3 bits for filter cutoff frequency setting.</p>
+</section>
+<section id="fc-hi">
+<h3><code class="docutils literal notranslate"><span class="pre">FC</span> <span class="pre">Hi</span></code><a class="headerlink" href="#fc-hi" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x16</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "FC[10:3]", "bits": 8}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Highest 8 bits for filter cutoff frequency setting.</p>
+</section>
+<section id="res-filt">
+<h3><code class="docutils literal notranslate"><span class="pre">RES/Filt</span></code><a class="headerlink" href="#res-filt" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x17</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "Filt 1", "bits": 1},
+    {"name": "Filt 2", "bits": 1},
+    {"name": "Filt 3", "bits": 1},
+    {"name": "Filt EX", "bits": 1},
+    {"name": "RES[3:0]", "bits": 4}
+    ],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Filter resonance setting, and bit-mask for which channels should use the filter. <code class="docutils literal notranslate"><span class="pre">Filt</span> <span class="pre">EX</span></code> is unimplemented in the AS6581, and setting it will have no effect.</p>
+</section>
+<section id="mode-vol">
+<h3><code class="docutils literal notranslate"><span class="pre">Mode/Vol</span></code><a class="headerlink" href="#mode-vol" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x18</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "VOL[3:0]", "bits": 4},
+    {"name": "LP", "bits": 1},
+    {"name": "BP", "bits": 1},
+    {"name": "HP", "bits": 1},
+    {"name": "3 OFF", "bits": 1}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Filter mode setting and volume setting.</p>
+<p><strong>Misc registers</strong></p>
+</section>
+<section id="potx">
+<h3><code class="docutils literal notranslate"><span class="pre">POTX</span></code><a class="headerlink" href="#potx" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x19</span></code> (read-only)</p>
+<p>Notice: This register is not implemented in the AS6581, and will always read 0.</p>
+</section>
+<section id="poty">
+<h3><code class="docutils literal notranslate"><span class="pre">POTY</span></code><a class="headerlink" href="#poty" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x1A</span></code> (read-only)</p>
+<p>Notice: This register is not implemented in the AS6581, and will always read 0.</p>
+</section>
+<section id="osc3-random">
+<h3><code class="docutils literal notranslate"><span class="pre">OSC3/Random</span></code><a class="headerlink" href="#osc3-random" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x1B</span></code> (read-only)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "OSC3[7:0]", "bits": 8}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Returns the highest 8 bits of the current value output by Voice 3’s tone generator.</p>
+</section>
+<section id="env3">
+<h3><code class="docutils literal notranslate"><span class="pre">ENV3</span></code><a class="headerlink" href="#env3" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x1C</span></code> (read-only)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "E[7:0]", "bits": 8}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Returns the current envelope volume of Voice 3.</p>
+</section>
+</section>
+<section id="sid-fine-tune-registers">
+<h2>SID Fine-Tune registers<a class="headerlink" href="#sid-fine-tune-registers" title="Permalink to this heading"></a></h2>
+<p>These registers use addresses originally unused by the SID, to include registers meant to fine-tune the sound of the SID post-production. They are meant to compensate for the uncertainty about the sound generated by the real hardware, as simulations of the chip run in software are not 100% accurate.
+The following registers are not meant to be modified by the user, instead being loaded with manually fine-tuned values by the management controller on power-up or reset.</p>
+<section id="filter-offset-hi">
+<h3><code class="docutils literal notranslate"><span class="pre">Filter</span> <span class="pre">offset</span> <span class="pre">hi</span></code><a class="headerlink" href="#filter-offset-hi" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x1D</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+        {"name": "FOSET[14:8]", "bits": 7},
+        {type: 1, "bits": 1}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+</section>
+<section id="filter-offset-lo">
+<h3><code class="docutils literal notranslate"><span class="pre">Filter</span> <span class="pre">offset</span> <span class="pre">lo</span></code><a class="headerlink" href="#filter-offset-lo" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x1E</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+        {"name": "FOSET[7:0]", "bits": 8}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>The filter offset is a 14-bit value added onto the raw output of the SID filter, to compensate for signal level differences. Its loaded with the default value of 8192 on power-up or reset.
+It also has the effect of pushing the filter output entirely into the positive number range. If filter offset is set to a lower value, the filter will begin producing negative numbers, which would be clamped to 0.</p>
+</section>
+<section id="filter-amplitude-adjust">
+<h3><code class="docutils literal notranslate"><span class="pre">Filter</span> <span class="pre">amplitude</span> <span class="pre">adjust</span></code><a class="headerlink" href="#filter-amplitude-adjust" title="Permalink to this heading"></a></h3>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x1F</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+        {"name": "FAJ[1:0]", "bits": 2},
+        {type: 1, "bits": 6}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>The raw filter output will be right-shifted (exponentially reduced in amplitude) according to the setting in this register. Initialized to 0 on power-up or reset, and most likely unused, unless the characteristics of the physical chip end up differing greatly from expectations.</p>
+</section>
+</section>
+<section id="global-configuration-register">
+<h2>Global Configuration Register<a class="headerlink" href="#global-configuration-register" title="Permalink to this heading"></a></h2>
+<p>This is probably the most important register in the AS6581, as it is what controls the various output modes, mixer modes and contains the SID select bits.</p>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x19</span></code> (write-only)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+        {"name": "SIDSEL[2:0]", "bits": 3},
+        {"name": "MMODE[1:0]", "bits": 2},
+        {"name": "SPI_mode", "bits": 1},
+        {"name": "SPI_rst", "bits": 1},
+        {"name": "SPI_en", "bits": 1}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>Information about the functionality controlled by this register is documented on their own pages.</p>
+<p>For information on <code class="docutils literal notranslate"><span class="pre">SIDSEL</span></code>, see <strong>Addressing multiple SIDs.</strong></p>
+<p>For information on <code class="docutils literal notranslate"><span class="pre">MMODE</span></code>, see <strong>Mixer configuration.</strong></p>
+<p>For information on <code class="docutils literal notranslate"><span class="pre">SPI_mode</span></code>, <code class="docutils literal notranslate"><span class="pre">SPI_rst</span></code> and <code class="docutils literal notranslate"><span class="pre">SPI_en</span></code>, see <strong>SPI DAC output mode.</strong></p>
+<p>This register is <strong>global</strong>, meaning there exists only one copy of it, and writing to this address will always write this same register, no matter the value of <code class="docutils literal notranslate"><span class="pre">SIDSEL</span></code>.</p>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pinout.html" class="btn btn-neutral float-left" title="Pinout" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Tholin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
