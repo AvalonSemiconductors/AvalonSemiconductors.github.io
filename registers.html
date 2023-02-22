@@ -624,6 +624,20 @@ It also has the effect of pushing the filter output entirely into the positive n
 <p>For information on <code class="docutils literal notranslate"><span class="pre">SPI_mode</span></code>, <code class="docutils literal notranslate"><span class="pre">SPI_rst</span></code> and <code class="docutils literal notranslate"><span class="pre">SPI_en</span></code>, see <strong>SPI DAC output mode.</strong></p>
 <p>This register is <strong>global</strong>, meaning there exists only one copy of it, and writing to this address will always write this same register, no matter the value of <code class="docutils literal notranslate"><span class="pre">SIDSEL</span></code>.</p>
 </section>
+<section id="sid-mask-register">
+<h2>SID Mask Register<a class="headerlink" href="#sid-mask-register" title="Permalink to this heading"></a></h2>
+<p>Base address: <code class="docutils literal notranslate"><span class="pre">0x1A</span></code> (write-only)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+        {"name": "SIDEN[7:0]", "bits": 8}],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<p>This register contains an 8-bit mask of which SIDs are currently enabled. Outputs of SIDs for which the bit is 0 in this register will not be mixed into the final output.</p>
+</section>
 </section>
 
     <script type="text/javascript">
