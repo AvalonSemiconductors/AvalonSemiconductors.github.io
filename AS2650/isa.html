@@ -19,7 +19,7 @@
         <script src="static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="https://wavedrom.com/skins/default.js"></script>
         <script src="https://wavedrom.com/wavedrom.min.js"></script>
-        <script src="static/js/table.js?v=deb90935"></script>
+        <script src="static/js/table.js?v=744aa474"></script>
     <script src="static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -405,6 +405,26 @@
         </tr>
     </tbody>
 </table>
+<br>
+<h4>Table colorization:</h4>
+<fieldset id="coloration-changer">
+    <div style="display: inline-block; margin-right: 20px;">
+        <input type="radio" id="coloration-none" name="coloration" value="None" checked />
+        <label for="coloration-none">None</label>
+    </div>
+    <div style="display: inline-block; margin-right: 20px;">
+        <input type="radio" id="coloration-size" name="coloration" value="Size" />
+        <label for="coloration-size">Length (bytes)</label>
+    </div>
+    <div style="display: inline-block; margin-right: 20px;">
+        <input type="radio" id="coloration-addressing" name="coloration" value="Addressing" />
+        <label for="coloration-addressing">Indir/Indexed Addressing Support</label>
+    </div>
+    <div style="display: inline-block; margin-right: 20px;">
+        <input type="radio" id="coloration-cc" name="coloration" value="ConditionCode" />
+        <label for="coloration-cc">Condition Code Change</label>
+    </div>
+</fieldset>
 <br>
 <h3>Extended Instructions</h3>
 <table title="isa-ext" class="isa-table">

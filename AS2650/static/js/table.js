@@ -47,4 +47,67 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	});
 	
 	$('.isa-table').mouseout(function(e) { $('.tooltip').remove(); });
+
+	function updateColoration() {
+		let tds = $('td').toArray();
+		tds.forEach(t => {
+			$(t).removeClass('highlight-red');
+			$(t).removeClass('highlight-green');
+			$(t).removeClass('highlight-yellow');
+		});
+		if($('#coloration-size').is(':checked')) {
+			tds.forEach(t => {
+				let desc = $(t).attr('desc');
+				if(!desc || desc == '') return;
+				let vals = desc.split('|');
+				if(vals[1] == '1') {
+					$(t).addClass('highlight-green');
+				}
+				if(vals[1] == '2') {
+					$(t).addClass('highlight-yellow');
+				}
+				if(vals[1] == '3') {
+					$(t).addClass('highlight-red');
+				}
+			});
+		}
+		if($('#coloration-addressing').is(':checked')) {
+			tds.forEach(t => {
+				let desc = $(t).attr('desc');
+				if(!desc || desc == '') return;
+				let vals = desc.split('|');
+				if(vals[2] == 'T' && vals[3] != 'T') {
+					$(t).addClass('highlight-green');
+				}
+				if(vals[2] == 'T' && vals[3] == 'T') {
+					$(t).addClass('highlight-yellow');
+				}
+				if(vals[2] == 'T' && vals[3] == 'R') {
+					$(t).addClass('highlight-red');
+				}
+			});
+		}
+		if($('#coloration-cc').is(':checked')) {
+			tds.forEach(t => {
+				let desc = $(t).attr('desc');
+				if(!desc || desc == '') return;
+				let vals = desc.split('|');
+				var CC = vals[0].charAt(3);
+				if(CC == '1') {
+					$(t).addClass('highlight-green');
+				}
+				if(CC == '2' || CC == '5') {
+					$(t).addClass('highlight-yellow');
+				}
+				if(CC == '3') {
+					$(t).addClass('highlight-red');
+				}
+			});
+		}
+	}
+	
+	$('input[type=\'radio\']').change(_ => {
+		updateColoration();
+	});
+	updateColoration();
 });
