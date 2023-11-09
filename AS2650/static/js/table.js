@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		self.removeClass('hr');
 	});
 	
-	/*$('td').toArray().forEach(t => {
+	$('td').toArray().forEach(t => {
 		let desc = $(t).attr('desc');
 		if(!desc || desc == '') return;
 		let vals = desc.split('|');
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		}
 		if(vals[2] == 'T' && vals[3] == 'R') {
 			$(t).addClass('highlight-red');
-		}*
+		}*/
 		
 		/*var CC = vals[0].charAt(3);
 		if(CC == '1') {
@@ -51,8 +51,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		}
 		if(CC == '3') {
 			$(t).addClass('highlight-red');
-		}*
-	});*/
+		}*/
+	});
 	
 	$('td:not(:has(\'a\')):not(:first-child)').mouseover(function(e) {
 		let prefix = $(this).closest('table').attr('title') == 'isa-ext' ? 'B7 ' : '';
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		var CC_text = 'Unchanged';
 		if(CC == '1') CC_text = '<br>&emsp;&emsp;  00: = 0<br>&emsp;&emsp;  01: > 0<br>&emsp;&emsp;  10: < 0';
 		else if(CC == '2') CC_text = '<br>&emsp;&emsp;  00: r0 = r<br>&emsp;&emsp;  01: r0 > r<br>&emsp;&emsp;  10: r0 < r';
-		else if(CC == '2') CC_text = '<br>&emsp;&emsp;  00: r = V<br>&emsp;&emsp;  01: r > V<br>&emsp;&emsp;  10: r < V';
+		else if(CC == '5') CC_text = '<br>&emsp;&emsp;  00: r = V<br>&emsp;&emsp;  01: r > V<br>&emsp;&emsp;  10: r < V';
 		else if(CC == '3') CC_text = '<br>&emsp;&emsp;  00: All selected bits 1<br>&emsp;&emsp;  01: Not all selected bits 1<br>&emsp;&emsp;';
 		else if(CC == '4') CC_text = 'Loaded from r0';
 		var indir = val[2] == 'T';
