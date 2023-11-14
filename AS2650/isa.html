@@ -19,7 +19,7 @@
         <script src="static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="https://wavedrom.com/skins/default.js"></script>
         <script src="https://wavedrom.com/wavedrom.min.js"></script>
-        <script src="static/js/table.js?v=ef196efa"></script>
+        <script src="static/js/table.js?v=64a17238"></script>
     <script src="static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -132,10 +132,10 @@
             <td desc="----|2|T|F|_|Branches to PC+Immediate if the CC equals to 01. Immediate is signed value -64 -> 63.">bctr,gt</td>
             <td desc="----|2|T|F|_|Branches to PC+Immediate if the CC equals to 10. Immediate is signed value -64 -> 63.">bctr,lt</td>
             <td desc="----|2|T|F|_|Unconditionally branches to PC+Immediate. Immediate is signed value -64 -> 63.">bctr,un</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC equals to 00. Immediate is unsigned value 0 -> 8191.">bcta,eq</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC equals to 01. Immediate is unsigned value 0 -> 8191.">bcta,gt</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC equals to 10. Immediate is unsigned value 0 -> 8191.">bcta,lt</td>
-            <td desc="----|3|T|F|_|Unconditionally branches to address specified by Immediate. Immediate is unsigned value 0 -> 8191.">bcta,un</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC equals to 00. Immediate is unsigned value 0 -> 32767.">bcta,eq</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC equals to 01. Immediate is unsigned value 0 -> 32767.">bcta,gt</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC equals to 10. Immediate is unsigned value 0 -> 32767.">bcta,lt</td>
+            <td desc="----|3|T|F|_|Unconditionally branches to address specified by Immediate. Immediate is unsigned value 0 -> 32767.">bcta,un</td>
         </tr>
         <tr>
             <th>2</th>
@@ -170,10 +170,10 @@
             <td desc="---|2|T|F|_|Branches to PC+Immediate if the CC equals to 01 and pushes a return address onto the internal stack. Immediate is signed value -64 -> 63.">bstr,gt</td>
             <td desc="---|2|T|F|_|Branches to PC+Immediate if the CC equals to 10 and pushes a return address onto the internal stack. Immediate is signed value -64 -> 63.">bstr,lt</td>
             <td desc="---|2|T|F|_|Unconditionally branches to PC+Immediate and pushes a return address onto the internal stack. Immediate is signed value -64 -> 63.">bstr,un</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC equals to 00 and pushes a return address onto the stack. Immediate is unsigned value 0 -> 8191.">bsta,eq</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC equals to 01 and pushes a return address onto the stack. Immediate is unsigned value 0 -> 8191.">bsta,gt</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC equals to 10 and pushes a return address onto the stack. Immediate is unsigned value 0 -> 8191.">bsta,lt</td>
-            <td desc="----|3|T|F|_|Unconditionally branches to address specified by Immediate and pushes a return address onto the stack. Immediate is unsigned value 0 -> 8191.">bsta,un</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC equals to 00 and pushes a return address onto the stack. Immediate is unsigned value 0 -> 32767.">bsta,eq</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC equals to 01 and pushes a return address onto the stack. Immediate is unsigned value 0 -> 32767.">bsta,gt</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC equals to 10 and pushes a return address onto the stack. Immediate is unsigned value 0 -> 32767.">bsta,lt</td>
+            <td desc="----|3|T|F|_|Unconditionally branches to address specified by Immediate and pushes a return address onto the stack. Immediate is unsigned value 0 -> 32767.">bsta,un</td>
         </tr>
         <tr>
             <th>4</th>
@@ -208,10 +208,10 @@
             <td desc="----|2|T|F|_|Branches to PC+Immediate if the value of r1 does not equals to 0. Immediate is signed value -64 -> 63.">brnr,r1</td>
             <td desc="----|2|T|F|_|Branches to PC+Immediate if the value of r2 does not equals to 0. Immediate is signed value -64 -> 63.">brnr,r2</td>
             <td desc="----|2|T|F|_|Branches to PC+Immediate if the value of r3 does not equals to 0. Immediate is signed value -64 -> 63.">brnr,r3</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the value of r0 does not equals to 0. Immediate is unsigned value 0 -> 8191.">brna,r0</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the value of r1 does not equals to 0. Immediate is unsigned value 0 -> 8191.">brna,r1</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the value of r2 does not equals to 0. Immediate is unsigned value 0 -> 8191.">brna,r2</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the value of r3 does not equals to 0. Immediate is unsigned value 0 -> 8191.">brna,r3</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the value of r0 does not equals to 0. Immediate is unsigned value 0 -> 32767.">brna,r0</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the value of r1 does not equals to 0. Immediate is unsigned value 0 -> 32767.">brna,r1</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the value of r2 does not equals to 0. Immediate is unsigned value 0 -> 32767.">brna,r2</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the value of r3 does not equals to 0. Immediate is unsigned value 0 -> 32767.">brna,r3</td>
         </tr>
         <tr>
             <th>6</th>
@@ -246,10 +246,10 @@
             <td desc="----|2|T|F|_|Branches to PC+Immediate if the value of r1 does not equals to 0 and pushes a return address onto the internal stack. Immediate is signed value -64 -> 63.">bsnr,r1</td>
             <td desc="----|2|T|F|_|Branches to PC+Immediate if the value of r2 does not equals to 0 and pushes a return address onto the internal stack. Immediate is signed value -64 -> 63.">bsnr,r2</td>
             <td desc="----|2|T|F|_|Branches to PC+Immediate if the value of r3 does not equals to 0 and pushes a return address onto the internal stack. Immediate is signed value -64 -> 63.">bsnr,r3</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the value of r0 does not equals to 0 and pushes a return value onto the internal stack. Immediate is unsigned value 0 -> 8191.">bsna,r0</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the value of r1 does not equals to 0 and pushes a return value onto the internal stack. Immediate is unsigned value 0 -> 8191.">bsna,r1</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the value of r2 does not equals to 0 and pushes a return value onto the internal stack. Immediate is unsigned value 0 -> 8191.">bsna,r2</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the value of r3 does not equals to 0 and pushes a return value onto the internal stack. Immediate is unsigned value 0 -> 8191.">bsna,r3</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the value of r0 does not equals to 0 and pushes a return value onto the internal stack. Immediate is unsigned value 0 -> 32767.">bsna,r0</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the value of r1 does not equals to 0 and pushes a return value onto the internal stack. Immediate is unsigned value 0 -> 32767.">bsna,r1</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the value of r2 does not equals to 0 and pushes a return value onto the internal stack. Immediate is unsigned value 0 -> 32767.">bsna,r2</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the value of r3 does not equals to 0 and pushes a return value onto the internal stack. Immediate is unsigned value 0 -> 32767.">bsna,r3</td>
         </tr>
         <tr>
             <th>8</th>
@@ -284,9 +284,9 @@
             <td desc="----|2|T|F|_|Branches to PC+Immediate if the CC does NOT equals to 01. Immediate is signed value -64 -> 63.">bcfr,gt</td>
             <td desc="----|2|T|F|_|Branches to PC+Immediate if the CC does NOT equals to 10. Immediate is signed value -64 -> 63.">bcfr,lt</td>
             <td desc="----|2|T|F|_|Branches to an address specified using a signed Immediate -64 -> 63. Negative values cause a branch to address 8192+Immediate.">zbrr</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC does NOT equals to 00. Immediate is unsigned value 0 -> 8191.">bcfa,eq</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC does NOT equals to 01. Immediate is unsigned value 0 -> 8191.">bcfa,gt</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC does NOT equals to 10. Immediate is unsigned value 0 -> 8191.">bcfa,lt</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC does NOT equals to 00. Immediate is unsigned value 0 -> 32767.">bcfa,eq</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC does NOT equals to 01. Immediate is unsigned value 0 -> 32767.">bcfa,gt</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC does NOT equals to 10. Immediate is unsigned value 0 -> 32767.">bcfa,lt</td>
             <td desc="----|3|T|R|_|Performs an absolute, indexed branch. Indexing is forced and register used for indexing is always r3.">bxa</td>
         </tr>
         <tr>
@@ -322,9 +322,9 @@
             <td desc="----|2|T|F|_|Branches to PC+Immediate if the CC does NOT equals to 01 and pushes a return address onto the internal stack. Immediate is signed value -64 -> 63.">bsfr,gt</td>
             <td desc="----|2|T|F|_|Branches to PC+Immediate if the CC does NOT equals to 10 and pushes a return address onto the internal stack. Immediate is signed value -64 -> 63.">bsfr,lt</td>
             <td desc="----|2|T|F|_|Branches to an address specified using a signed Immediate -64 -> 63 and pushes a return address onto the internal stack. Negative values for Immediate cause a branch to address 8192+Immediate.">zbsr</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC does NOT equals to 00 and pushes a return address onto the internal stack. Immediate is unsigned value 0 -> 8191.">bsfa,eq</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC does NOT equals to 01 and pushes a return address onto the internal stack. Immediate is unsigned value 0 -> 8191.">bsfa,gt</td>
-            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC does NOT equals to 10 and pushes a return address onto the internal stack. Immediate is unsigned value 0 -> 8191.">bsfa,lt</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC does NOT equals to 00 and pushes a return address onto the internal stack. Immediate is unsigned value 0 -> 32767.">bsfa,eq</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC does NOT equals to 01 and pushes a return address onto the internal stack. Immediate is unsigned value 0 -> 32767.">bsfa,gt</td>
+            <td desc="----|3|T|F|_|Branches to address specified by Immediate if the CC does NOT equals to 10 and pushes a return address onto the internal stack. Immediate is unsigned value 0 -> 32767.">bsfa,lt</td>
             <td desc="----|3|T|R|_|Performs an absolute, indexed branch. Indexing is forced and register used for indexing is always r3. Pushes a return address onto the internal stack.">bsxa</td>
         </tr>
         <tr>
@@ -333,10 +333,10 @@
             <td desc="---1|1|F|F|_|Stores r0 into r1.">strz,r1</td>
             <td desc="---1|1|F|F|_|Stores r0 into r2.">strz,r2</td>
             <td desc="---1|1|F|F|_|Stores r0 into r3.">strz,r3</td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
+            <td desc="----|1|F|F|_|Clear r0 to 0 without affecting flags.">clr r0</td>
+            <td desc="----|1|F|F|_|Clear r1 to 0 without affecting flags.">clr r1</td>
+            <td desc="----|1|F|F|_|Clear r2 to 0 without affecting flags.">clr r2</td>
+            <td desc="----|1|F|F|_|Clear r3 to 0 without affecting flags.">clr r3</td>
             <td desc="----|2|T|F|_|Stores r0 into memory at PC+Immediate. Immediate is signed value -64 -> 63.">strr,r0</td>
             <td desc="----|2|T|F|_|Stores r1 into memory at PC+Immediate. Immediate is signed value -64 -> 63.">strr,r1</td>
             <td desc="----|2|T|F|_|Stores r2 into memory at PC+Immediate. Immediate is signed value -64 -> 63.">strr,r2</td>
@@ -360,10 +360,10 @@
             <td desc="----|2|T|F|_|Increments r1, then Branches to PC+Immediate if the new register value does not equals to 0. Immediate is signed value -64 -> 63.">birr,r1</td>
             <td desc="----|2|T|F|_|Increments r2, then Branches to PC+Immediate if the new register value does not equals to 0. Immediate is signed value -64 -> 63.">birr,r2</td>
             <td desc="----|2|T|F|_|Increments r3, then Branches to PC+Immediate if the new register value does not equals to 0. Immediate is signed value -64 -> 63.">birr,r3</td>
-            <td desc="----|3|T|F|_|Increments r0, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 8191.">bira,r0</td>
-            <td desc="----|3|T|F|_|Increments r1, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 8191.">bira,r1</td>
-            <td desc="----|3|T|F|_|Increments r2, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 8191.">bira,r2</td>
-            <td desc="----|3|T|F|_|Increments r3, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 8191.">bira,r3</td>
+            <td desc="----|3|T|F|_|Increments r0, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 32767.">bira,r0</td>
+            <td desc="----|3|T|F|_|Increments r1, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 32767.">bira,r1</td>
+            <td desc="----|3|T|F|_|Increments r2, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 32767.">bira,r2</td>
+            <td desc="----|3|T|F|_|Increments r3, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 32767.">bira,r3</td>
         </tr>
         <tr>
             <th>E</th>
@@ -398,10 +398,10 @@
             <td desc="----|2|T|F|_|Decrements r1, then Branches to PC+Immediate if the new register value does not equals to 0. Immediate is signed value -64 -> 63.">bdrr,r1</td>
             <td desc="----|2|T|F|_|Decrements r2, then Branches to PC+Immediate if the new register value does not equals to 0. Immediate is signed value -64 -> 63.">bdrr,r2</td>
             <td desc="----|2|T|F|_|Decrements r3, then Branches to PC+Immediate if the new register value does not equals to 0. Immediate is signed value -64 -> 63.">bdrr,r3</td>
-            <td desc="----|3|T|F|_|Decrements r0, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 8191.">bdra,r0</td>
-            <td desc="----|3|T|F|_|Decrements r1, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 8191.">bdra,r1</td>
-            <td desc="----|3|T|F|_|Decrements r2, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 8191.">bdra,r2</td>
-            <td desc="----|3|T|F|_|Decrements r3, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 8191.">bdra,r3</td>
+            <td desc="----|3|T|F|_|Decrements r0, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 32767.">bdra,r0</td>
+            <td desc="----|3|T|F|_|Decrements r1, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 32767.">bdra,r1</td>
+            <td desc="----|3|T|F|_|Decrements r2, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 32767.">bdra,r2</td>
+            <td desc="----|3|T|F|_|Decrements r3, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 32767.">bdra,r3</td>
         </tr>
     </tbody>
 </table>
@@ -458,17 +458,21 @@
             <td desc=""></td>
             <td desc=""></td>
             <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
+            <td desc="---1|3|F|F|_|Loads r0 from far address in Immediate. Immediate is unsigned value 0 -> 65535.">lodf,r0</td>
+            <td desc="---1|3|F|F|_|Loads r1 from far address in Immediate. Immediate is unsigned value 0 -> 65535.">lodf,r1</td>
+            <td desc="---1|3|F|F|_|Loads r2 from far address in Immediate. Immediate is unsigned value 0 -> 65535.">lodf,r2</td>
+            <td desc="---1|3|F|F|_|Loads r3 from far address in Immediate. Immediate is unsigned value 0 -> 65535.">lodf,r3</td>
+            <td desc="---1|3|F|G|_|Loads r0 from far address in Immediate indexed by r0. Immediate is unsigned value 0 -> 65535.">ldfi,r0</td>
+            <td desc="---1|3|F|G|_|Loads r0 from far address in Immediate indexed by r1. Immediate is unsigned value 0 -> 65535.">ldfi,r0</td>
+            <td desc="---1|3|F|G|_|Loads r0 from far address in Immediate indexed by r2. Immediate is unsigned value 0 -> 65535.">ldfi,r0</td>
+            <td desc="---1|3|F|G|_|Loads r0 from far address in Immediate indexed by r3. Immediate is unsigned value 0 -> 65535.">ldfi,r0</td>
         </tr>
         <tr>
             <th>1</th>
+            <td desc="----|1|F|F|_|Pushes both program status words onto internal stack.">pshs</td>
+            <td desc="1116|1|F|F|_|Pops both program status words from internal stack.">pops</td>
+            <td desc="----|1|F|F|_|Set Vector Base. Sets interrupt vector table base address from r0 (LSB) and r1 (MSB).">svb</td>
+            <td desc="----|1|F|F|_|For testing purposes ; do not use">chrp</td>
             <td desc=""></td>
             <td desc=""></td>
             <td desc=""></td>
@@ -477,14 +481,10 @@
             <td desc=""></td>
             <td desc=""></td>
             <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the CC equals to 00. Immediate is unsigned value 0 -> 65535.">bctf,eq</td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the CC equals to 01. Immediate is unsigned value 0 -> 65535.">bctf,gt</td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the CC equals to 10. Immediate is unsigned value 0 -> 65535.">bctf,lt</td>
+            <td desc="----|3|F|F|_|Unconditionally branches to address specified by Immediate. Immediate is unsigned value 0 -> 65535.">bctf,un</td>
         </tr>
         <tr>
             <th>2</th>
@@ -519,10 +519,10 @@
             <td desc=""></td>
             <td desc=""></td>
             <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the CC equals to 00 and pushes a return address onto the stack. Immediate is unsigned value 0 -> 65535.">bstf,eq</td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the CC equals to 01 and pushes a return address onto the stack. Immediate is unsigned value 0 -> 65535.">bstf,gt</td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the CC equals to 10 and pushes a return address onto the stack. Immediate is unsigned value 0 -> 65535.">bstf,lt</td>
+            <td desc="----|3|F|F|_|Unconditionally branches to address specified by Immediate and pushes a return address onto the stack. Immediate is unsigned value 0 -> 65535.">bstf,un</td>
         </tr>
         <tr>
             <th>4</th>
@@ -557,10 +557,10 @@
             <td desc=""></td>
             <td desc=""></td>
             <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the value of r0 does not equals to 0. Immediate is unsigned value 0 -> 65535.">brnf,r0</td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the value of r1 does not equals to 0. Immediate is unsigned value 0 -> 65535.">brnf,r1</td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the value of r2 does not equals to 0. Immediate is unsigned value 0 -> 65535.">brnf,r2</td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the value of r3 does not equals to 0. Immediate is unsigned value 0 -> 65535.">brnf,r3</td>
         </tr>
         <tr>
             <th>6</th>
@@ -595,10 +595,10 @@
             <td desc=""></td>
             <td desc=""></td>
             <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the value of r0 does not equals to 0 and pushes a return value onto the internal stack. Immediate is unsigned value 0 -> 65535.">bsnf,r0</td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the value of r1 does not equals to 0 and pushes a return value onto the internal stack. Immediate is unsigned value 0 -> 65535.">bsnf,r1</td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the value of r2 does not equals to 0 and pushes a return value onto the internal stack. Immediate is unsigned value 0 -> 65535.">bsnf,r2</td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the value of r3 does not equals to 0 and pushes a return value onto the internal stack. Immediate is unsigned value 0 -> 65535.">bsnf,r3</td>
         </tr>
         <tr>
             <th>8</th>
@@ -633,10 +633,10 @@
             <td desc=""></td>
             <td desc=""></td>
             <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the CC does NOT equals to 00. Immediate is unsigned value 0 -> 65535.">bcff,eq</td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the CC does NOT equals to 01. Immediate is unsigned value 0 -> 65535.">bcff,gt</td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the CC does NOT equals to 10. Immediate is unsigned value 0 -> 65535.">bcff,lt</td>
+            <td desc="----|3|F|R|_|Performs an absolute, indexed branch. Indexing is forced and register used for indexing is always r3.">bxf</td>
         </tr>
         <tr>
             <th>A</th>
@@ -671,10 +671,10 @@
             <td desc=""></td>
             <td desc=""></td>
             <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the CC does NOT equals to 00 and pushes a return address onto the internal stack. Immediate is unsigned value 0 -> 65535.">bsff,eq</td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the CC does NOT equals to 01 and pushes a return address onto the internal stack. Immediate is unsigned value 0 -> 65535.">bsff,gt</td>
+            <td desc="----|3|F|F|_|Branches to address specified by Immediate if the CC does NOT equals to 10 and pushes a return address onto the internal stack. Immediate is unsigned value 0 -> 65535.">bsff,lt</td>
+            <td desc="----|3|F|R|_|Performs an absolute, indexed branch. Indexing is forced and register used for indexing is always r3. Pushes a return address onto the internal stack.">bsxf</td>
         </tr>
         <tr>
             <th>C</th>
@@ -686,14 +686,14 @@
             <td desc=""></td>
             <td desc=""></td>
             <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
+            <td desc="---1|3|F|F|_|Stores r0 to far address in Immediate. Immediate is unsigned value 0 -> 65535.">strf,r0</td>
+            <td desc="---1|3|F|F|_|Stores r1 to far address in Immediate. Immediate is unsigned value 0 -> 65535.">strf,r1</td>
+            <td desc="---1|3|F|F|_|Stores r2 to far address in Immediate. Immediate is unsigned value 0 -> 65535.">strf,r2</td>
+            <td desc="---1|3|F|F|_|Stores r3 to far address in Immediate. Immediate is unsigned value 0 -> 65535.">strf,r3</td>
+            <td desc="---1|3|F|G|_|Stores r0 to far address in Immediate indexed by r0. Immediate is unsigned value 0 -> 65535.">stfi,r0</td>
+            <td desc="---1|3|F|G|_|Stores r0 to far address in Immediate indexed by r1. Immediate is unsigned value 0 -> 65535.">stfi,r0</td>
+            <td desc="---1|3|F|G|_|Stores r0 to far address in Immediate indexed by r2. Immediate is unsigned value 0 -> 65535.">stfi,r0</td>
+            <td desc="---1|3|F|G|_|Stores r0 to far address in Immediate indexed by r3. Immediate is unsigned value 0 -> 65535.">stfi,r0</td>
         </tr>
         <tr>
             <th>D</th>
@@ -709,17 +709,17 @@
             <td desc=""></td>
             <td desc=""></td>
             <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
+            <td desc="----|3|F|F|_|Increments r0, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 65535.">birf,r0</td>
+            <td desc="----|3|F|F|_|Increments r1, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 65535.">birf,r1</td>
+            <td desc="----|3|F|F|_|Increments r2, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 65535.">birf,r2</td>
+            <td desc="----|3|F|F|_|Increments r3, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 65535.">birf,r3</td>
         </tr>
         <tr>
             <th>E</th>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
+            <td desc="----|1|F|F|_|Complements r0 without affecting flags.">cpl r0</td>
+            <td desc="----|1|F|F|_|Complements r1 without affecting flags.">cpl r1</td>
+            <td desc="----|1|F|F|_|Complements r2 without affecting flags.">cpl r2</td>
+            <td desc="----|1|F|F|_|Complements r3 without affecting flags.">cpl r3</td>
             <td desc=""></td>
             <td desc=""></td>
             <td desc=""></td>
@@ -747,10 +747,10 @@
             <td desc=""></td>
             <td desc=""></td>
             <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
-            <td desc=""></td>
+            <td desc="----|3|F|F|_|Decrements r0, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 65535.">bdrf,r0</td>
+            <td desc="----|3|F|F|_|Decrements r1, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 65535.">bdrf,r1</td>
+            <td desc="----|3|F|F|_|Decrements r2, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 65535.">bdrf,r2</td>
+            <td desc="----|3|F|F|_|Decrements r3, then branches to address specified by Immediate if the new register value does not equals to 0. Immediate is unsigned value 0 -> 65535.">bdrf,r3</td>
         </tr>
     </tbody>
 </table>
