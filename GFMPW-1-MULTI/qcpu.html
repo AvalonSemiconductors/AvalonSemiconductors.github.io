@@ -118,6 +118,45 @@
 <tr class="row-even"><td><p>IO</p></td>
 <td><p>Interface to the I/O devices</p></td>
 </tr>
+<tr class="row-odd"><td><p>FLAGS</p></td>
+<td><p>CPU flags</p></td>
+</tr>
+</tbody>
+</table>
+<p>The CPU flags register contains the following information:</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+    {"name": "C", "bits": 1},
+    {"name": "Z", "bits": 1},
+    {"name": "IE", "bits": 1},
+    {"name": "TIE", "bits": 1},
+    {"bits": 4, "type": 1}
+    ],
+"config": {"hspace": 700}
+}
+</script>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Bit</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>C</p></td>
+<td><p>Carry-Flag</p></td>
+</tr>
+<tr class="row-odd"><td><p>Z</p></td>
+<td><p>Zero-Flag</p></td>
+</tr>
+<tr class="row-even"><td><p>IE</p></td>
+<td><p>External Interrupt Enable</p></td>
+</tr>
+<tr class="row-odd"><td><p>TIE</p></td>
+<td><p>Timer Interrupt Enable</p></td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -131,12 +170,12 @@
 <div style="overflow-x:auto">
 <script type="WaveDrom">
 { "reg": [
-    {"name": "Reg", "bits": 4},
+    {"name": "Reg (!= 0)", "bits": 4},
     {"name": "0", "bits": 1},
     {"name": "0", "bits": 1},
     {"name": "1", "bits": 1},
     {"name": "0", "bits": 1},
-    {"name": "Immediate (!= 0)", "bits": 8}],
+    {"name": "Immediate", "bits": 8}],
 "config": {"hspace": 700}
 }
 </script>
@@ -338,16 +377,16 @@ For some opcodes, the R2 slot is used not as a register index, but a small immed
 </thead>
 <tbody>
 <tr class="row-even"><td><p>0</p></td>
-<td><p>R1 = R1 &gt;&gt; 1</p></td>
+<td><p>R1 = R1 &gt;&gt; 1, C = R1[0]</p></td>
 </tr>
 <tr class="row-odd"><td><p>1</p></td>
-<td><p>R1 = R1 &gt;&gt; 1 | C &lt;&lt; 7</p></td>
+<td><p>R1 = R1 &gt;&gt; 1 | C &lt;&lt; 7, C = R1[0]</p></td>
 </tr>
 <tr class="row-even"><td><p>2</p></td>
-<td><p>R1 = R1 &lt;&lt; 1</p></td>
+<td><p>R1 = R1 &lt;&lt; 1, C = R1[7]</p></td>
 </tr>
 <tr class="row-odd"><td><p>3</p></td>
-<td><p>R1 = R1 &lt;&lt; 1 | C</p></td>
+<td><p>R1 = R1 &lt;&lt; 1 | C, C = R1[7]</p></td>
 </tr>
 <tr class="row-even"><td><p>4</p></td>
 <td><p>R1 = R1 ROR 1</p></td>
