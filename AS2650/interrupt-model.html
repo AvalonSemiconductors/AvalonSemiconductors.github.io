@@ -88,16 +88,16 @@
 <span id="id1"></span><h1>Interrupt Model<a class="headerlink" href="#interrupt-model" title="Link to this heading"></a></h1>
 <p>Interrupts on the AS2650v2 can be triggered through one of 8 Interrupt Request (IRQ) lines. These interrupts are prioritized in ascending order, so IRQ0 is the least-prioritized interrupt and IRQ7 is the most-prioritized interrupt.</p>
 <p>All 8 IRQ lines are actually latches, which remember if an interrupt of a given priority is still pending. Once the CPU enables interrupts globally by clearing the <code class="docutils literal notranslate"><span class="pre">II</span></code> bit in the PSU, any IRQ line becoming set will trigger an interrupt service at the completion of the current CPU instruction.
-If multiply IRQ lines are active at one time, the line with the highest priority will be chosen to be serviced.</p>
+If multiple IRQ lines are active at one time, the line with the highest priority will be chosen to be serviced.</p>
 <p>A interrupt service behaves similar to a subroutine branch, moving program execution to a different location in memory while pushing a return address onto the internal stack. However, additionally, the <code class="docutils literal notranslate"><span class="pre">II</span></code> bit will be set, preventing another interrupt from being recognized immediately.
 However, interrupts may stack if the interrupt routine chooses to clear <code class="docutils literal notranslate"><span class="pre">II</span></code> again. Returning from an interrupt routine is usually accomplished by the <code class="docutils literal notranslate"><span class="pre">rete</span></code> instruction which, in addition to the normal subroutine return, also clears <code class="docutils literal notranslate"><span class="pre">II</span></code> to allow further interrupts to be handled.</p>
-<p>Of note is that an interrupt’s IRQ line is not cleared automatically be the interrupt being serviced. It must be done in software by writing to that IRQ’s “Interrupt Clear” bit, located in one of the on-die peripheral registers.
+<p>Of note is that an interrupt’s IRQ line is not cleared automatically by the interrupt being serviced. It must be done in software by writing to that IRQ’s “Interrupt Clear” bit, located in one of the on-die peripheral registers.
 This has the added effect of allowing the IRQs to be cleared outside of their respective interrupt routines, meaning pending interrupts can effectively be cancelled in software.</p>
 <p>The two exceptions to this are the software trap, in which case the <code class="docutils literal notranslate"><span class="pre">clrt</span></code> instruction will clear it, and the UART receive interrupt (IRQ3) which is cleared by reading the received byte from the UDR.</p>
-<p>Lastly, disabling a peripheral’s interrupt enable also always has the side-effect of clearing all of its IRQs.</p>
-<p>The following table summarized all 8 IRQ sources:</p>
-<table class="docutils align-default" id="irq-source">
-<caption><span class="caption-number">Table 5 </span><span class="caption-text">IRQ Sources</span><a class="headerlink" href="#irq-source" title="Link to this table"></a></caption>
+<p>Lastly, disabling a peripheral’s interrupt enable also always has the side-effect of clearing all of its pending IRQs.</p>
+<p>The following table summarizes all 8 IRQ sources:</p>
+<table class="docutils align-default" id="irq-sources">
+<caption><span class="caption-number">Table 5 </span><span class="caption-text">IRQ Sources</span><a class="headerlink" href="#irq-sources" title="Link to this table"></a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>IRQ</p></th>
 <th class="head"><p>Source</p></th>

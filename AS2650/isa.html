@@ -943,8 +943,8 @@
 </script>
 </div>
 <p>The PSU primarily contains the Stack Pointer <code class="docutils literal notranslate"><span class="pre">SP</span></code> for the internal stack as well as the global Interrupt Inhibit <code class="docutils literal notranslate"><span class="pre">II</span></code>. The pointer increments when values are pushed onto the stack and decrements when values are popped. It always points to where the next value will go, so the TOS is actually at <code class="docutils literal notranslate"><span class="pre">SP</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p>
-<p>This register also contains the bits that control the two digital input/output lines <code class="docutils literal notranslate"><span class="pre">Sense</span></code> and <code class="docutils literal notranslate"><span class="pre">Flag</span></code>. The <code class="docutils literal notranslate"><span class="pre">F</span></code> bit sets the state (high or low) of <code class="docutils literal notranslate"><span class="pre">Sense</span></code> and the current state of the <code class="docutils literal notranslate"><span class="pre">Flag</span></code> input can be read out of the <code class="docutils literal notranslate"><span class="pre">F</span></code> bit.</p>
-<p>Bit 4 of the PSU is not wired up to any hardware functionality but is physically present and can be read and writen by a user program.</p>
+<p>This register also contains the bits that control the two digital input/output lines <code class="docutils literal notranslate"><span class="pre">Sense</span></code> and <code class="docutils literal notranslate"><span class="pre">Flag</span></code>. The <code class="docutils literal notranslate"><span class="pre">F</span></code> bit sets the state (high or low) of <code class="docutils literal notranslate"><span class="pre">Flag</span></code> and the current state of the <code class="docutils literal notranslate"><span class="pre">Sense</span></code> input can be read out of the <code class="docutils literal notranslate"><span class="pre">F</span></code> bit.</p>
+<p>Bit 4 of the PSU is not wired up to any hardware functionality, but is physically present and can be read and writen by a user program.</p>
 <p>The PSU is reset to 20h on reset, meaning the <code class="docutils literal notranslate"><span class="pre">II</span></code> bit is set.</p>
 <p><strong>Program Status Lower</strong></p>
 
@@ -965,11 +965,11 @@
 <p><code class="docutils literal notranslate"><span class="pre">C</span></code> is the carry flag defined by arithmatic operations.</p>
 <p><code class="docutils literal notranslate"><span class="pre">COM</span></code> is a processor setting that modifies the behavior of the compare instructions. If clear, they will compare values as two’s-complement signed bytes. If set, they will compare values as unsigned bytes.</p>
 <p><code class="docutils literal notranslate"><span class="pre">OVF</span></code> if set, indicates that the last addition or subtraction operation resulted in an arithmatic overflow, meaning the result could not be represented by a signed byte.</p>
-<p><code class="docutils literal notranslate"><span class="pre">WC</span></code> is a processor setting that modifies the behavior of addition and subtraction instructions. If set, the value of the carry flag, either one or zero, will aditionally be added or subtracted (depending on the type of operation performed) onto the result. If clear, the carry flag is ignored.</p>
+<p><code class="docutils literal notranslate"><span class="pre">WC</span></code> is a processor setting that modifies the behavior of addition and subtraction instructions, as well as left- and right-rotate.</p>
 <p><code class="docutils literal notranslate"><span class="pre">IDC</span></code> is the Interdigit Carry, that is the carry from bit 3 to bit 4 during an addition, subtraction of bitshift operation. It is used in combination with the <code class="docutils literal notranslate"><span class="pre">dar</span></code> instruction to perform arithmatic on packed BCD values.</p>
-<p><code class="docutils literal notranslate"><span class="pre">CC</span></code> is the Condition Code. This code is set either by any instruction that modifies a general purpose register (unless otherwise specified) and compare instructions. This code can be tested by software or conditional branch instructions.</p>
+<p><code class="docutils literal notranslate"><span class="pre">CC</span></code> is the Condition Code. This code is set either by any instruction that modifies a general purpose register (unless otherwise specified) and compare and bit-test instructions. This code can be tested by software or conditional branch instructions.</p>
 <p>This PSL is initialized to 0 on reset.</p>
-<p>Unless otherwise specified, any instruction listed in this documentation that is described as affecting CC will do according to the new value in whichever register it modifies in the following way:</p>
+<p>Unless otherwise specified, any instruction listed in this documentation that is described as affecting CC will do according to the new value in whichever register it modifies as listed in this table:</p>
 <table class="docutils align-default" id="condition-codes">
 <caption><span class="caption-number">Table 6 </span><span class="caption-text">Condition Codes</span><a class="headerlink" href="#condition-codes" title="Link to this table"></a></caption>
 <thead>
@@ -996,7 +996,7 @@
 <h2>Memory Model<a class="headerlink" href="#memory-model" title="Link to this heading"></a></h2>
 <p>The AS2650v2 segments its view of the 65,536 byte memory space into 8,192 pages. There is always one “current” page set by the 3 bit Page Control. This is combined with the 13 bit Program Counter to form the address of the next instruction to be executed. The Page Control can only be changed by a far branch or indirect addressed branch changing the Instruction Pointer to a different page.</p>
 <p>All absolute and relative addressed instructions can only directly reach memory within the current page, essentially allowing faster access to local data. Indirect addressing and far addressing can access bytes anywhere within the complete 65,536 byte memory space.</p>
-<p>Notably, the Program Counter reaching its maximum value and wrapping to 0 does not cause the Instruction Pointer to be advanced into the follow page. Only branch instructions can change the current page.</p>
+<p>Notably, the Program Counter reaching its maximum value and wrapping to 0 does not cause the Instruction Pointer to be advanced into the following page. Only branch instructions can change the current page.</p>
 <p>The 4KiB of on-die SRAM lie entirely within the first half of page 0.</p>
 </section>
 <section id="instruction-addressing-modes">
@@ -1016,7 +1016,7 @@
 </section>
 <section id="register-addressing">
 <h3>Register Addressing<a class="headerlink" href="#register-addressing" title="Link to this heading"></a></h3>
-<p>All instructions that operate on a single instruction in-place are encoded in a single byte with a 6-bit opcode and 2-bit register address.</p>
+<p>All instructions that operate on a single register in-place are encoded in a single byte with a 6-bit opcode and 2-bit register index.</p>
 
 <div style="overflow-x:auto">
 <script type="WaveDrom">
@@ -1030,7 +1030,7 @@
 </section>
 <section id="zero-addressing">
 <h3>Zero Addressing<a class="headerlink" href="#zero-addressing" title="Link to this heading"></a></h3>
-<p>This is a special form of Register Addressing that is identical in encoding but operates on a pair of registers, the second of which is implied to be R0.</p>
+<p>This is a special form of Register Addressing that is identical in encoding but operates on a pair of registers, the second of which is always implied to be R0.</p>
 <p>With the exception of <code class="docutils literal notranslate"><span class="pre">strz</span></code> or unless otherwise specified, R0 is also the destination for the instruction result with the specified register index only used as a source.</p>
 </section>
 <section id="immediate-addressing">
@@ -1058,7 +1058,7 @@
 </section>
 <section id="relative-addressing">
 <h3>Relative Addressing<a class="headerlink" href="#relative-addressing" title="Link to this heading"></a></h3>
-<p>Relative addressed instructions are memory reference instructions, meaning the load or store one byte in memory as part of their operation.
+<p>Relative addressed instructions are either branch instructions or memory reference instructions, in which case they load or store one byte in memory as part of their operation.
 Relative instructions reference a memory location relative to the current Program Counter value. The second byte contains a signed 7-bit displacement value that is added to the Program Counter to obtain the effective address.</p>
 <p>Indirect addressing may additionally be specified.</p>
 <p>There are some exceptions (<code class="docutils literal notranslate"><span class="pre">zbsr</span></code>, <code class="docutils literal notranslate"><span class="pre">zbrr</span></code>) where the effective address is computed not as relative to the Program Counter, but as relative to address 0, page 0.</p>
@@ -1186,12 +1186,12 @@ Relative instructions reference a memory location relative to the current Progra
 </section>
 <section id="indirect-addressing">
 <h3>Indirect Addressing<a class="headerlink" href="#indirect-addressing" title="Link to this heading"></a></h3>
-<p>Indirect Addressing may be specified on top of another addressing mode when supported by setting the <code class="docutils literal notranslate"><span class="pre">I</span></code> bit. When specified, the original effective address of the instruction is no longer the true memory reference. Instead, two successive bytes are read from this location which become the new effective address for the memory reference.</p>
+<p>Indirect Addressing may be specified on top of another addressing mode, when supported, by setting the <code class="docutils literal notranslate"><span class="pre">I</span></code> bit. When specified, the original effective address of the instruction is no longer the true memory reference. Instead, two successive bytes are read from this location which become the new effective address for the memory reference.</p>
 <p>Essentially, this mode implements a pointer dereference. The pointer is stored in big endian format.</p>
 </section>
 <section id="indexed-addressing">
 <h3>Indexed Addressing<a class="headerlink" href="#indexed-addressing" title="Link to this heading"></a></h3>
-<p>Indexed Addressing may be specified on top of another addressing mode when supported by setting the Index Control bits to a value other than zero. Once enabled, the register index in the first instruction byte instead specifies which register to use for indexing. The operation’s actual register index implicitely becomes R0.</p>
+<p>Indexed Addressing may be specified on top of another addressing mode, when supported, by setting the Index Control bits to a value other than zero. Once enabled, the register index in the first instruction byte instead specifies which register to use for indexing. The operation’s actual register index implicitly becomes R0.</p>
 <p>The current value of the register chosen for indexing is added onto the original effective address to obtain the new effective address.</p>
 <p>If autoincrement or autodecrement are specified, the index register’s value is incremented or decremented <strong>before</strong> the address calculation.</p>
 <table class="docutils align-default" id="index-control">
@@ -1225,7 +1225,7 @@ Relative instructions reference a memory location relative to the current Progra
 </section>
 <section id="extended-instructions">
 <h3>Extended Instructions<a class="headerlink" href="#extended-instructions" title="Link to this heading"></a></h3>
-<p>The AS2650v2 contains a series of extended instructions marked by a prefix, B7h. If the processor encounters this opcode, it will skip it and interpret the following bytes as an extended instruction. Besides this prefix, extended instructions follow the same rules for their addressing modes.</p>
+<p>The AS2650v2 contains a series of extended instructions marked by a prefix, B7h. If the processor encounters this opcode, it will skip it and interpret the following byte(s) as an extended instruction. Besides this prefix, extended instructions follow the same rules for their addressing modes.</p>
 </section>
 </section>
 <section id="instructions">

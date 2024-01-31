@@ -6,22 +6,22 @@ Interrupt Model
 Interrupts on the AS2650v2 can be triggered through one of 8 Interrupt Request (IRQ) lines. These interrupts are prioritized in ascending order, so IRQ0 is the least-prioritized interrupt and IRQ7 is the most-prioritized interrupt.
 
 All 8 IRQ lines are actually latches, which remember if an interrupt of a given priority is still pending. Once the CPU enables interrupts globally by clearing the ``II`` bit in the PSU, any IRQ line becoming set will trigger an interrupt service at the completion of the current CPU instruction.
-If multiply IRQ lines are active at one time, the line with the highest priority will be chosen to be serviced.
+If multiple IRQ lines are active at one time, the line with the highest priority will be chosen to be serviced.
 
 A interrupt service behaves similar to a subroutine branch, moving program execution to a different location in memory while pushing a return address onto the internal stack. However, additionally, the ``II`` bit will be set, preventing another interrupt from being recognized immediately.
 However, interrupts may stack if the interrupt routine chooses to clear ``II`` again. Returning from an interrupt routine is usually accomplished by the ``rete`` instruction which, in addition to the normal subroutine return, also clears ``II`` to allow further interrupts to be handled.
 
-Of note is that an interrupt’s IRQ line is not cleared automatically be the interrupt being serviced. It must be done in software by writing to that IRQ’s "Interrupt Clear" bit, located in one of the on-die peripheral registers.
+Of note is that an interrupt’s IRQ line is not cleared automatically by the interrupt being serviced. It must be done in software by writing to that IRQ’s "Interrupt Clear" bit, located in one of the on-die peripheral registers.
 This has the added effect of allowing the IRQs to be cleared outside of their respective interrupt routines, meaning pending interrupts can effectively be cancelled in software.
 
 The two exceptions to this are the software trap, in which case the ``clrt`` instruction will clear it, and the UART receive interrupt (IRQ3) which is cleared by reading the received byte from the UDR.
 
-Lastly, disabling a peripheral’s interrupt enable also always has the side-effect of clearing all of its IRQs.
+Lastly, disabling a peripheral’s interrupt enable also always has the side-effect of clearing all of its pending IRQs.
 
-The following table summarized all 8 IRQ sources:
+The following table summarizes all 8 IRQ sources:
 
 .. list-table:: IRQ Sources
-    :name: irq-source
+    :name: irq-sources
     :header-rows: 1
     
     * - IRQ
