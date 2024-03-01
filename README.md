@@ -6,6 +6,6 @@ Built using Sphinx
 
 Currently contains docs for:
 
-<a href="avalonsemiconductors.github.io/AS2650/index.html">AS2650v2</a>
+<a href="https://avalonsemiconductors.github.io/AS2650/index.html">AS2650v2</a>
 
-<a href="avalonsemiconductors.github.io/GFMPW-1-MULTI/index.html">GFMPW-1-Multi</a>
+<a href="https://avalonsemiconductors.github.io/GFMPW-1-MULTI/index.html">GFMPW-1-Multi</a>
