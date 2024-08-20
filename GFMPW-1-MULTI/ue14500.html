@@ -16,7 +16,7 @@
         <script src="static/jquery.js?v=5d32c60e"></script>
         <script src="static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="static/documentation_options.js?v=5929fcd5"></script>
-        <script src="static/doctools.js?v=888ff710"></script>
+        <script src="static/doctools.js?v=9a2dae69"></script>
         <script src="static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="https://wavedrom.com/skins/default.js"></script>
         <script src="https://wavedrom.com/wavedrom.min.js"></script>
@@ -90,6 +90,7 @@
              
   <section id="ue14500">
 <span id="id1"></span><h1>UE14500<a class="headerlink" href="#ue14500" title="Link to this heading"></a></h1>
+<p><cite>This design is broken. The RR register latches on every instruction, even those not meant to modify RR, breaking the design.</cite></p>
 <p>This project is related to the MC14500 one. It is just a 1-bit CPU core that is under consideration as an alternative to the one used in the MC14500 bit-serial processor. It only adds a single register, the carry flag <code class="docutils literal notranslate"><span class="pre">CAR</span></code>, and replaces the 16 instructions with this alternative set:</p>
 <table class="docutils align-default" id="ue14500-instrs">
 <caption><span class="caption-number">Table 6 </span><span class="caption-text">CPU Instructions</span><a class="headerlink" href="#ue14500-instrs" title="Link to this table"></a></caption>
@@ -168,7 +169,7 @@
 </table>
 <section id="pinout">
 <h2>Pinout<a class="headerlink" href="#pinout" title="Link to this heading"></a></h2>
-<img alt="images/pinoutue1.png" src="images/pinoutue1.png" />
+<img alt="images/pinoutue1.png" src="_images/pinoutue1.png" />
 <table class="docutils align-default" id="pin-description-ue1">
 <caption><span class="caption-number">Table 7 </span><span class="caption-text">Pin description</span><a class="headerlink" href="#pin-description-ue1" title="Link to this table"></a></caption>
 <thead>

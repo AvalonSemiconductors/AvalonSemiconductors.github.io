@@ -16,7 +16,7 @@
         <script src="static/jquery.js?v=5d32c60e"></script>
         <script src="static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="static/documentation_options.js?v=5929fcd5"></script>
-        <script src="static/doctools.js?v=888ff710"></script>
+        <script src="static/doctools.js?v=9a2dae69"></script>
         <script src="static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="https://wavedrom.com/skins/default.js"></script>
         <script src="https://wavedrom.com/wavedrom.min.js"></script>
@@ -124,7 +124,7 @@
 <p>The internal 64 bytes of RAM in the multiplexer are used as data memory, and an external QSPI flash is used as program memory.</p>
 <section id="pinout">
 <h2>Pinout<a class="headerlink" href="#pinout" title="Link to this heading"></a></h2>
-<img alt="images/pinout6.png" src="images/pinout6.png" />
+<img alt="images/pinout6.png" src="_images/pinout6.png" />
 <table class="docutils align-default" id="pin-description-qcpu">
 <caption><span class="caption-number">Table 1 </span><span class="caption-text">Pin description</span><a class="headerlink" href="#pin-description-qcpu" title="Link to this table"></a></caption>
 <thead>
@@ -230,6 +230,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">0xAB</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">0x06</span> <span class="pre">0x01</span> <span class="pre">0x02</span> <span class="pre">0x02</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">0xEB</span> <span class="pre">[now</span> <span class="pre">in</span> <span class="pre">quad</span> <span class="pre">mode]</span> <span class="pre">0x00</span> <span class="pre">0x00</span> <span class="pre">0x00</span> <span class="pre">0x00</span> <span class="pre">0x00</span> <span class="pre">0x00</span> <span class="pre">0xA5</span></code></p>
+<p><strong>Update:</strong> this sequence is erroneous and will cause the ROM to become unresponsive. A workaround using the management controller to inhibit its execution except for the last command <a class="reference external" href="https://github.com/AvalonSemiconductors/gfmpw1-multi-bringup/tree/main/QCPU">has been documented</a> , but this does mean the non-volatile <cite>Q</cite> bit in the status registers has to be set manually beforehand.</p>
 <p>Additionally, because these ROMs are all 3.3V devices, QCPU is a 5V device and the QSPI bus is bi-directional, a bi-directional level shifter needs to be used on the 4 QSPI data lines. The <code class="docutils literal notranslate"><span class="pre">BDIR</span></code> output can be used to set the direction on the level shifter.</p>
 <p>Resistors (ideally 1000 ohm) must be placed on all data lines on both sides of the shifter as bus shorts will briefly be created while the flash is still in SPI mode. These will not damage either device provided these current-limiting resistors are in place. Additionally, a pull-up resistor to 3.3V needs to be placed on whichever pin of the flash acts as HOLD in SPI mode.</p>
 </section>

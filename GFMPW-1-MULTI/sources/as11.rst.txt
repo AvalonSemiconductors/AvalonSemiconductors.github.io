@@ -252,6 +252,8 @@ Since register ``R7`` is the Program Counter, several additional addressing mode
       - ``@A``
       - As above, but Relative Address contains address of operand
 
+**Update:** Relative addressing (and probably relative deferred as well) work differently on this CPU than the PDP-11/40 reference. The relative offset is computed from the end of the instruction, rather than the start.
+
 Byte- and Word-addressing
 -------------------------
 
@@ -1827,6 +1829,8 @@ Address: ``0x10``
 	}
 
 This register contains the busy flag for the UART transmitter. It normally returns zero when read, but will equal one if the UART is active and transmitting data after writing ``UDR``. Once the UART transmitter is idle again, it will become zero again.
+
+**Update:** note how no bit indicating the state of the UART receiver is present. This is a bug. There is no way to ascertain the state of the receiver and if it has fully received the next character, effectively making it useless.
 
 ---------------
 Custom Settings

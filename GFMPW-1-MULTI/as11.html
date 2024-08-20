@@ -16,7 +16,7 @@
         <script src="static/jquery.js?v=5d32c60e"></script>
         <script src="static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="static/documentation_options.js?v=5929fcd5"></script>
-        <script src="static/doctools.js?v=888ff710"></script>
+        <script src="static/doctools.js?v=9a2dae69"></script>
         <script src="static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="https://wavedrom.com/skins/default.js"></script>
         <script src="https://wavedrom.com/wavedrom.min.js"></script>
@@ -191,7 +191,7 @@
 <p>This project is a 16-bit processor intended to be bytecode compatible with the PDP11/40. It implements the complete base integer instruction set, including the EIS instructions. The FPU is not implemented.</p>
 <section id="pinout">
 <h2>Pinout<a class="headerlink" href="#pinout" title="Link to this heading"></a></h2>
-<img alt="images/pinout5.png" src="images/pinout5.png" />
+<img alt="images/pinout5.png" src="_images/pinout5.png" />
 <table class="docutils align-default" id="as-11-pin-description">
 <caption><span class="caption-number">Table 18 </span><span class="caption-text">Pin description</span><a class="headerlink" href="#as-11-pin-description" title="Link to this table"></a></caption>
 <thead>
@@ -414,6 +414,7 @@
 </tr>
 </tbody>
 </table>
+<p><strong>Update:</strong> Relative addressing (and probably relative deferred as well) work differently on this CPU than the PDP-11/40 reference. The relative offset is computed from the end of the instruction, rather than the start.</p>
 </section>
 <section id="byte-and-word-addressing">
 <h3>Byte- and Word-addressing<a class="headerlink" href="#byte-and-word-addressing" title="Link to this heading"></a></h3>
@@ -1854,6 +1855,7 @@
 </script>
 </div>
 <p>This register contains the busy flag for the UART transmitter. It normally returns zero when read, but will equal one if the UART is active and transmitting data after writing <code class="docutils literal notranslate"><span class="pre">UDR</span></code>. Once the UART transmitter is idle again, it will become zero again.</p>
+<p><strong>Update:</strong> note how no bit indicating the state of the UART receiver is present. This is a bug. There is no way to ascertain the state of the receiver and if it has fully received the next character, effectively making it useless.</p>
 </section>
 </section>
 <section id="custom-settings">

@@ -3,6 +3,8 @@
 UE14500
 =======
 
+`This design is broken. The RR register latches on every instruction, even those not meant to modify RR, breaking the design.`
+
 This project is related to the MC14500 one. It is just a 1-bit CPU core that is under consideration as an alternative to the one used in the MC14500 bit-serial processor. It only adds a single register, the carry flag ``CAR``, and replaces the 16 instructions with this alternative set:
 
 .. list-table:: CPU Instructions
