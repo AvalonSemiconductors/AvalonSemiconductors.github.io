@@ -311,7 +311,7 @@
 <div style="overflow-x:auto">
 <script type="WaveDrom">
 { "reg": [
-  {"name": "UART BUSY", "bits": 1},{"name": "UHB", "bits": 1},{"name": "SPI BUSY", "bits": 1},{"type": "1", "bits": 29}],
+  {"name": "SPI BUSY", "bits": 1},{"name": "UART BUSY", "bits": 1},{"name": "UHB", "bits": 1},{"type": "1", "bits": 29}],
  "config": {"hspace": 2800}
 }
 </script>
@@ -455,7 +455,7 @@
 <p>IRQ #: <code class="docutils literal notranslate"><span class="pre">IRQ1</span></code></p>
 <p>When enabled in <code class="docutils literal notranslate"><span class="pre">IEN</span></code>, Timer 1 will generate this interrupt every time it reaches <code class="docutils literal notranslate"><span class="pre">TTOP1</span></code> and resets to 0.</p>
 <p>The interrupt must be cleared by writing a zero to address <code class="docutils literal notranslate"><span class="pre">FFFFFF44h</span></code>.</p>
-<p><strong>Update:</strong> when this interrupt is enabled and Timer 1 has a prescaler setting of &gt;1, the interrupt request will immediately be re-triggered after the beginning of the interrupt service routine, due to the timer value still not having been changed from the one equaling TOP. To work around this, clear the timer value to 0 in the interrupt handler <strong>before</strong> writing zero to <code class="docutils literal notranslate"><span class="pre">FFFFFF44h</span></code>.</p>
+<p><em>Update:*</em> when this interrupt is enabled and Timer 1 has a prescaler setting of &gt;1, the interrupt request will immediately be re-triggered after the beginning of the interrupt service routine, due to the timer value still not having been changed from the one equaling TOP. To work around this, clear the timer value to 0 in the interrupt handler <strong>before</strong> writing zero to <code class="docutils literal notranslate"><span class="pre">FFFFFF44h</span></code>.</p>
 </section>
 <section id="uart-interrupt">
 <h3>UART Interrupt<a class="headerlink" href="#uart-interrupt" title="Link to this heading"></a></h3>
@@ -478,6 +478,7 @@
 </script>
 </div>
 <p>This register holds the address of the first instruction of the interrupt handler. As RISC-V requires all instructions be alligned to 32-bit words, the least-significant two bits of this register are always 0.</p>
+<p><a href="#id1"><span class="problematic" id="id2">**</span></a>Update: ** due to a bug, when a value is written into this register, it is right-shifted by two places. Programmers must first left-shift the intended value by two places before writing it into <code class="docutils literal notranslate"><span class="pre">IVEC</span></code> to counteract the issue. This does, however, mean that the interrupt routine must lie within the first 1GiB of address space.</p>
 <p><code class="docutils literal notranslate"><span class="pre">INUM</span></code> - Current Interrupt Number</p>
 <p>Address: <code class="docutils literal notranslate"><span class="pre">FFFFFF24h</span></code></p>
 
