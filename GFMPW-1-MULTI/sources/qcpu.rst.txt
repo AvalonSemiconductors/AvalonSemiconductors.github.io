@@ -110,8 +110,6 @@ The program ROM is connected externally and must be either a Winbond 25Q32 or si
 
 ``0xEB [now in quad mode] 0x00 0x00 0x00 0x00 0x00 0x00 0xA5``
 
-**Update:** this sequence is erroneous and will cause the ROM to become unresponsive. A workaround using the management controller to inhibit its execution except for the last command `has been documented <https://github.com/AvalonSemiconductors/gfmpw1-multi-bringup/tree/main/QCPU>`__ , but this does mean the non-volatile `Q` bit in the status registers has to be set manually beforehand.
-
 Additionally, because these ROMs are all 3.3V devices, QCPU is a 5V device and the QSPI bus is bi-directional, a bi-directional level shifter needs to be used on the 4 QSPI data lines. The ``BDIR`` output can be used to set the direction on the level shifter.
 
 Resistors (ideally 1000 ohm) must be placed on all data lines on both sides of the shifter as bus shorts will briefly be created while the flash is still in SPI mode. These will not damage either device provided these current-limiting resistors are in place. Additionally, a pull-up resistor to 3.3V needs to be placed on whichever pin of the flash acts as HOLD in SPI mode.

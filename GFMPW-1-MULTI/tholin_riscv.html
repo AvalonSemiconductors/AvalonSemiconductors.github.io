@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -6,20 +8,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tholin’s RISC-V &mdash; GFMPW-1-Multi  documentation</title>
       <link rel="stylesheet" type="text/css" href="static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="static/jquery.js?v=5d32c60e"></script>
-        <script src="static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="static/documentation_options.js?v=5929fcd5"></script>
-        <script src="static/doctools.js?v=9a2dae69"></script>
-        <script src="static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="https://wavedrom.com/skins/default.js"></script>
-        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+      <script src="static/jquery.js?v=5d32c60e"></script>
+      <script src="static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="static/documentation_options.js?v=5929fcd5"></script>
+      <script src="static/doctools.js?v=9bcbadda"></script>
+      <script src="static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://wavedrom.com/skins/default.js"></script>
+      <script src="https://wavedrom.com/wavedrom.min.js"></script>
     <script src="static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -304,7 +302,7 @@
 </script>
 </div>
 <p>This register address is used to provide the UART data to transmit as well as read received data. When written to, the UART will immediatly activate, set its busy flag and begin serially transmitting the provided data byte. No further writes to this location should be made while the busy flag is set.</p>
-<p>When read, the UDR will contain the latest data byte received by the UART. Accessing this location with a read will also clear the <code class="docutils literal notranslate"><span class="pre">UHB</span></code> flag.</p>
+<p>When read, the UDR will contain the latest data byte received by the UART.</p>
 <p><code class="docutils literal notranslate"><span class="pre">STAT</span></code> - Serial Status Register</p>
 <p>Address: <code class="docutils literal notranslate"><span class="pre">FFFFFF10h</span></code></p>
 
@@ -317,6 +315,7 @@
 </script>
 </div>
 <p>This read-only register contains status information for both the UART and SPI master ports. Besides their respective busy flags, the STAT also contains <code class="docutils literal notranslate"><span class="pre">UHB</span></code>, a flag which indicates that the UART has received a data byte which has not yet been read out of the <code class="docutils literal notranslate"><span class="pre">UDR</span></code>.</p>
+<p>Accessing this location with a write will clear the <code class="docutils literal notranslate"><span class="pre">UHB</span></code> flag. No other flags are changed.</p>
 </section>
 <section id="gpio-port">
 <h3>GPIO Port<a class="headerlink" href="#gpio-port" title="Link to this heading"></a></h3>
@@ -478,7 +477,7 @@
 </script>
 </div>
 <p>This register holds the address of the first instruction of the interrupt handler. As RISC-V requires all instructions be alligned to 32-bit words, the least-significant two bits of this register are always 0.</p>
-<p><a href="#id1"><span class="problematic" id="id2">**</span></a>Update: ** due to a bug, when a value is written into this register, it is right-shifted by two places. Programmers must first left-shift the intended value by two places before writing it into <code class="docutils literal notranslate"><span class="pre">IVEC</span></code> to counteract the issue. This does, however, mean that the interrupt routine must lie within the first 1GiB of address space.</p>
+<p><strong>Update:</strong> due to a bug, when a value is written into this register, it is right-shifted by two places. Programmers must first left-shift the intended value by two places before writing it into <code class="docutils literal notranslate"><span class="pre">IVEC</span></code> to counteract the issue. This does, however, mean that the interrupt routine must lie within the first 1GiB of address space.</p>
 <p><code class="docutils literal notranslate"><span class="pre">INUM</span></code> - Current Interrupt Number</p>
 <p>Address: <code class="docutils literal notranslate"><span class="pre">FFFFFF24h</span></code></p>
 

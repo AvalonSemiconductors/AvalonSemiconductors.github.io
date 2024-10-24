@@ -196,7 +196,7 @@ Address: ``FFFFFF0Ch``
 
 This register address is used to provide the UART data to transmit as well as read received data. When written to, the UART will immediatly activate, set its busy flag and begin serially transmitting the provided data byte. No further writes to this location should be made while the busy flag is set.
 
-When read, the UDR will contain the latest data byte received by the UART. Accessing this location with a read will also clear the ``UHB`` flag.
+When read, the UDR will contain the latest data byte received by the UART.
 
 ``STAT`` - Serial Status Register
 
@@ -205,11 +205,13 @@ Address: ``FFFFFF10h``
 .. wavedrom::
 
 	{ "reg": [
-	  {"name": "UART BUSY", "bits": 1},{"name": "UHB", "bits": 1},{"name": "SPI BUSY", "bits": 1},{"type": "1", "bits": 29}],
+	  {"name": "SPI BUSY", "bits": 1},{"name": "UART BUSY", "bits": 1},{"name": "UHB", "bits": 1},{"type": "1", "bits": 29}],
 	 "config": {"hspace": 2800}
 	}
 
 This read-only register contains status information for both the UART and SPI master ports. Besides their respective busy flags, the STAT also contains ``UHB``, a flag which indicates that the UART has received a data byte which has not yet been read out of the ``UDR``.
+
+Accessing this location with a write will clear the ``UHB`` flag. No other flags are changed.
 
 GPIO Port
 ---------
@@ -374,7 +376,7 @@ When enabled in ``IEN``, Timer 1 will generate this interrupt every time it reac
 
 The interrupt must be cleared by writing a zero to address ``FFFFFF44h``.
 
-**Update:** when this interrupt is enabled and Timer 1 has a prescaler setting of >1, the interrupt request will immediately be re-triggered after the beginning of the interrupt service routine, due to the timer value still not having been changed from the one equaling TOP. To work around this, clear the timer value to 0 in the interrupt handler **before** writing zero to ``FFFFFF44h``.
+*Update:** when this interrupt is enabled and Timer 1 has a prescaler setting of >1, the interrupt request will immediately be re-triggered after the beginning of the interrupt service routine, due to the timer value still not having been changed from the one equaling TOP. To work around this, clear the timer value to 0 in the interrupt handler **before** writing zero to ``FFFFFF44h``.
 
 UART Interrupt
 --------------
@@ -402,6 +404,8 @@ Address: ``FFFFFF20h``
 	}
 
 This register holds the address of the first instruction of the interrupt handler. As RISC-V requires all instructions be alligned to 32-bit words, the least-significant two bits of this register are always 0.
+
+**Update:** due to a bug, when a value is written into this register, it is right-shifted by two places. Programmers must first left-shift the intended value by two places before writing it into ``IVEC`` to counteract the issue. This does, however, mean that the interrupt routine must lie within the first 1GiB of address space.
 
 ``INUM`` - Current Interrupt Number
 
