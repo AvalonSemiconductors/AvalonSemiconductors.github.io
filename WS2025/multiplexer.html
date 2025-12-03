@@ -1,0 +1,207 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multiplexer &mdash; WAFER-SPACE-MULTI  documentation</title>
+      <link rel="stylesheet" type="text/css" href="static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="static/custom.css?v=4f7215f6" />
+
+  
+      <script src="static/jquery.js?v=5d32c60e"></script>
+      <script src="static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="static/documentation_options.js?v=5929fcd5"></script>
+      <script src="static/doctools.js?v=9bcbadda"></script>
+      <script src="static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://wavedrom.com/skins/default.js"></script>
+      <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="wafer.space Multi-Project Die" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            WAFER-SPACE-MULTI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Multiplexer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#i-o-routing-and-design-selection">I/O Routing and design selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#design-address-map">Design address map</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WAFER-SPACE-MULTI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Multiplexer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="sources/multiplexer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="multiplexer">
+<span id="id1"></span><h1>Multiplexer<a class="headerlink" href="#multiplexer" title="Link to this heading"></a></h1>
+<p>All project design I/O is routed through the Project Multiplexer. It makes sure that only the selected design has its outputs routed to the I/O pins.
+5 input-only pads serve as the project selection. These pads have internal pull-ups. Any design can thus be permanently selected during wire bonding by bonding select pads to ground while leaving the rest to float high.</p>
+<section id="i-o-routing-and-design-selection">
+<h2>I/O Routing and design selection<a class="headerlink" href="#i-o-routing-and-design-selection" title="Link to this heading"></a></h2>
+<p>Every design has access to up to 42 bi-directional I/O lines with a 24mA drive strength. To accomplish this, the <code class="docutils literal notranslate"><span class="pre">bidir[41:0]</span></code> pad signals are routed to the designs as follows:</p>
+<ul class="simple">
+<li><p>All designs directly read from <code class="docutils literal notranslate"><span class="pre">bidir_PAD2CORE</span></code> or <code class="docutils literal notranslate"><span class="pre">io_in_buffered</span></code></p></li>
+<li><p>Two sets of wires, <code class="docutils literal notranslate"><span class="pre">io_out_[design_name]</span></code> and <code class="docutils literal notranslate"><span class="pre">io_oe_[design_name]</span></code> leave each design and are routed into the Multiplexer</p></li>
+<li><p>As the name implies, the Multiplexer only passes one set of io outs and output enables to the chip pads’ <code class="docutils literal notranslate"><span class="pre">bidir_CORE2PAD</span></code> and <code class="docutils literal notranslate"><span class="pre">bidir_CORE2PAD_OE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bidir_CORE2PAD_IE</span></code> is automatically generated by inverting <code class="docutils literal notranslate"><span class="pre">bidir_CORE2PAD_OE</span></code></p></li>
+<li><p>For each design, the Multiplexer provides a fixed config for <code class="docutils literal notranslate"><span class="pre">bidir_CORE2PAD_SL</span></code>, <code class="docutils literal notranslate"><span class="pre">bidir_CORE2PAD_PU</span></code>, <code class="docutils literal notranslate"><span class="pre">bidir_CORE2PAD_PD</span></code> and <code class="docutils literal notranslate"><span class="pre">bidir_CORE2PAD_CS</span></code></p></li>
+</ul>
+<p>Additionally, all non-selected designs are held perpetually in reset to minimize dynamic power consumption.</p>
+<p>To reduce fan-out at <code class="docutils literal notranslate"><span class="pre">bidir_PAD2CORE</span></code>, a “InputRepeater” macro exists on the die, consisting only of buffers which repeat <code class="docutils literal notranslate"><span class="pre">bidir_PAD2CORE</span></code> into <code class="docutils literal notranslate"><span class="pre">io_in_buffered</span></code>. As this creates additional input delay, some performance-critical designs still sample <code class="docutils literal notranslate"><span class="pre">bidir_PAD2CORE</span></code> directly. Designs where clock rate is of no special concern make use of <code class="docutils literal notranslate"><span class="pre">io_in_buffered</span></code>.</p>
+</section>
+<section id="design-address-map">
+<h2>Design address map<a class="headerlink" href="#design-address-map" title="Link to this heading"></a></h2>
+<p>Note that all design selection pads have internal pull-ups. For cases where project selection is to be hard-wired, a “0” corresponds to a bonded pad and a “1” corresponds to a floating pad.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Address</p></th>
+<th class="head"><p>Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>‘b00000</p></td>
+<td><p>All pads output low</p></td>
+</tr>
+<tr class="row-odd"><td><p>‘b00001</p></td>
+<td><p>VGA Demo - TT Logo</p></td>
+</tr>
+<tr class="row-even"><td><p>‘b00010</p></td>
+<td><p>VGA Demo - wafer.space screensaver</p></td>
+</tr>
+<tr class="row-odd"><td><p>‘b00011</p></td>
+<td><p>Hellorld &amp; Diceroll &amp; LED Blinker</p></td>
+</tr>
+<tr class="row-even"><td><p>‘b00100</p></td>
+<td><p>HP Nanoprocessor replica</p></td>
+</tr>
+<tr class="row-odd"><td><p>‘b00101</p></td>
+<td><p>VGA Demo - 24-bit color test</p></td>
+</tr>
+<tr class="row-even"><td><p>‘b00110</p></td>
+<td><p>Simple 8-bit CPU</p></td>
+</tr>
+<tr class="row-odd"><td><p>‘b00111</p></td>
+<td><p>All pads output low</p></td>
+</tr>
+<tr class="row-even"><td><p>‘b01000</p></td>
+<td><p>RV32IMA core (6510-compatible pinout)</p></td>
+</tr>
+<tr class="row-odd"><td><p>‘b01001</p></td>
+<td><p>RV32IMA core (6502-compatible pinout)</p></td>
+</tr>
+<tr class="row-even"><td><p>‘b10000</p></td>
+<td><p>SID 2 (FM Synth)</p></td>
+</tr>
+<tr class="row-odd"><td><p>‘b10100</p></td>
+<td><p><span class="strikethrough">Secret Message</span> Nothing</p></td>
+</tr>
+<tr class="row-even"><td><p>‘b11000</p></td>
+<td><p>NTSC Test signal generator</p></td>
+</tr>
+<tr class="row-odd"><td><p>‘b11001</p></td>
+<td><p>Retro DRAM Controller</p></td>
+</tr>
+<tr class="row-even"><td><p>‘b11010</p></td>
+<td><p>Retro GPIO Chip</p></td>
+</tr>
+<tr class="row-odd"><td><p>‘b11011</p></td>
+<td><p>SID Replica</p></td>
+</tr>
+<tr class="row-even"><td><p>‘b11100</p></td>
+<td><p>6502 core (6510-compatible pinout)</p></td>
+</tr>
+<tr class="row-odd"><td><p>‘b11101</p></td>
+<td><p>6502 core (6502-compatible pinout)</p></td>
+</tr>
+<tr class="row-even"><td><p>‘b11110</p></td>
+<td><p>C64 PLA Replica</p></td>
+</tr>
+<tr class="row-odd"><td><p>‘b11111</p></td>
+<td><p>All pads high-impedance</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="wafer.space Multi-Project Die" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Tholin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
