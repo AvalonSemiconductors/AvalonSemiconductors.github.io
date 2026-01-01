@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SID 2 (SID-compatible FM-Synthesizer) &mdash; WAFER-SPACE-MULTI  documentation</title>
+      <link rel="stylesheet" type="text/css" href="static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="static/custom.css?v=5d8de9f2" />
+
+  
+      <script src="static/jquery.js?v=5d32c60e"></script>
+      <script src="static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="static/documentation_options.js?v=5929fcd5"></script>
+      <script src="static/doctools.js?v=9bcbadda"></script>
+      <script src="static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://wavedrom.com/skins/default.js"></script>
+      <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="NTSC Test" href="ntsc.html" />
+    <link rel="prev" title="AS65RV32" href="rv32.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            WAFER-SPACE-MULTI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="multiplexer.html">Multiplexer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html">TinyTapeout VGA Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html#bit-color-vga-demo">24-bit color VGA demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscelaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nanoproc.html">Nanoprocessor Replica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simplecpu.html">Simple CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rv32.html">AS65RV32</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SID 2 (SID-compatible FM-Synthesizer)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pad-assignments">Pad Assignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#registers">Registers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bank-0">Bank 0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bank-1">Bank 1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-description">Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#compatibility-mode">Compatibility Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additive-synthesis">Additive Synthesis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#frequency-modulation-synthesis">Frequency Modulation Synthesis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sine-wave-generation">Sine Wave Generation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ntsc.html">NTSC Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dramcontroller.html">DRAM Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpio.html">GPIO Chip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sid.html">SID</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WAFER-SPACE-MULTI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SID 2 (SID-compatible FM-Synthesizer)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="sources/fm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sid-2-sid-compatible-fm-synthesizer">
+<span id="fm"></span><h1>SID 2 (SID-compatible FM-Synthesizer)<a class="headerlink" href="#sid-2-sid-compatible-fm-synthesizer" title="Link to this heading"></a></h1>
+<p>The SID 2 is a sound generator that is backwards-compatible with the famous Commodore SID, but extends it by powerful FM Synthesis features. Each of the three voices in the SID 2 consists of two operators, with each operator functioning identially to one SID voice with the addition of a sine-wave output option. In the default, additive synthesis mode, the two operators function independently, with both of their outputs audible, yielding up to 6 total voices nearly analogous to a dual-SID setup. If frequency-modulated synthesis mode is selected for a voice, its two operators are merged, with the output of one (the modulator) shifting the frequency of the other (the modulated). Only the output of the modulated operator becomes audible in this case.</p>
+<p>The famous SID filters are also still present in this design, allowing further flexibility in sound generation. Each of the three voices can be independently selected to be passed through this filter. In additive synthesis mode, both operators’ outputs of a selected voice are passed through the filter.</p>
+<p>All additional functionality is hidden in new registers mapped to addresses unused in the original SID, which all reset to inactive states, providing backwards-compatibility. Tunes composed for the original SID will also play back correctly on the SID 2.</p>
+<section id="pad-assignments">
+<h2>Pad Assignments<a class="headerlink" href="#pad-assignments" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="sid-2-pad-description">
+<caption><span class="caption-number">Table 12 </span><span class="caption-text">Pad description</span><a class="headerlink" href="#sid-2-pad-description" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pad</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Summary</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[5]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">R/Wn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Active low write-enable</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[10]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CEn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Active low chip-enable</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[15:11]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A[4:0]</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Register address inputs</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[21:16]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">D[5:0]</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>Bi-directional databus</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[23]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">D[6]</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>Bi-directional databus</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[32]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">D[7]</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>Bi-directional databus</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[33]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">POTY</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>Potentiometer analog input Y</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[34]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">POTX</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>Potentiometer analog input X</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[39]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A[5]</span></code></p></td>
+<td><p>I (PD)</p></td>
+<td><p>Register address input</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[41]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RSTn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Active-low design reset</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="registers">
+<h2>Registers<a class="headerlink" href="#registers" title="Link to this heading"></a></h2>
+<p>To allow for twice as many operators to be present on the SID 2 as on the SID, the amount of registers has been doubled through the use of an additional address input to differentiate between the two banks of SID registers. This behaves similarly to a dual-SID setup. The following registers are implemented, with register bits unique to the SID 2 highlighted in green.</p>
+<section id="bank-0">
+<h3>Bank 0<a class="headerlink" href="#bank-0" title="Link to this heading"></a></h3>
+<table class="regbox">
+<tbody>
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr>
+        <td style="width: 12.5%;">Addr</td>
+        <td style="width: 12.5%;">2⁷</td>
+        <td style="width: 12.5%;"></td>
+        <td style="width: 12.5%;"></td>
+        <td style="width: 12.5%;"></td>
+        <td style="width: 12.5%;"></td>
+        <td style="width: 12.5%;"></td>
+        <td style="width: 12.5%;"></td>
+        <td style="width: 12.5%;">2⁰</td>
+    </tr>
+    <tr><td></td><td colspan="8"><b>Voice 1, Modulating Operator</b></td></tr>
+    <tr><td><code>'h00</code></td><td colspan="8">freq[7:0]</td></tr>
+    <tr><td><code>'h01</code></td><td colspan="8">freq[15:8]</td></tr>
+    <tr><td><code>'h02</code></td><td colspan="8">pw[7:0]</td></tr>
+    <tr><td><code>'h03</code></td><td colspan="4" class="regbox-type1"></td><td colspan="4">pw[11:8]</td></tr>
+    <tr><td><code>'h04</code></td><td>Noise</td><td>Pulse</td><td>Saw</td><td>Triangle</td><td>Test</td><td>Ring</td><td>Sync</td><td>Gate</td></tr>
+    <tr><td><code>'h05</code></td><td colspan="4">attack</td><td colspan="4">decay</td></tr>
+    <tr><td><code>'h06</code></td><td colspan="4">sustain</td><td colspan="4">release</td></tr>
+    <tr><td></td><td colspan="8"><b>Voice 2, Modulating Operator</b></td></tr>
+    <tr><td><code>'h07</code></td><td colspan="8">freq[7:0]</td></tr>
+    <tr><td><code>'h08</code></td><td colspan="8">freq[15:8]</td></tr>
+    <tr><td><code>'h09</code></td><td colspan="8">pw[7:0]</td></tr>
+    <tr><td><code>'h0A</code></td><td colspan="4" class="regbox-type1"></td><td colspan="4">pw[11:8]</td></tr>
+    <tr><td><code>'h0B</code></td><td>Noise</td><td>Pulse</td><td>Saw</td><td>Triangle</td><td>Test</td><td>Ring</td><td>Sync</td><td>Gate</td></tr>
+    <tr><td><code>'h0C</code></td><td colspan="4">attack</td><td colspan="4">decay</td></tr>
+    <tr><td><code>'h0D</code></td><td colspan="4">sustain</td><td colspan="4">release</td></tr>
+    <tr><td></td><td colspan="8"><b>Voice 3, Modulating Operator</b></td></tr>
+    <tr><td><code>'h0E</code></td><td colspan="8">freq[7:0]</td></tr>
+    <tr><td><code>'h0F</code></td><td colspan="8">freq[15:8]</td></tr>
+    <tr><td><code>'h10</code></td><td colspan="8">pw[7:0]</td></tr>
+    <tr><td><code>'h11</code></td><td colspan="4" class="regbox-type1"></td><td colspan="4">pw[11:8]</td></tr>
+    <tr><td><code>'h12</code></td><td>Noise</td><td>Pulse</td><td>Saw</td><td>Triangle</td><td>Test</td><td>Ring</td><td>Sync</td><td>Gate</td></tr>
+    <tr><td><code>'h13</code></td><td colspan="4">attack</td><td colspan="4">decay</td></tr>
+    <tr><td><code>'h14</code></td><td colspan="4">sustain</td><td colspan="4">release</td></tr>
+    <tr><td></td><td colspan="8"><b>Filter Configuration</b></td></tr>
+    <tr><td><code>'h15</code></td><td colspan="5" class="regbox-type1"></td><td colspan="3">fc[2:0]</td></tr>
+    <tr><td><code>'h16</code></td><td colspan="8">fc[10:3]</td></tr>
+    <tr><td><code>'h17</code></td><td colspan="4">res</td><td class="regbox-type1"></td><td>V3</td><td>V2</td><td>V1</td></tr>
+    <tr><td><code>'h18</code></td><td>3 OFF</td><td>HP</td><td>BP</td><td>LP</td><td colspan="4">vol</td></tr>
+    <tr><td></td><td colspan="8"><b>Misc.</b></td></tr>
+    <tr><td><code>'h19</code></td><td colspan="8">potx</td></tr>
+    <tr><td><code>'h1A</code></td><td colspan="8">poty</td></tr>
+    <tr><td><code>'h1B</code></td><td colspan="8">osc3¹</td></tr>
+    <tr><td><code>'h1C</code></td><td colspan="8">env3¹</td></tr>
+    <tr><td></td><td colspan="8"><b>Voice 1, Modulating Operator, Sine Configuration</b></td></tr>
+    <tr><td><code>'h1D</code></td><td colspan="3" class="regbox-type1"></td><td class="regbox-type2">SNoise</td><td class="regbox-type2">SPulse</td><td class="regbox-type2">SSaw</td><td class="regbox-type2">STriangle</td><td class="regbox-type2">Sine</td></tr>
+    <tr><td></td><td colspan="8"><b>Voice 2, Modulating Operator, Sine Configuration</b></td></tr>
+    <tr><td><code>'h1E</code></td><td colspan="3" class="regbox-type1"></td><td class="regbox-type2">SNoise</td><td class="regbox-type2">SPulse</td><td class="regbox-type2">SSaw</td><td class="regbox-type2">STriangle</td><td class="regbox-type2">Sine</td></tr>
+    <tr><td></td><td colspan="8"><b>Voice 3, Modulating Operator, Sine Configuration</b></td></tr>
+    <tr><td><code>'h1F</code></td><td colspan="3" class="regbox-type1"></td><td class="regbox-type2">SNoise</td><td class="regbox-type2">SPulse</td><td class="regbox-type2">SSaw</td><td class="regbox-type2">STriangle</td><td class="regbox-type2">Sine</td></tr>
+</tbody>
+</table></section>
+<section id="bank-1">
+<h3>Bank 1<a class="headerlink" href="#bank-1" title="Link to this heading"></a></h3>
+<table class="regbox">
+<tbody>
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr>
+        <td style="width: 12.5%;">Addr</td>
+        <td style="width: 12.5%;">2⁷</td>
+        <td style="width: 12.5%;"></td>
+        <td style="width: 12.5%;"></td>
+        <td style="width: 12.5%;"></td>
+        <td style="width: 12.5%;"></td>
+        <td style="width: 12.5%;"></td>
+        <td style="width: 12.5%;"></td>
+        <td style="width: 12.5%;">2⁰</td>
+    </tr>
+    <tr><td></td><td colspan="8"><b>Voice 1, Modulated Operator</b></td></tr>
+    <tr><td><code>'h20</code></td><td colspan="8">freq[7:0]</td></tr>
+    <tr><td><code>'h21</code></td><td colspan="8">freq[15:8]</td></tr>
+    <tr><td><code>'h22</code></td><td colspan="8">pw[7:0]</td></tr>
+    <tr><td><code>'h23</code></td><td colspan="4" class="regbox-type1"></td><td colspan="4">pw[11:8]</td></tr>
+    <tr><td><code>'h24</code></td><td>Noise</td><td>Pulse</td><td>Saw</td><td>Triangle</td><td>Test</td><td>Ring</td><td>Sync</td><td>Gate</td></tr>
+    <tr><td><code>'h25</code></td><td colspan="4">attack</td><td colspan="4">decay</td></tr>
+    <tr><td><code>'h26</code></td><td colspan="4">sustain</td><td colspan="4">release</td></tr>
+    <tr><td></td><td colspan="8"><b>Voice 2, Modulated Operator</b></td></tr>
+    <tr><td><code>'h27</code></td><td colspan="8">freq[7:0]</td></tr>
+    <tr><td><code>'h28</code></td><td colspan="8">freq[15:8]</td></tr>
+    <tr><td><code>'h29</code></td><td colspan="8">pw[7:0]</td></tr>
+    <tr><td><code>'h2A</code></td><td colspan="4" class="regbox-type1"></td><td colspan="4">pw[11:8]</td></tr>
+    <tr><td><code>'h2B</code></td><td>Noise</td><td>Pulse</td><td>Saw</td><td>Triangle</td><td>Test</td><td>Ring</td><td>Sync</td><td>Gate</td></tr>
+    <tr><td><code>'h2C</code></td><td colspan="4">attack</td><td colspan="4">decay</td></tr>
+    <tr><td><code>'h2D</code></td><td colspan="4">sustain</td><td colspan="4">release</td></tr>
+    <tr><td></td><td colspan="8"><b>Voice 3, Modulated Operator</b></td></tr>
+    <tr><td><code>'h2E</code></td><td colspan="8">freq[7:0]</td></tr>
+    <tr><td><code>'h2F</code></td><td colspan="8">freq[15:8]</td></tr>
+    <tr><td><code>'h30</code></td><td colspan="8">pw[7:0]</td></tr>
+    <tr><td><code>'h31</code></td><td colspan="4" class="regbox-type1"></td><td colspan="4">pw[11:8]</td></tr>
+    <tr><td><code>'h32</code></td><td>Noise</td><td>Pulse</td><td>Saw</td><td>Triangle</td><td>Test</td><td>Ring</td><td>Sync</td><td>Gate</td></tr>
+    <tr><td><code>'h33</code></td><td colspan="4">attack</td><td colspan="4">decay</td></tr>
+    <tr><td><code>'h34</code></td><td colspan="4">sustain</td><td colspan="4">release</td></tr>
+    <tr><td></td><td colspan="8"><b>Modulation Volume Adjust</b></td></tr>
+    <tr><td><code>'h35</code></td><td colspan="8" class="regbox-type2">modvol1</td></tr>
+    <tr><td><code>'h36</code></td><td colspan="8" class="regbox-type2">modvol2</td></tr>
+    <tr><td><code>'h37</code></td><td colspan="8" class="regbox-type2">modvol3</td></tr>
+    <tr><td></td><td colspan="8"><b>FM Configuration</b></td></tr>
+    <tr><td><code>'h38</code></td><td class="regbox-type2">CD</td><td colspan="3" class="regbox-type2">inv</td><td class="regbox-type1"></td><td colspan="3" class="regbox-type2">fm_en</td></tr>
+    <tr><td></td><td colspan="8"><b>Misc.</b></td></tr>
+    <tr><td><code>'h39</code></td><td colspan="8">potx</td></tr>
+    <tr><td><code>'h3A</code></td><td colspan="8">poty</td></tr>
+    <tr><td><code>'h3B</code></td><td colspan="8">osc3¹</td></tr>
+    <tr><td><code>'h3C</code></td><td colspan="8">env3¹</td></tr>
+    <tr><td></td><td colspan="8"><b>Voice 1, Modulated Operator, Sine Configuration</b></td></tr>
+    <tr><td><code>'h3D</code></td><td colspan="3" class="regbox-type1"></td><td class="regbox-type2">SNoise</td><td class="regbox-type2">SPulse</td><td class="regbox-type2">SSaw</td><td class="regbox-type2">STriangle</td><td class="regbox-type2">Sine</td></tr>
+    <tr><td></td><td colspan="8"><b>Voice 2, Modulated Operator, Sine Configuration</b></td></tr>
+    <tr><td><code>'h3E</code></td><td colspan="3" class="regbox-type1"></td><td class="regbox-type2">SNoise</td><td class="regbox-type2">SPulse</td><td class="regbox-type2">SSaw</td><td class="regbox-type2">STriangle</td><td class="regbox-type2">Sine</td></tr>
+    <tr><td></td><td colspan="8"><b>Voice 3, Modulated Operator, Sine Configuration</b></td></tr>
+    <tr><td><code>'h3F</code></td><td colspan="3" class="regbox-type1"></td><td class="regbox-type2">SNoise</td><td class="regbox-type2">SPulse</td><td class="regbox-type2">SSaw</td><td class="regbox-type2">STriangle</td><td class="regbox-type2">Sine</td></tr>
+</tbody>
+</table><p>¹In bank 0, these registers sample from the modulating operator of Voice 3, but in bank 1, they sample from the modulated operator of Voice 3.</p>
+</section>
+</section>
+<section id="functional-description">
+<h2>Functional Description<a class="headerlink" href="#functional-description" title="Link to this heading"></a></h2>
+<p>Description of original SID function is not covered in this documentation, please refer to <a class="reference external" href="https://www.waitingforfriday.com/?p=661">original documentation</a> for information on SID functionality.</p>
+<section id="compatibility-mode">
+<h3>Compatibility Mode<a class="headerlink" href="#compatibility-mode" title="Link to this heading"></a></h3>
+<p>After reset, the SID 2 behaves like a single SID. FM is disabled for all voices, putting them in additive mode. However, the <code class="docutils literal notranslate"><span class="pre">CD</span></code> (short for Compatibility Disable) bit of register <code class="docutils literal notranslate"><span class="pre">'h38</span></code> gates additive synthesis mode. If this bit is cleared, as is the default, only the three operators of bank 0 (the modulating operators) are audible, with the additional operators of bank 1 being disabled.</p>
+</section>
+<section id="additive-synthesis">
+<h3>Additive Synthesis<a class="headerlink" href="#additive-synthesis" title="Link to this heading"></a></h3>
+<p>Once <code class="docutils literal notranslate"><span class="pre">CD</span></code> is set, additive mode is enabled for all voices that do not have FM enabled. In additive mode, the modulating and modulated operator outputs in the affected voice are added together. To prevent clipping, the volume of each operator is halved before this addition, meaning the final voice output is <code class="docutils literal notranslate"><span class="pre">v</span> <span class="pre">=</span> <span class="pre">op1</span> <span class="pre">*</span> <span class="pre">0.5</span> <span class="pre">+</span> <span class="pre">op2</span> <span class="pre">*</span> <span class="pre">0.5</span></code>. This incompatibility necessitates the existance of the <code class="docutils literal notranslate"><span class="pre">CD</span></code> bit, as the halving does not take place when it is clear. FM can be enabled for individual voices even while <code class="docutils literal notranslate"><span class="pre">CD</span></code> is clear.</p>
+</section>
+<section id="frequency-modulation-synthesis">
+<h3>Frequency Modulation Synthesis<a class="headerlink" href="#frequency-modulation-synthesis" title="Link to this heading"></a></h3>
+<p>Frequency Modulation Synthesis can be enabled for individual voices by setting the corresponding bit in <code class="docutils literal notranslate"><span class="pre">fm_en</span></code>. In this mode, the output of the modulating operator of the affected voice becomes inaudible and is instead used to modulate the frequency of the modulated operator. The frequency of the modulated operator is continuously multiplied by one plus the amplitude of the modulating operator output multiplied by three: <code class="docutils literal notranslate"><span class="pre">f_mod</span> <span class="pre">=</span> <span class="pre">freq</span> <span class="pre">*</span> <span class="pre">(1</span> <span class="pre">+</span> <span class="pre">amplitude</span> <span class="pre">*</span> <span class="pre">3)</span></code>.</p>
+<p>To control this effect more precisely, the <code class="docutils literal notranslate"><span class="pre">modvol1</span></code> through <code class="docutils literal notranslate"><span class="pre">modvol3</span></code> registers scale the output of the corresponding voice’s modulating operator. A value of zero is off, while a value of <code class="docutils literal notranslate"><span class="pre">'hFF</span></code> is full volume. In FM Mode, this allows the maximum frequency shift to be tuned. In additive mode, these register simply scale the audible volume of these operators, even if <code class="docutils literal notranslate"><span class="pre">CD</span></code> is clear. To maintain backwards-compatibility, all three <code class="docutils literal notranslate"><span class="pre">modvol</span></code> registers read <code class="docutils literal notranslate"><span class="pre">'hFF</span></code> after reset.</p>
+</section>
+<section id="sine-wave-generation">
+<h3>Sine Wave Generation<a class="headerlink" href="#sine-wave-generation" title="Link to this heading"></a></h3>
+<p>To allow for more interesting and dynamic sound types to be generated, all 6 operators on the SID 2 have been extended by one additional waveform type: sine wave. This can be selected by setting the “Sine” bit in the corresponding “Sine Configuration” register, along with at least one of “SNoise”, “SPulse”, “SSaw” or “STriangle”. Selecting multiple waveform types causes the output of the operator to become the bitwise-logic-AND of all selected waveforms, just as on the SID, which now includes the sine wave.</p>
+<p>The sine wave is generated by indexing a quarter-sine Look-Up-Table and translating its output depending on which quadrant of the wave the index falls in. How this index is generated depends on the remaining bits in the Sine Configuration register. A normal sine wave can be achieved by setting just the “SSaw” bit. This selects the value of the sawtooth waveform to be used as the LUT index. As this waveform’s binary amplitude simply counts up until overflowing to zero, this results in a linear cycling through the LUT indices and thus a normal sine wave. However, other waveforms, and their bitwise-logic-AND combinations, may be used as  the LUT index, creating other waveforms. For instance, selecting just “STriangle” as the LUT index generates a “mirrored” looking wave.</p>
+<img alt="images/waveform1.png" src="_images/waveform1.png" />
+<p>Relationship between LUT index and sine output. This is also the final output when using sawtooth as the LUT index.</p>
+<img alt="images/waveform2.png" src="_images/waveform2.png" />
+<p>Alternative waveform achievable by using triangle as the LUT index.</p>
+<img alt="images/image.png" src="_images/image.png" />
+<p>Frequency modulation example where the modulating operator is playing a square wave and the modulated operator is playing a sine wave.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rv32.html" class="btn btn-neutral float-left" title="AS65RV32" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ntsc.html" class="btn btn-neutral float-right" title="NTSC Test" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Tholin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

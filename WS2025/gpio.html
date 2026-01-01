@@ -1,0 +1,772 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GPIO Chip &mdash; WAFER-SPACE-MULTI  documentation</title>
+      <link rel="stylesheet" type="text/css" href="static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="static/custom.css?v=5d8de9f2" />
+
+  
+      <script src="static/jquery.js?v=5d32c60e"></script>
+      <script src="static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="static/documentation_options.js?v=5929fcd5"></script>
+      <script src="static/doctools.js?v=9bcbadda"></script>
+      <script src="static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://wavedrom.com/skins/default.js"></script>
+      <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SID" href="sid.html" />
+    <link rel="prev" title="DRAM Controller" href="dramcontroller.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            WAFER-SPACE-MULTI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="multiplexer.html">Multiplexer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html">TinyTapeout VGA Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html#bit-color-vga-demo">24-bit color VGA demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscelaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nanoproc.html">Nanoprocessor Replica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simplecpu.html">Simple CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rv32.html">AS65RV32</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fm.html">SID 2 (SID-compatible FM-Synthesizer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ntsc.html">NTSC Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dramcontroller.html">DRAM Controller</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GPIO Chip</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pad-assignments">Pad Assignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bus-interface">Bus Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#register-descriptions">Register Descriptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gpio-port">GPIO Port</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#serial-ports">Serial Ports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#timer-counters">Timer/Counters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#digital-to-analog-converters">Digital To Analog Converters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prng">PRNG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#general-purpose-registers">General-Purpose Registers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#interrupts">Interrupts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sid.html">SID</a></li>
+<li class="toctree-l1"><a class="reference internal" href="as65cxx.html">AS65C02/AS65C10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pla.html">Commodore 64 PLA</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WAFER-SPACE-MULTI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">GPIO Chip</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="sources/gpio.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gpio-chip">
+<span id="gpio"></span><h1>GPIO Chip<a class="headerlink" href="#gpio-chip" title="Link to this heading"></a></h1>
+<p>This design combines many common I/O peripherals into a single layout and interfaces to the outside world using an 8-bit bus interface compatible with many old 8-bit and 16-bit microprocessors. It contains 16 individually programmable GPIO lines, 3 timer/counters, 3 DACs, a PRNG, one UART, one SPI port and 16 bytes of general-purpose registers.</p>
+<section id="pad-assignments">
+<h2>Pad Assignments<a class="headerlink" href="#pad-assignments" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="gpio-pad-description">
+<caption><span class="caption-number">Table 15 </span><span class="caption-text">Pad description</span><a class="headerlink" href="#gpio-pad-description" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pad</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Summary</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[0]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">INTn</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Interrupt output, active low</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[1]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SDI</span></code></p></td>
+<td><p>I</p></td>
+<td><p>SPI Serial Data In</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[2]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RSTm</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Active-low design reset</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[3]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SDO</span></code></p></td>
+<td><p>O</p></td>
+<td><p>SPI Serial Data Out</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[4]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SCLK</span></code></p></td>
+<td><p>O</p></td>
+<td><p>SPI Serial Clock Out</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[5]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T0</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Timer 0 toggle output</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[6]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T1</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Timer 1 toggle output</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[12:7]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A[5:0]</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Bus address inputs</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[20:13]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">D[7:0]</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>Bidirectional bus data lines</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[21]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CEn</span></code></p></td>
+<td><p>I (PU)</p></td>
+<td><p>Bus Chip Enable input</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[22]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OEn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Bus Output Enable input</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[23]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">WEn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Bus Write Enable input</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[24]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PA[0]/T0CLK/CTSn</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>PORTA bit 0 or Timer 0 external clock or UART Clear To Send output</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[25]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PA[1]/T1CLK</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>PORTA bit 1 or Timer 1 external clock</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[31:26]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PA[7:2]</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>PORTA GPIO port</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[39:32]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PB[7:0]</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>PORTB GPIO port</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[40]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RXD</span></code></p></td>
+<td><p>I (PU)</p></td>
+<td><p>UART Receive Data input</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[41]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TXD</span></code></p></td>
+<td><p>O</p></td>
+<td><p>UART Transmit Data output</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">analog[0]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DAC[0]</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Digital To Analog Converter output</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">analog[5]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DAC[1]</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Digital To Analog Converter output</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">analog[10]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DAC[2]</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Digital To Analog Converter output</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="bus-interface">
+<h2>Bus Interface<a class="headerlink" href="#bus-interface" title="Link to this heading"></a></h2>
+<p>The design’s internal registers are addressed using a 8-bit data bus with data lines on the <code class="docutils literal notranslate"><span class="pre">D[7:0]</span></code> pads, register address provided on the <code class="docutils literal notranslate"><span class="pre">A[5:0]</span></code> pads and controlled by the <code class="docutils literal notranslate"><span class="pre">CEn</span></code>, <code class="docutils literal notranslate"><span class="pre">OEn</span></code> and <code class="docutils literal notranslate"><span class="pre">WEn</span></code> inputs. Any register read or write cycle requires <code class="docutils literal notranslate"><span class="pre">CEn</span></code> to be low in addition to either <code class="docutils literal notranslate"><span class="pre">OEn</span></code> or <code class="docutils literal notranslate"><span class="pre">WEn</span></code> being low. <code class="docutils literal notranslate"><span class="pre">OEn</span></code> takes precedence over <code class="docutils literal notranslate"><span class="pre">WEn</span></code>, but the condition of all three inputs being low simultaneously should generally be avoided. <code class="docutils literal notranslate"><span class="pre">OEn</span></code> being low indicates a read access, with the value of the addressed register being presented on the <code class="docutils literal notranslate"><span class="pre">D[7:0]</span></code> lines, which become outputs during this time. <code class="docutils literal notranslate"><span class="pre">WEn</span></code> being low indicates a write access, with a value presented on the <code class="docutils literal notranslate"><span class="pre">D[7:0]</span></code> lines being written into the addressed register, if the register in question is writeable. For read-only registers, <code class="docutils literal notranslate"><span class="pre">WEn</span></code> simply has no effect.</p>
+<p>All three control lines are synchronous to the clock. <code class="docutils literal notranslate"><span class="pre">WEn</span></code> takes effect on every rising clock edge where it and <code class="docutils literal notranslate"><span class="pre">CEn</span></code> are low and <code class="docutils literal notranslate"><span class="pre">OEn</span></code> is high. When <code class="docutils literal notranslate"><span class="pre">OEn</span></code> goes low, the <code class="docutils literal notranslate"><span class="pre">D[7:0]</span></code> become outputs immediately, outputing the value of the addressed register, but if the addressed register triggers a side effect when read (i.e. <code class="docutils literal notranslate"><span class="pre">UDAT</span></code>), this only triggers on the next rising clock edge after <code class="docutils literal notranslate"><span class="pre">OEn</span></code> and <code class="docutils literal notranslate"><span class="pre">CEn</span></code> going low.</p>
+</section>
+<section id="register-descriptions">
+<h2>Register Descriptions<a class="headerlink" href="#register-descriptions" title="Link to this heading"></a></h2>
+<p>All registers are listed by address and mnemonic.</p>
+<section id="gpio-port">
+<h3>GPIO Port<a class="headerlink" href="#gpio-port" title="Link to this heading"></a></h3>
+<p>Two 8-bit GPIO ports are provided through these registers, with pin direction and pull resistors individually programmable. Every bit of these registers is mapped to the corresponding bit on the <code class="docutils literal notranslate"><span class="pre">PA</span></code>/<code class="docutils literal notranslate"><span class="pre">PB</span></code> pads. <code class="docutils literal notranslate"><span class="pre">DDRx</span></code> controls pin direction, with logic ones indicating outputs and logic zeroes indicating inputs. The <code class="docutils literal notranslate"><span class="pre">PORTx</span></code> registers control the states of any outputs, with logic ones indicating a high output state and logic zeroes indicating a low output state. For pins configured as inputs, the input levels can be sampled by reading the <code class="docutils literal notranslate"><span class="pre">PINx</span></code> registers, where high level inputs generate logic ones and low level inputs generate logic zeroes.</p>
+<p>Inputs can additionally be configured to have an internal pull-up or pull-down resistor with the <code class="docutils literal notranslate"><span class="pre">PUx</span></code> and <code class="docutils literal notranslate"><span class="pre">PDx</span></code> registers. <code class="docutils literal notranslate"><span class="pre">PUx</span></code> enables pull-ups while <code class="docutils literal notranslate"><span class="pre">PDx</span></code> enables pull-downs. Setting bits in either register for port bits configured as outputs has no effect.</p>
+<p><code class="docutils literal notranslate"><span class="pre">'h00</span></code> - <code class="docutils literal notranslate"><span class="pre">DDRA</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "DDRA", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h01</span></code> - <code class="docutils literal notranslate"><span class="pre">DDRB</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "DDRB", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h02</span></code> - <code class="docutils literal notranslate"><span class="pre">PORTA</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "PORTA", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h03</span></code> - <code class="docutils literal notranslate"><span class="pre">PORTB</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "PORTB", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h04</span></code> - <code class="docutils literal notranslate"><span class="pre">PINA</span></code> - Read Only</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "PINA", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h05</span></code> - <code class="docutils literal notranslate"><span class="pre">PINB</span></code> - Read Only</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "PINB", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h2B</span></code> - <code class="docutils literal notranslate"><span class="pre">PUA</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "PUA", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h2C</span></code> - <code class="docutils literal notranslate"><span class="pre">PUB</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "PUB", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h2D</span></code> - <code class="docutils literal notranslate"><span class="pre">PDA</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "PDA", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h2E</span></code> - <code class="docutils literal notranslate"><span class="pre">PDB</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "PDB", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+</section>
+<section id="serial-ports">
+<h3>Serial Ports<a class="headerlink" href="#serial-ports" title="Link to this heading"></a></h3>
+<p>Two serial ports, one SPI master port and one UART, are provided through these registers. Both have individually programmable bitrates, generated by dividing the input clock. <code class="docutils literal notranslate"><span class="pre">SDIV</span></code> contains the divider value for the SPI port and <code class="docutils literal notranslate"><span class="pre">UDIV</span></code> the divider value for the UART. The final bitrate for either is then <code class="docutils literal notranslate"><span class="pre">clock</span> <span class="pre">/</span> <span class="pre">(UDIV/SDIV</span> <span class="pre">+</span> <span class="pre">1)</span></code>.</p>
+<p>Both ports have a data register, <code class="docutils literal notranslate"><span class="pre">SDAT</span></code> for the SPI port and <code class="docutils literal notranslate"><span class="pre">UDAT</span></code> for the UART, which immediately initiate a data transfer when written to. In the case of the SPI port, a full-duplex data exchange takes place, with the received byte obtainable by reading <code class="docutils literal notranslate"><span class="pre">SDAT</span></code> once the transfer is complete. The UART will asynchronously receive bytes, which can then be obtained by reading <code class="docutils literal notranslate"><span class="pre">UDAT</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">SSTAT</span></code> register provides status information and configuration options for the serial ports.
+The bits <code class="docutils literal notranslate"><span class="pre">SBUSY</span></code>, for the SPI port, and <code class="docutils literal notranslate"><span class="pre">UBUSY</span></code>, for the UART, indicate if the corresponding serial port is still busy transmitting the last value written to its data register. No further data register writes may take place for a serial port if its corresponding busy bit is set. The UART additionally provides the <code class="docutils literal notranslate"><span class="pre">UHB</span></code> status bit which reads one if it has completed receiving a new byte and this data is now available in <code class="docutils literal notranslate"><span class="pre">UDAT</span></code>. Reading <code class="docutils literal notranslate"><span class="pre">UDAT</span></code> then also clears <code class="docutils literal notranslate"><span class="pre">UHB</span></code>. Buffer overruns are not detected.</p>
+<p>The UART is capable of generating an interrupt whenever it has received a byte, which can be enabled by setting the <code class="docutils literal notranslate"><span class="pre">UIEN</span></code> bit in <code class="docutils literal notranslate"><span class="pre">SSTAT</span></code>. Basic flow control can also be enabled by setting <code class="docutils literal notranslate"><span class="pre">FLOWEN</span></code>. <code class="docutils literal notranslate"><span class="pre">PORTA</span></code> bit zero, corresponding to the <code class="docutils literal notranslate"><span class="pre">PA[0]</span></code> pad, must additionally be an output pin to use this feature. Setting <code class="docutils literal notranslate"><span class="pre">FLOWEN</span></code> overrides the output value setting of this pad with the <code class="docutils literal notranslate"><span class="pre">CTSn</span></code> flow control line. This line goes high whenever <code class="docutils literal notranslate"><span class="pre">UHB</span></code> is set and only goes low when <code class="docutils literal notranslate"><span class="pre">UHB</span></code> becomes low again. This indicates to the other end of the connection that no further bytes can be received by the UART until <code class="docutils literal notranslate"><span class="pre">UDAT</span></code> is read.</p>
+<p><code class="docutils literal notranslate"><span class="pre">'h06</span></code> - <code class="docutils literal notranslate"><span class="pre">SDIV</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "SDIV", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h07</span></code> - <code class="docutils literal notranslate"><span class="pre">SDAT</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "SDAT", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h08</span></code> - <code class="docutils literal notranslate"><span class="pre">UDIV</span></code> (LSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "UDIV[7:0]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h09</span></code> - <code class="docutils literal notranslate"><span class="pre">UDIV</span></code> (MSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "UDIV[15:8]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h0A</span></code> - <code class="docutils literal notranslate"><span class="pre">UDAT</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "UDAT", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h0B</span></code> - <code class="docutils literal notranslate"><span class="pre">SSTAT</span></code> - Only marked bits are writeable</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "SBUSY", "bits": 1},{"name": "UHB", "bits": 1},{"name": "UBUSY", "bits": 1},{"type": 1, "bits": 3},{"name": "FLOWEN", "bits": 1, "type": 3},{"name": "UIEN", "bits": 1, "type": 3}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+</section>
+<section id="timer-counters">
+<h3>Timer/Counters<a class="headerlink" href="#timer-counters" title="Link to this heading"></a></h3>
+<p>Three timer/counters provide precise general-purpose or interrupt timing based on the system clock, or an external clock, or can count pulses from an external source. All timers are 16-bits wide with a 16-bit prescaler and a 16-bit compare unit. Reading and writing these 16-bit registers through the 8-bit databus must follow a specific pattern. All put the <code class="docutils literal notranslate"><span class="pre">TMRx</span></code> registers can have their LSB and MSB read in any order. To read the timer values, a write to the <code class="docutils literal notranslate"><span class="pre">TCAPT</span></code> register will instantly copy all timer values from <code class="docutils literal notranslate"><span class="pre">TMRx</span></code> to the corresponding <code class="docutils literal notranslate"><span class="pre">CAPx</span></code> registers, which may then be read in any order. Writing any 16-bit register must be done LSB first. When writing to the LSB of one of these registers, the value is not directly written, but instead cached in a hidden temporary register. When the write to the MSB is done, the value presented on the bus and that in the temporary register are combined to form a full 16-bit value, which is then instantaneously written to the target register.</p>
+<p>Each timer functions the same: it counts up from zero until reaching the value programmed in <code class="docutils literal notranslate"><span class="pre">TTOPx</span></code>, at which point it resets to zero, optionally generating an interrupt or toggling an output pin. The rate at which each timer counts up can be set in multiple ways and if the <code class="docutils literal notranslate"><span class="pre">TPREx</span></code> registers have been programmed with non-zero values, the count rate is additionally divided by <code class="docutils literal notranslate"><span class="pre">TPREx</span> <span class="pre">+</span> <span class="pre">1</span></code>. The simplest and default method is counting up at the rate of the design input clock, divided by <code class="docutils literal notranslate"><span class="pre">TPREx</span> <span class="pre">+</span> <span class="pre">1</span></code>. However, timers <code class="docutils literal notranslate"><span class="pre">TMR0</span></code> and <code class="docutils literal notranslate"><span class="pre">TMR1</span></code> may also receive a count rate from an external source, which can be selected by setting <code class="docutils literal notranslate"><span class="pre">TxEXT</span></code> in <code class="docutils literal notranslate"><span class="pre">TOPT</span></code>. Once enabled, the clock source of the affected timer switches to its corresponding <code class="docutils literal notranslate"><span class="pre">TxCLK</span></code> input pad. As <code class="docutils literal notranslate"><span class="pre">T0CLK</span></code> and <code class="docutils literal notranslate"><span class="pre">T1CLK</span></code> are shared with <code class="docutils literal notranslate"><span class="pre">PA[0]</span></code> and <code class="docutils literal notranslate"><span class="pre">PA[1]</span></code>, the corresponding <code class="docutils literal notranslate"><span class="pre">PORTA</span></code> bits must be set to inputs. They can then still be read normally through <code class="docutils literal notranslate"><span class="pre">PINA</span></code> on top of functioning as <code class="docutils literal notranslate"><span class="pre">TxCLK</span></code> and a pull-up or pull-down may still be enabled for either pad. The design will then detect positive going edges on <code class="docutils literal notranslate"><span class="pre">TxCLK</span></code> and the corresponding timer/counter will increment every <code class="docutils literal notranslate"><span class="pre">TPREx</span> <span class="pre">+</span> <span class="pre">1</span></code> such edges.</p>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">TMRIEx</span></code> bits in <code class="docutils literal notranslate"><span class="pre">TOPT</span></code> enables the generation of timer interrupts for the corresponding timer/counter. Every time a interrupt-enabled timer reaches <code class="docutils literal notranslate"><span class="pre">TTOPx</span></code> and resets to zero, its <code class="docutils literal notranslate"><span class="pre">TxIRQ</span></code> bit is set and an interrupt is generated. These interrupts must be cleared by writing to the <code class="docutils literal notranslate"><span class="pre">TIRQS</span></code> register. Every logic one in the written value resets the corresponding <code class="docutils literal notranslate"><span class="pre">TxIRQ</span></code> bit, clearing the interrupt. Reading <code class="docutils literal notranslate"><span class="pre">TIRQS</span></code> reveals which timers currently have  their <code class="docutils literal notranslate"><span class="pre">TxIRQ</span></code> bit set. If a <code class="docutils literal notranslate"><span class="pre">TMRIEx</span></code> bit is cleared while the corresponding <code class="docutils literal notranslate"><span class="pre">TxIRQ</span></code> bit is set, the <code class="docutils literal notranslate"><span class="pre">TxIRQ</span></code> bit also clears.</p>
+<p><code class="docutils literal notranslate"><span class="pre">'h0C</span></code> - <code class="docutils literal notranslate"><span class="pre">TOPT</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "TMRIE[2:0]", "bits": 3},{"name": "TMR0EXT", "bits": 1},{"name": "TMR1EXT", "bits": 1},{"type": 1, "bits": 3}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h0D</span></code> - <code class="docutils literal notranslate"><span class="pre">TIRQS</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "TMR0IRQ", "bits": 1},{"name": "TMR1IRQ", "bits": 1},{"name": "TMR2IRQ", "bits": 1},{"type": 1, "bits": 5}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h0E</span></code> - <code class="docutils literal notranslate"><span class="pre">TCAPT</span></code> - Write Only</p>
+<p>Writing this register instantaneously captures all current <code class="docutils literal notranslate"><span class="pre">TMRx</span></code> values into the corresponding <code class="docutils literal notranslate"><span class="pre">CAPx</span></code> registers.</p>
+<p><code class="docutils literal notranslate"><span class="pre">'h0F</span></code> - <code class="docutils literal notranslate"><span class="pre">T0PRE</span></code> (LSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "T0PRE[7:0]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h10</span></code> - <code class="docutils literal notranslate"><span class="pre">T0PRE</span></code> (MSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "T0PRE[15:8]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h11</span></code> - <code class="docutils literal notranslate"><span class="pre">T1PRE</span></code> (LSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "T1PRE[7:0]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h12</span></code> - <code class="docutils literal notranslate"><span class="pre">T1PRE</span></code> (MSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "T1PRE[15:8]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h13</span></code> - <code class="docutils literal notranslate"><span class="pre">T2PRE</span></code> (LSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "T2PRE[7:0]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h14</span></code> - <code class="docutils literal notranslate"><span class="pre">T2PRE</span></code> (MSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "T2PRE[15:8]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h15</span></code> - <code class="docutils literal notranslate"><span class="pre">T0TOP</span></code> (LSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "T0TOP[7:0]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h16</span></code> - <code class="docutils literal notranslate"><span class="pre">T0TOP</span></code> (MSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "T0TOP[15:8]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h17</span></code> - <code class="docutils literal notranslate"><span class="pre">T1TOP</span></code> (LSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "T1TOP[7:0]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h18</span></code> - <code class="docutils literal notranslate"><span class="pre">T1TOP</span></code> (MSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "T1TOP[15:8]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h19</span></code> - <code class="docutils literal notranslate"><span class="pre">T2TOP</span></code> (LSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "T2TOP[7:0]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h1A</span></code> - <code class="docutils literal notranslate"><span class="pre">T2TOP</span></code> (MSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "T2TOP[15:8]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h1B</span></code> - <code class="docutils literal notranslate"><span class="pre">TMR0</span></code> (write) / <code class="docutils literal notranslate"><span class="pre">CAP0</span></code> (read) (LSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "TMR0[7:0] / CAP0[7:0]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h1C</span></code> - <code class="docutils literal notranslate"><span class="pre">TMR0</span></code> (write) / <code class="docutils literal notranslate"><span class="pre">CAP0</span></code> (read) (MSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "TMR0[15:8] / CAP0[15:8]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h1D</span></code> - <code class="docutils literal notranslate"><span class="pre">TMR1</span></code> (write) / <code class="docutils literal notranslate"><span class="pre">CAP1</span></code> (read) (LSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "TMR1[7:0] / CAP1[7:0]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h1E</span></code> - <code class="docutils literal notranslate"><span class="pre">TMR1</span></code> (write) / <code class="docutils literal notranslate"><span class="pre">CAP1</span></code> (read) (MSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "TMR1[15:8] / CAP1[15:8]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h1F</span></code> - <code class="docutils literal notranslate"><span class="pre">TMR2</span></code> (write) / <code class="docutils literal notranslate"><span class="pre">CAP2</span></code> (read) (LSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "TMR2[7:0] / CAP2[7:0]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h20</span></code> - <code class="docutils literal notranslate"><span class="pre">TMR2</span></code> (write) / <code class="docutils literal notranslate"><span class="pre">CAP2</span></code> (read) (MSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "TMR2[15:8] / CAP2[15:8]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+</section>
+<section id="digital-to-analog-converters">
+<h3>Digital To Analog Converters<a class="headerlink" href="#digital-to-analog-converters" title="Link to this heading"></a></h3>
+<p>Three DACs provide analog output capabilities. Each DAC is 12-bits wide, with a change of a DAC’s register value corresponding to a proportional voltage change on its analog output pin. A value of zero produces a voltage close to 0V while the maximum value of <code class="docutils literal notranslate"><span class="pre">'hFFF</span></code> produces a voltage close to the supply voltage¹. Values in-between these two extremes produce voltages on a linear slope between 0V and the supply voltage. Each DAC is typically capable of driving a 1Kohm load.</p>
+<p>¹Proper functioning of the DACs is not guranteed at supply voltages not equal to 5V +/- 10% as all passive circuit components were tuned for 5V operation.</p>
+<p><code class="docutils literal notranslate"><span class="pre">'h21</span></code> - <code class="docutils literal notranslate"><span class="pre">DAC0</span></code> (MSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "DAC0[11:8]", "bits": 4},{"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h22</span></code> - <code class="docutils literal notranslate"><span class="pre">DAC0</span></code> (LSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "DAC0[7:0]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h23</span></code> - <code class="docutils literal notranslate"><span class="pre">DAC1</span></code> (MSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "DAC1[11:8]", "bits": 4},{"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h24</span></code> - <code class="docutils literal notranslate"><span class="pre">DAC1</span></code> (LSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "DAC1[7:0]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h25</span></code> - <code class="docutils literal notranslate"><span class="pre">DAC2</span></code> (MSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "DAC2[11:8]", "bits": 4},{"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h26</span></code> - <code class="docutils literal notranslate"><span class="pre">DAC2</span></code> (LSB)</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "DAC2[7:0]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+</section>
+<section id="prng">
+<h3>PRNG<a class="headerlink" href="#prng" title="Link to this heading"></a></h3>
+<p>A Xorshift-based PRNG provides random values that update on every clock cycle. 24 of the PRNG state’s 32-bits are left uninitialized on reset, meaning they start with a truly random state from the register bit flip-flops settling into random states on power-up, providing a different random number sequence each time. The whole 32-bit state of the PRNG is accessible, though it is not capturable in whole like is the case with the timer values.</p>
+<p><code class="docutils literal notranslate"><span class="pre">'h27</span></code> - <code class="docutils literal notranslate"><span class="pre">PRNG</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "PRNG[7:0]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h28</span></code> - <code class="docutils literal notranslate"><span class="pre">PRNG</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "PRNG[15:8]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h29</span></code> - <code class="docutils literal notranslate"><span class="pre">PRNG</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "PRNG[23:16]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">'h2A</span></code> - <code class="docutils literal notranslate"><span class="pre">PRNG</span></code></p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "PRNG[31:24]", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+</section>
+<section id="general-purpose-registers">
+<h3>General-Purpose Registers<a class="headerlink" href="#general-purpose-registers" title="Link to this heading"></a></h3>
+<p>16 addresses in the range <code class="docutils literal notranslate"><span class="pre">'h30</span></code> through <code class="docutils literal notranslate"><span class="pre">'h3F</span></code> (inclusive) map to registers which are readable and writeable, but are not mapped to any hardware function. This essentially turns them into 16 bytes of general-purpose random-access memory that can be used arbitrarily for data storage by the host system.</p>
+</section>
+</section>
+<section id="interrupts">
+<h2>Interrupts<a class="headerlink" href="#interrupts" title="Link to this heading"></a></h2>
+<p>Interrupts are provided by the <code class="docutils literal notranslate"><span class="pre">INTn</span></code> output pin. This pin transitions low as soon as any enabled interrupt source becomes active and stays low until the number of active interrupt sources has reached zero after each source has been cleared or reset. All three timers as well as the UART serial port can generate interrupts, as described in their own sections above.</p>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dramcontroller.html" class="btn btn-neutral float-left" title="DRAM Controller" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sid.html" class="btn btn-neutral float-right" title="SID" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Tholin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

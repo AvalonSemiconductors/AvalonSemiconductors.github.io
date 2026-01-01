@@ -1,0 +1,230 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SID &mdash; WAFER-SPACE-MULTI  documentation</title>
+      <link rel="stylesheet" type="text/css" href="static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="static/custom.css?v=5d8de9f2" />
+
+  
+      <script src="static/jquery.js?v=5d32c60e"></script>
+      <script src="static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="static/documentation_options.js?v=5929fcd5"></script>
+      <script src="static/doctools.js?v=9bcbadda"></script>
+      <script src="static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://wavedrom.com/skins/default.js"></script>
+      <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="GPIO Chip" href="gpio.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            WAFER-SPACE-MULTI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="multiplexer.html">Multiplexer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html">TinyTapeout VGA Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html#bit-color-vga-demo">24-bit color VGA demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscelaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nanoproc.html">Nanoprocessor Replica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simplecpu.html">Simple CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rv32.html">AS65RV32</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fm.html">SID 2 (SID-compatible FM-Synthesizer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ntsc.html">NTSC Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dramcontroller.html">DRAM Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpio.html">GPIO Chip</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SID</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pad-assignments">Pad Assignments</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WAFER-SPACE-MULTI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SID</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="sources/sid.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sid">
+<span id="id1"></span><h1>SID<a class="headerlink" href="#sid" title="Link to this heading"></a></h1>
+<p>This is an updated version of the same layout taped out as part of the AvalonSemiconductors GFMPW-1 Multi-Project die, documented <a class="reference external" href="https://avalonsemiconductors.github.io/GFMPW-1-MULTI/sid.html">here</a>.</p>
+<p>Several bus timing problems have been fixed and the implementation of the filters adjusted to function slightly better. The POT registers and associated IO pads have now also been implemented. Additionally, two of the DACs on the die are now used for direct, analog audio output. The external DAC output option has been retained as a fallback, but the DAC chip supported was changed to the MCP4921.</p>
+<p>Just as before, two SIDs are actually contained with the design, with an extra address pin differentiating between the two, no external filter capacitors are required and all registers marked as write-only in the original SID documentation are now read-write. A input clock 8 times faster than that of the original SID is still required due to the voices and filters being time-multiplexed/pipelined in this implementation. The ICS501 integrated circuit has been verified as being suitable for multiplying a host system’s clock by 8 for this purpose.</p>
+<p>In cases where timing issues on the <code class="docutils literal notranslate"><span class="pre">R/Wn</span></code> and <code class="docutils literal notranslate"><span class="pre">CEn</span></code> control lines exist, these signals may be synchronized to a slower separate clock signal by pulling <code class="docutils literal notranslate"><span class="pre">PHI2ENn</span></code> low and feeding the slow clock into the <code class="docutils literal notranslate"><span class="pre">PHI2</span></code> input.</p>
+<p>For a functional description of the SID, see <a class="reference external" href="https://www.waitingforfriday.com/?p=661">this page</a>.</p>
+<section id="pad-assignments">
+<h2>Pad Assignments<a class="headerlink" href="#pad-assignments" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="sid-pad-description">
+<caption><span class="caption-number">Table 16 </span><span class="caption-text">Pad description</span><a class="headerlink" href="#sid-pad-description" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pad</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Summary</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[5]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">R/Wn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Active low write-enable</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[10]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CEn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Active low chip-enable</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[15:11]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A[4:0]</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Register address inputs</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[21:16]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">D[5:0]</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>Bi-directional databus</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[23]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">D[6]</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>Bi-directional databus</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[24]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PHI2</span></code></p></td>
+<td><p>I (PU)</p></td>
+<td><p>External synchronization clock input</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[25]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PHI2ENn</span></code></p></td>
+<td><p>I (PU)</p></td>
+<td><p>Enables external clock synchronization when pulled low</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[27]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DSCLK</span></code> ¹</p></td>
+<td><p>O</p></td>
+<td><p>Serial clock to external DACs</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[29:28]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DSDO[1:0]</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Serial data out for each external DAC individually</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[30]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DLEn</span></code> ¹</p></td>
+<td><p>O</p></td>
+<td><p>External DAC Latch Enable (active-low)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[31]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DCSn</span></code> ¹</p></td>
+<td><p>O</p></td>
+<td><p>External DAC Chip Select (active-low)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[32]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">D[7]</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>Bi-directional databus</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[33]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">POTY</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>Potentiometer analog input Y</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[34]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">POTX</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>Potentiometer analog input X</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[39]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A[5]</span></code></p></td>
+<td><p>I (PD)</p></td>
+<td><p>Register address input</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[41]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RSTn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Active-low design reset</p></td>
+</tr>
+</tbody>
+</table>
+<p>¹These signals are shared between both external DACs.</p>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gpio.html" class="btn btn-neutral float-left" title="GPIO Chip" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Tholin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

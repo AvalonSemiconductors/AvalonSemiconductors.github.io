@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>wafer.space Multi-Project Die &mdash; WAFER-SPACE-MULTI  documentation</title>
       <link rel="stylesheet" type="text/css" href="static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="static/custom.css?v=4f7215f6" />
+      <link rel="stylesheet" type="text/css" href="static/custom.css?v=5d8de9f2" />
 
   
       <script src="static/jquery.js?v=5d32c60e"></script>
@@ -46,6 +46,19 @@
               <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="multiplexer.html">Multiplexer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html">TinyTapeout VGA Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html#bit-color-vga-demo">24-bit color VGA demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscelaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nanoproc.html">Nanoprocessor Replica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simplecpu.html">Simple CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rv32.html">AS65RV32</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fm.html">SID 2 (SID-compatible FM-Synthesizer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ntsc.html">NTSC Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dramcontroller.html">DRAM Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpio.html">GPIO Chip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sid.html">SID</a></li>
+<li class="toctree-l1"><a class="reference internal" href="as65cxx.html">AS65C02/AS65C10</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pla.html">Commodore 64 PLA</a></li>
 </ul>
 
         </div>
@@ -96,6 +109,198 @@
 <li class="toctree-l1"><a class="reference internal" href="multiplexer.html">Multiplexer</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="multiplexer.html#i-o-routing-and-design-selection">I/O Routing and design selection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multiplexer.html#design-address-map">Design address map</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html">TinyTapeout VGA Demos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vga.html#pad-assignments">Pad Assignments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html#bit-color-vga-demo">24-bit color VGA demo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vga.html#id1">Pad Assignments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscelaneous</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="misc.html#pad-assignments">Pad Assignments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nanoproc.html">Nanoprocessor Replica</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nanoproc.html#pad-assignments">Pad Assignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nanoproc.html#bus-cycles">Bus cycles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nanoproc.html#direct-control-port">Direct Control Port</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nanoproc.html#interrupts">Interrupts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nanoproc.html#programming-model">Programming Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nanoproc.html#instruction-set">Instruction Set</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#sbs-skip-on-bit-set">SBS - Skip on Bit Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#sbz-skip-on-bit-zero">SBZ - Skip on Bit Zero</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#sbn-set-bit-n">SBN - Set Bit N</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#cbn-clear-bit-n">CBN - Clear Bit N</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#inb-increment-binary">INB - Increment Binary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#ind-increment-decimal">IND - Increment Decimal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#deb-decrement-binary">DEB - Decrement Binary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#ded-decrement-decimal">DED - Decrement Decimal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#cla-clear-accumulator">CLA - Clear Accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#cma-complement-accumulator">CMA - Complement Accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#lsa-left-shift-accumulator">LSA - Left-Shift Accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#rsa-right-shift-accumulator">RSA - Right-Shift Accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#ses-skip-on-extend-set">SES - Skip on Extend Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#sez-skip-on-extend-zero">SEZ - Skip on Extend Zero</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#ldr-load-rom-data">LDR - Load ROM Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#lda-load-accumulator">LDA - Load Accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#sta-store-accumulator">STA - Store Accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#ldi-load-indexed">LDI - Load Indexed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#sti-store-indexed">STI - Store Indexed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#str-store-rom-data">STR - Store ROM Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#ste-set-extend">STE - Set Extend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#cle-clear-extend">CLE - Clear Extend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#dsi-disable-interrupt">DSI - Disable Interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#eni-enable-interrupt">ENI - Enable Interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#slt-skip-on-less-than">SLT - Skip on Less Than</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#seq-skip-on-equal">SEQ - Skip on Equal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#saz-skip-on-accumulator-zero">SAZ - Skip on Accumulator Zero</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#sle-skip-on-less-equal">SLE - Skip on Less Equal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#sge-skip-on-greater-equal">SGE - Skip on Greater Equal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#sne-skip-on-not-equal">SNE - Skip on Not Equal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#san-skip-on-accumulator-not-zero">SAN - Skip on Accumulator Not zero</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#sgt-skip-on-greater-than">SGT - Skip on Greater Than</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#ina-input-data-to-accumulator">INA - Input Data to Accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#ota-output-accumulator">OTA - Output Accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#otr-output-rom-data">OTR - Output ROM data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#stc-set-control">STC - Set Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#clc-clear-control">CLC - Clear Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#sfs-skip-on-flag-set">SFS - Skip on Flag Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#sfz-skip-on-flag-zero">SFZ - Skip on Flag Zero</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#rti-return-from-interrupt">RTI - Return from Interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#rte-return-w-enable">RTE - Return w. Enable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#nop-no-operation">NOP - No Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#jai-jump-through-accumulator-indirect">JAI - Jump through Accumulator Indirect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#jas-jump-through-accumulator-indirect-to-subroutine">JAS - Jump through Accumulator indirect to Subroutine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#jmp-jump">JMP - Jump</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#jsb-jump-to-subroutine">JSB - Jump to Subroutine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#rts-return-from-subroutine">RTS - Return from Subroutine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nanoproc.html#rse-return-from-subroutine-and-enable">RSE - Return from Subroutine and Enable</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="simplecpu.html">Simple CPU</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="simplecpu.html#pad-assignments">Pad Assignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simplecpu.html#programming-model">Programming Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simplecpu.html#loader-operation">Loader Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simplecpu.html#cpu-instructions">CPU Instructions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="simplecpu.html#not-not-accumulator">NOT - NOT accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simplecpu.html#subm-substract-memory">SUBm - Substract Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simplecpu.html#addm-add-memory">ADDm - Add Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simplecpu.html#orm-or-memory">ORm - OR Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simplecpu.html#storem-store-to-memory">STOREm - Store to memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simplecpu.html#bz-branch-if-zero">BZ - Branch if Zero</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simplecpu.html#andm-and-memory">ANDm - AND Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simplecpu.html#loadm-load-from-memory">LOADm - Load from Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simplecpu.html#in-input-from-io">IN - Input from IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simplecpu.html#subi-substract-immediate">SUBi - Substract Immediate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simplecpu.html#addi-add-immediate">ADDi - Add Immediate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simplecpu.html#id1">ORm - OR Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simplecpu.html#out-output-to-io">OUT - Output to IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simplecpu.html#br-branch-unconditionally">BR - Branch unconditionally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simplecpu.html#andi-and-immediate">ANDi - AND Immediate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simplecpu.html#loadi-load-immediate">LOADi - Load Immediate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rv32.html">AS65RV32</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rv32.html#pad-assignments">Pad Assignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rv32.html#intended-pinouts">Intended Pinouts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rv32.html#dip-40-pinout-for-6502-pad-out">DIP-40 Pinout for 6502 pad-out</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rv32.html#dip-40-pinout-for-6510-pad-out">DIP-40 Pinout for 6510 pad-out</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rv32.html#bus-interface">Bus Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rv32.html#basic-bus-cycle">Basic Bus Cycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rv32.html#effect-of-half-write-cycle-low">Effect of “Half write cycle” low</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rv32.html#successive-writes">Successive writes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rv32.html#reset-vector-fetch-sequence">Reset/Vector Fetch Sequence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rv32.html#peripherals">Peripherals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rv32.html#gpio-port">GPIO Port</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rv32.html#uart">UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rv32.html#interrupt-capable-timer">Interrupt-capable timer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rv32.html#pseudo-rng">Pseudo-RNG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rv32.html#standard-csrs">Standard CSRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rv32.html#cpuconf-csr"><code class="docutils literal notranslate"><span class="pre">cpuconf</span></code> CSR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rv32.html#interrupts-traps">Interrupts / Traps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rv32.html#non-maskable-interrupt">Non-Maskable Interrupt</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fm.html">SID 2 (SID-compatible FM-Synthesizer)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fm.html#pad-assignments">Pad Assignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fm.html#registers">Registers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fm.html#bank-0">Bank 0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm.html#bank-1">Bank 1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fm.html#functional-description">Functional Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fm.html#compatibility-mode">Compatibility Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm.html#additive-synthesis">Additive Synthesis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm.html#frequency-modulation-synthesis">Frequency Modulation Synthesis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm.html#sine-wave-generation">Sine Wave Generation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ntsc.html">NTSC Test</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ntsc.html#pad-assignments">Pad Assignments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dramcontroller.html">DRAM Controller</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dramcontroller.html#pad-assignments">Pad Assignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dramcontroller.html#intended-pinout">Intended Pinout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dramcontroller.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dramcontroller.html#memory-access-function">Memory access function</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gpio.html">GPIO Chip</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gpio.html#pad-assignments">Pad Assignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpio.html#bus-interface">Bus Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpio.html#register-descriptions">Register Descriptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html#gpio-port">GPIO Port</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html#serial-ports">Serial Ports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html#timer-counters">Timer/Counters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html#digital-to-analog-converters">Digital To Analog Converters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html#prng">PRNG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html#general-purpose-registers">General-Purpose Registers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gpio.html#interrupts">Interrupts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sid.html">SID</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sid.html#pad-assignments">Pad Assignments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="as65cxx.html">AS65C02/AS65C10</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="as65cxx.html#pad-assignments">Pad Assignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="as65cxx.html#intended-pinouts">Intended Pinouts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="as65cxx.html#dip-40-pinout-for-6502-pad-out">DIP-40 Pinout for 6502 pad-out</a></li>
+<li class="toctree-l3"><a class="reference internal" href="as65cxx.html#dip-40-pinout-for-6510-pad-out">DIP-40 Pinout for 6510 pad-out</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="as65cxx.html#detect-instruction">“Detect” Instruction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="as65cxx.html#additional-instructions">Additional Instructions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="as65cxx.html#sev-set-v">SEV - Set V</a></li>
+<li class="toctree-l3"><a class="reference internal" href="as65cxx.html#mul-multiply">MUL - Multiply</a></li>
+<li class="toctree-l3"><a class="reference internal" href="as65cxx.html#chrp-chirp">CHRP - Chirp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="as65cxx.html#cor-corrupt">COR - Corrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="as65cxx.html#extend-reserved">EXTEND - Reserved</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pla.html">Commodore 64 PLA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pla.html#pad-assignments">Pad Assignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pla.html#intended-pinout">Intended Pinout</a></li>
 </ul>
 </li>
 </ul>

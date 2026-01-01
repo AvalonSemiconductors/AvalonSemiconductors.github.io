@@ -1,0 +1,601 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple CPU &mdash; WAFER-SPACE-MULTI  documentation</title>
+      <link rel="stylesheet" type="text/css" href="static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="static/custom.css?v=055303e1" />
+
+  
+      <script src="static/jquery.js?v=5d32c60e"></script>
+      <script src="static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="static/documentation_options.js?v=5929fcd5"></script>
+      <script src="static/doctools.js?v=9bcbadda"></script>
+      <script src="static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://wavedrom.com/skins/default.js"></script>
+      <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="AS65RV32" href="rv32.html" />
+    <link rel="prev" title="Nanoprocessor Replica" href="nanoproc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            WAFER-SPACE-MULTI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="multiplexer.html">Multiplexer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html">TinyTapeout VGA Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html#bit-color-vga-demo">24-bit color VGA demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscelaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nanoproc.html">Nanoprocessor Replica</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Simple CPU</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pad-assignments">Pad Assignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#programming-model">Programming Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loader-operation">Loader Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cpu-instructions">CPU Instructions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#not-not-accumulator">NOT - NOT accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#subm-substract-memory">SUBm - Substract Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#addm-add-memory">ADDm - Add Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#orm-or-memory">ORm - OR Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#storem-store-to-memory">STOREm - Store to memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bz-branch-if-zero">BZ - Branch if Zero</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#andm-and-memory">ANDm - AND Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loadm-load-from-memory">LOADm - Load from Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#in-input-from-io">IN - Input from IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#subi-substract-immediate">SUBi - Substract Immediate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#addi-add-immediate">ADDi - Add Immediate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">ORm - OR Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#out-output-to-io">OUT - Output to IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#br-branch-unconditionally">BR - Branch unconditionally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#andi-and-immediate">ANDi - AND Immediate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loadi-load-immediate">LOADi - Load Immediate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rv32.html">AS65RV32</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WAFER-SPACE-MULTI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Simple CPU</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="sources/simplecpu.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="simple-cpu">
+<span id="simplecpu"></span><h1>Simple CPU<a class="headerlink" href="#simple-cpu" title="Link to this heading"></a></h1>
+<p>This design, with ID <code class="docutils literal notranslate"><span class="pre">'b00110</span></code>, is an intentionally simplistic 8-bit CPU for educational purposes, with only 16 instructions and 64 bytes of on-die memory. The memory can be pre-programmed by the user through inputs pins intended to be controlled via toggle switches and push buttons. An automatic preload mode is also available to initialize RAM contents from an external memory.</p>
+<p>For I/O, one output port and one input port are provided, each 8-bits wide.</p>
+<section id="pad-assignments">
+<h2>Pad Assignments<a class="headerlink" href="#pad-assignments" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="mccpu-pad-description">
+<caption><span class="caption-number">Table 5 </span><span class="caption-text">Pad description</span><a class="headerlink" href="#mccpu-pad-description" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pad</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Summary</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[0]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RSTn</span></code></p></td>
+<td><p>I (PD)</p></td>
+<td><p>Active low reset input</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[8:1]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">out[7:0]</span></code></p></td>
+<td><p>O</p></td>
+<td><p>General-purpose output port</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[9]</span></code></p></td>
+<td><p>Run Enable</p></td>
+<td><p>I (PD)</p></td>
+<td><p>Puts the processor into free-run mode when high</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[10]</span></code></p></td>
+<td><p>Load</p></td>
+<td><p>I (PD)</p></td>
+<td><p>A rising edge on this pin loads the next byte in loader mode</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[11]</span></code></p></td>
+<td><p>Preload Enable</p></td>
+<td><p>I (PD)</p></td>
+<td><p>A high level on this pin as reset is released enables auto-preload mode or for blinkenlights</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[19:12]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">load_in[7:0]</span></code></p></td>
+<td><p>I (PD)</p></td>
+<td><p>Data byte input during loader and auto-preload modes</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[27:20]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">in[7:0]</span></code></p></td>
+<td><p>I (PD)</p></td>
+<td><p>General-purpose input port</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[35:28]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PC[7:0]</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Mirror of the Program Counter register, used during auto-preload mode</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[36]</span></code></p></td>
+<td><p>Preload Active</p></td>
+<td><p>O</p></td>
+<td><p>Active low, asserted when auto-preload mode is active and still fetching bytes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[37]</span></code></p></td>
+<td><p>Loader Enable</p></td>
+<td><p>I (PD)</p></td>
+<td><p>Enables loader mode when high</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[41:38]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ireg[3:0]</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Mirror of the instruction register showing the current opcode being executed, used for debugging or blinkenlights</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="programming-model">
+<h2>Programming Model<a class="headerlink" href="#programming-model" title="Link to this heading"></a></h2>
+<p>There are only three major registers inside the processor, all 8-bits wide: the accumulator, through which all arithmatic and logic operations are performed, the Program Counter, which points to the current instruction being executed, and the latches for the general-purpose output port. All of these are accessible to the programmer.</p>
+<p>Instructions are always two bytes long and though they must not be strictly alligned to even memory locations, it is recommended to keep instructions aligned. Of the combined 16-bits, only 12 are used. The first byte fetched contains the opcode in its least-significant 4 bits, with the remaining bits ignored, and the following byte contains the instruction argument - either an immediate or an absolute memory address. For instructions which do not use the argument byte, all of its bits are don’t care.</p>
+<p>64 bytes of built-in RAM are provided from addresses 0 through 63, which then repeats four times over the whole 256-byte address space.</p>
+</section>
+<section id="loader-operation">
+<h2>Loader Operation<a class="headerlink" href="#loader-operation" title="Link to this heading"></a></h2>
+<p>There are two ways to initialize the memory contents. The first is regular loader mode, activated by pulling the Loader Enable high. This can be done at any time, though it is recommended to pair this with a reset to clear the program counter to zero. Successive negative-to-positive transitions on the Load input will read the 8-bit value presented on the <code class="docutils literal notranslate"><span class="pre">load_in</span></code> pins and store it in the RAM at the Program Counter location, before incrementing the Program Counter by one. The current Program Counter value is displayed on the <code class="docutils literal notranslate"><span class="pre">PC</span></code> pins for reference. When the Load pin is released, the processor instantly enters free-running mode and starts fetching instructions from the Program Counter location. De-asserting Load in this manner does not clear the Program Counter to zero, so it is recommended to pair this with a reset.</p>
+<p>The other way of setting up memory is using auto-preload mode, which is enabled with a high level on the Preload Enable input. This pin is only sampled while reset is active, however and so must be in the desired state as reset is released. If reset is released while Preload Enable is high, the processor will autonomously cycle the Program Counter through values 0 through 63 (inclusive), automatically copying the input at <code class="docutils literal notranslate"><span class="pre">load_in</span></code> to the Program Counter location before every increment. The Preload Active pin is low during this process. As soon as the Program Counter has reached address 63 and the <code class="docutils literal notranslate"><span class="pre">load_in</span></code> value has been latched for this location, the Program Counter is cleared to zero, Preload Active goes high and free-running mode is entered automatically. This process allows memory initialization from an external ROM by using the <code class="docutils literal notranslate"><span class="pre">PC</span></code> outputs as the address to the ROM and Preload Active as the output-enable to the ROM, with the ROM data outputs wired to <code class="docutils literal notranslate"><span class="pre">load_in</span></code>.</p>
+</section>
+<section id="cpu-instructions">
+<h2>CPU Instructions<a class="headerlink" href="#cpu-instructions" title="Link to this heading"></a></h2>
+<section id="not-not-accumulator">
+<h3>NOT - NOT accumulator<a class="headerlink" href="#not-not-accumulator" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 0, "bits": 4},
+  {"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"type": 1, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Logically inverts all bits in the accumulator.</p>
+</section>
+<section id="subm-substract-memory">
+<h3>SUBm - Substract Memory<a class="headerlink" href="#subm-substract-memory" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 1, "bits": 4},
+  {"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Address", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Subtracts from the accumulator the contents of specified memory location.</p>
+</section>
+<section id="addm-add-memory">
+<h3>ADDm - Add Memory<a class="headerlink" href="#addm-add-memory" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 2, "bits": 4},
+  {"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Address", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Adds to the accumulator the contents of specified memory location.</p>
+</section>
+<section id="orm-or-memory">
+<h3>ORm - OR Memory<a class="headerlink" href="#orm-or-memory" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 3, "bits": 4},
+  {"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Address", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Logic ORs onto the accumulator the contents of specified memory location.</p>
+</section>
+<section id="storem-store-to-memory">
+<h3>STOREm - Store to memory<a class="headerlink" href="#storem-store-to-memory" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 4, "bits": 4},
+  {"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Address", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Stores the contents of the accumulator to the specified memory location.</p>
+</section>
+<section id="bz-branch-if-zero">
+<h3>BZ - Branch if Zero<a class="headerlink" href="#bz-branch-if-zero" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 5, "bits": 4},
+  {"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Offset", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Adds the specified offset to the Program Counter IF the current accumulator contents equal exactly zero. The offset is measured from the location of the second instruction byte containing the offset. The offset is a signed integer.</p>
+</section>
+<section id="andm-and-memory">
+<h3>ANDm - AND Memory<a class="headerlink" href="#andm-and-memory" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 6, "bits": 4},
+  {"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Address", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Logic ANDs onto the accumulator the contents of specified memory location.</p>
+</section>
+<section id="loadm-load-from-memory">
+<h3>LOADm - Load from Memory<a class="headerlink" href="#loadm-load-from-memory" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 7, "bits": 4},
+  {"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Address", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Loads the memory contents from the specified memory location into the accumulator, overwriting its previous contents.</p>
+</section>
+<section id="in-input-from-io">
+<h3>IN - Input from IO<a class="headerlink" href="#in-input-from-io" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 8, "bits": 4},
+  {"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"type": 1, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Gets the input value from the <code class="docutils literal notranslate"><span class="pre">in[7:0]</span></code> pins and stores it into the accumulator, overwriting its previous contents. Note that these pins are only sampled on every second clock edge to internally buffer them.</p>
+</section>
+<section id="subi-substract-immediate">
+<h3>SUBi - Substract Immediate<a class="headerlink" href="#subi-substract-immediate" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 9, "bits": 4},
+  {"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Immediate", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Subtracts from the accumulator the immediate constant provided with the instruction.</p>
+</section>
+<section id="addi-add-immediate">
+<h3>ADDi - Add Immediate<a class="headerlink" href="#addi-add-immediate" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 10, "bits": 4},
+  {"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Immediate", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Adds to the accumulator the immediate constant provided with the instruction.</p>
+</section>
+<section id="id1">
+<h3>ORm - OR Memory<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 11, "bits": 4},
+  {"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Immediate", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Logic ORs onto the accumulator the immediate constant provided with the instruction.</p>
+</section>
+<section id="out-output-to-io">
+<h3>OUT - Output to IO<a class="headerlink" href="#out-output-to-io" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 12, "bits": 4},
+  {"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"type": 1, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Stores the contents of the accumulator to the output port latch, causing this value to become visible at the <code class="docutils literal notranslate"><span class="pre">out[7:0]</span></code> pins.</p>
+</section>
+<section id="br-branch-unconditionally">
+<h3>BR - Branch unconditionally<a class="headerlink" href="#br-branch-unconditionally" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 13, "bits": 4},
+  {"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Offset", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Adds the specified offset to the Program Counter unconditionally (always). The offset is measured from the location of the second instruction byte containing the offset. The offset is a signed integer.</p>
+</section>
+<section id="andi-and-immediate">
+<h3>ANDi - AND Immediate<a class="headerlink" href="#andi-and-immediate" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 14, "bits": 4},
+  {"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Address", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Logic ANDs onto the accumulator the immediate constant provided with the instruction.</p>
+</section>
+<section id="loadi-load-immediate">
+<h3>LOADi - Load Immediate<a class="headerlink" href="#loadi-load-immediate" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 15, "bits": 4},
+  {"type": 1, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Immediate", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Stores the immediate constant provided with the instruction into the accumulator, overwriting its previous contents.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nanoproc.html" class="btn btn-neutral float-left" title="Nanoprocessor Replica" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rv32.html" class="btn btn-neutral float-right" title="AS65RV32" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Tholin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

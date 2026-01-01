@@ -1,0 +1,960 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nanoprocessor Replica &mdash; WAFER-SPACE-MULTI  documentation</title>
+      <link rel="stylesheet" type="text/css" href="static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="static/custom.css?v=055303e1" />
+
+  
+      <script src="static/jquery.js?v=5d32c60e"></script>
+      <script src="static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="static/documentation_options.js?v=5929fcd5"></script>
+      <script src="static/doctools.js?v=9bcbadda"></script>
+      <script src="static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://wavedrom.com/skins/default.js"></script>
+      <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Simple CPU" href="simplecpu.html" />
+    <link rel="prev" title="Miscelaneous" href="misc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            WAFER-SPACE-MULTI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="multiplexer.html">Multiplexer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html">TinyTapeout VGA Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html#bit-color-vga-demo">24-bit color VGA demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscelaneous</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Nanoprocessor Replica</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pad-assignments">Pad Assignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bus-cycles">Bus cycles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#direct-control-port">Direct Control Port</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interrupts">Interrupts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#programming-model">Programming Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instruction-set">Instruction Set</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sbs-skip-on-bit-set">SBS - Skip on Bit Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sbz-skip-on-bit-zero">SBZ - Skip on Bit Zero</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sbn-set-bit-n">SBN - Set Bit N</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cbn-clear-bit-n">CBN - Clear Bit N</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inb-increment-binary">INB - Increment Binary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ind-increment-decimal">IND - Increment Decimal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deb-decrement-binary">DEB - Decrement Binary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ded-decrement-decimal">DED - Decrement Decimal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cla-clear-accumulator">CLA - Clear Accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cma-complement-accumulator">CMA - Complement Accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lsa-left-shift-accumulator">LSA - Left-Shift Accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rsa-right-shift-accumulator">RSA - Right-Shift Accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ses-skip-on-extend-set">SES - Skip on Extend Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sez-skip-on-extend-zero">SEZ - Skip on Extend Zero</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ldr-load-rom-data">LDR - Load ROM Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lda-load-accumulator">LDA - Load Accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sta-store-accumulator">STA - Store Accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ldi-load-indexed">LDI - Load Indexed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sti-store-indexed">STI - Store Indexed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#str-store-rom-data">STR - Store ROM Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ste-set-extend">STE - Set Extend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cle-clear-extend">CLE - Clear Extend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dsi-disable-interrupt">DSI - Disable Interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eni-enable-interrupt">ENI - Enable Interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slt-skip-on-less-than">SLT - Skip on Less Than</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#seq-skip-on-equal">SEQ - Skip on Equal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#saz-skip-on-accumulator-zero">SAZ - Skip on Accumulator Zero</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sle-skip-on-less-equal">SLE - Skip on Less Equal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sge-skip-on-greater-equal">SGE - Skip on Greater Equal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sne-skip-on-not-equal">SNE - Skip on Not Equal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#san-skip-on-accumulator-not-zero">SAN - Skip on Accumulator Not zero</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sgt-skip-on-greater-than">SGT - Skip on Greater Than</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ina-input-data-to-accumulator">INA - Input Data to Accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ota-output-accumulator">OTA - Output Accumulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#otr-output-rom-data">OTR - Output ROM data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stc-set-control">STC - Set Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clc-clear-control">CLC - Clear Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sfs-skip-on-flag-set">SFS - Skip on Flag Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sfz-skip-on-flag-zero">SFZ - Skip on Flag Zero</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rti-return-from-interrupt">RTI - Return from Interrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rte-return-w-enable">RTE - Return w. Enable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nop-no-operation">NOP - No Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jai-jump-through-accumulator-indirect">JAI - Jump through Accumulator Indirect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jas-jump-through-accumulator-indirect-to-subroutine">JAS - Jump through Accumulator indirect to Subroutine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jmp-jump">JMP - Jump</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jsb-jump-to-subroutine">JSB - Jump to Subroutine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rts-return-from-subroutine">RTS - Return from Subroutine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rse-return-from-subroutine-and-enable">RSE - Return from Subroutine and Enable</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="simplecpu.html">Simple CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rv32.html">AS65RV32</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fm.html">SID 2 (SID-compatible FM-Synthesizer)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WAFER-SPACE-MULTI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Nanoprocessor Replica</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="sources/nanoproc.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nanoprocessor-replica">
+<span id="nanoproc"></span><h1>Nanoprocessor Replica<a class="headerlink" href="#nanoprocessor-replica" title="Link to this heading"></a></h1>
+<p>This design is a functional, cycle-accurate replica of the <a class="reference external" href="https://www.righto.com/2020/09/inside-hp-nanoprocessor-high-speed.html">Nanoprocessor</a>, a simple programmable I/O processor with 16 8-bit registers for holding data, a 8-bit data bus for I/O and a dedicated GPIO port.</p>
+<section id="pad-assignments">
+<h2>Pad Assignments<a class="headerlink" href="#pad-assignments" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="nanoprocessor-pad-description">
+<caption><span class="caption-number">Table 4 </span><span class="caption-text">Pad description</span><a class="headerlink" href="#nanoprocessor-pad-description" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pad</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Summary</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[0]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RSTn</span></code></p></td>
+<td><p>I (PD)</p></td>
+<td><p>Active low reset input</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[13:7]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DC[6:0]</span></code></p></td>
+<td><p>IO (open drain)</p></td>
+<td><p>Last-significant 7 bits of the Direct Control Bus</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[14]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">IREQn</span></code></p></td>
+<td><p>I (PU)</p></td>
+<td><p>Interrupt-Request input, level-sensitive</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[15]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">INTACK</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Interrupt-Acknowledge output</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[16]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">INTENA</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Interrupt-Enable output</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[17]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PSG</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Program Gate - Indicates that the program address is valid and the nanoprocessor is requesting to fetch an instruction byte.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[21:18]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DS[3:0]</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Device Select / Device Address</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[22]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RWn</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Device Read/Write select - High is Read, Low is Write</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[30:23]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">D[7:0]</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>Multiplexed, Bi-directional data bus for both instruction fetches and device access</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[41:31]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PA[10:0]</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Program Address lines</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="bus-cycles">
+<h2>Bus cycles<a class="headerlink" href="#bus-cycles" title="Link to this heading"></a></h2>
+<p>The Nanoprocessor is a Harvard-Architecture style processor, but multiplexes both types of memory onto the same data bus. To avoid collisions, the <code class="docutils literal notranslate"><span class="pre">PSG</span></code> output indicates when a program data fetch is being performed. When <code class="docutils literal notranslate"><span class="pre">PSG</span></code> is high, a byte from the program memory (as addressed by <code class="docutils literal notranslate"><span class="pre">PA</span></code>) should be placed on the databus. Otherwise, the I/O device addressed by <code class="docutils literal notranslate"><span class="pre">DS</span></code> is to respond according to the state of <code class="docutils literal notranslate"><span class="pre">RWn</span></code>.</p>
+</section>
+<section id="direct-control-port">
+<h2>Direct Control Port<a class="headerlink" href="#direct-control-port" title="Link to this heading"></a></h2>
+<p>The Direct Control lines (<code class="docutils literal notranslate"><span class="pre">DC[6:0]</span></code>) are a set of individually-controllable GPIO lines. Each line is a open-drain output with weak pull-up and individually latched. Each line configured to output a logic one (pull-up) can be used as an input pin and have its state be read by the processor. The Direct Control port is actually 8-bits wide internally, but the most-significant bit is used as the interrupt-enable and its state is reflected on the <code class="docutils literal notranslate"><span class="pre">INTENA</span></code> pin. It is automatically set and reset as part of the interrupt sequence.</p>
+</section>
+<section id="interrupts">
+<h2>Interrupts<a class="headerlink" href="#interrupts" title="Link to this heading"></a></h2>
+<p>If the <code class="docutils literal notranslate"><span class="pre">IREQn</span></code> line is low at the end of an instruction’s execute phase, the processor is interrupted. This is regardless of the state of <code class="docutils literal notranslate"><span class="pre">INTENA</span></code>, though this pin can be used to gate the interrupt request line externally. If this is not the case, <code class="docutils literal notranslate"><span class="pre">INTENA</span></code> may be used as a general-purpose output.</p>
+<p>When an interrupt occurs, the Program Counter is backed-up in <code class="docutils literal notranslate"><span class="pre">ISR</span></code> and a vectored interrupt is executed, whereby the least-significant 8 bits of the Program Counter are loaded from the current databus contents, with the remaining bits set to zero. <code class="docutils literal notranslate"><span class="pre">INTENA</span></code> is also cleared. To indicate that a vectored interrupt is taking place, <code class="docutils literal notranslate"><span class="pre">INTACK</span></code> pulses high for one clock during the vector fetch.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">RTI</span></code> instruction returns from an interrupt, restoring the Program Counter from <code class="docutils literal notranslate"><span class="pre">ISR</span></code>, without changing the state of <code class="docutils literal notranslate"><span class="pre">INTENA</span></code>. The instruction <code class="docutils literal notranslate"><span class="pre">RTE</span></code> does the same, but also sets <code class="docutils literal notranslate"><span class="pre">INTENA</span></code>.</p>
+</section>
+<section id="programming-model">
+<h2>Programming Model<a class="headerlink" href="#programming-model" title="Link to this heading"></a></h2>
+<p>The Nanoprocessor contains 16 general-purpose registers each 8-bit wide and labeled <code class="docutils literal notranslate"><span class="pre">R0</span></code> through <code class="docutils literal notranslate"><span class="pre">R15</span></code> and can be used interchangably, except <code class="docutils literal notranslate"><span class="pre">R0</span></code>, which is the only valid source for comparisons and indexing. An 8-bit Accumulator register, <code class="docutils literal notranslate"><span class="pre">ACC</span></code>, is used for most operations and its contents can be freely exchanged with that of any general-purpose register.</p>
+<p>The Subroutine Stack Register, <code class="docutils literal notranslate"><span class="pre">SSR</span></code>, and Interrupt Stack Register, <code class="docutils literal notranslate"><span class="pre">ISR</span></code>, provide a single level of nesting each. Despite the names, both registers hold just a single value. The Extend Register, <code class="docutils literal notranslate"><span class="pre">E</span></code>, holds a single bit of information, usually indicating a overflow or borrow condition, but can also be set, cleared and read by program instructions.</p>
+<p>Finally, the Program Counter always points to the next instruction to be executed. It, as well as <code class="docutils literal notranslate"><span class="pre">SSR</span></code> and <code class="docutils literal notranslate"><span class="pre">ISR</span></code>, are 11-bits wide, resulting in a program memory capacity of 2048 bytes.</p>
+</section>
+<section id="instruction-set">
+<h2>Instruction Set<a class="headerlink" href="#instruction-set" title="Link to this heading"></a></h2>
+<section id="sbs-skip-on-bit-set">
+<h3>SBS - Skip on Bit Set<a class="headerlink" href="#sbs-skip-on-bit-set" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "N", "bits": 3},
+  {"name": 2, "bits": 5}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Skips the following two bytes if the indicated bit <code class="docutils literal notranslate"><span class="pre">N</span></code> in <code class="docutils literal notranslate"><span class="pre">ACC</span></code> is set (one).</p>
+</section>
+<section id="sbz-skip-on-bit-zero">
+<h3>SBZ - Skip on Bit Zero<a class="headerlink" href="#sbz-skip-on-bit-zero" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "N", "bits": 3},
+  {"name": 6, "bits": 5}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Skips the following two program bytes if the indicated bit <code class="docutils literal notranslate"><span class="pre">N</span></code> in <code class="docutils literal notranslate"><span class="pre">ACC</span></code> is cleared (zero).</p>
+</section>
+<section id="sbn-set-bit-n">
+<h3>SBN - Set Bit N<a class="headerlink" href="#sbn-set-bit-n" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "N", "bits": 3},
+  {"name": 4, "bits": 5}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Sets the indicated bit <code class="docutils literal notranslate"><span class="pre">N</span></code> in <code class="docutils literal notranslate"><span class="pre">ACC</span></code>.</p>
+</section>
+<section id="cbn-clear-bit-n">
+<h3>CBN - Clear Bit N<a class="headerlink" href="#cbn-clear-bit-n" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "N", "bits": 3},
+  {"name": 20, "bits": 5}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Clears the indicated bit <code class="docutils literal notranslate"><span class="pre">N</span></code> in <code class="docutils literal notranslate"><span class="pre">ACC</span></code>.</p>
+</section>
+<section id="inb-increment-binary">
+<h3>INB - Increment Binary<a class="headerlink" href="#inb-increment-binary" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 0, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Increments <code class="docutils literal notranslate"><span class="pre">ACC</span></code> as an 8-bit binary number. <code class="docutils literal notranslate"><span class="pre">E</span></code> is set if overflow occurs.</p>
+</section>
+<section id="ind-increment-decimal">
+<h3>IND - Increment Decimal<a class="headerlink" href="#ind-increment-decimal" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 2, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Increments <code class="docutils literal notranslate"><span class="pre">ACC</span></code> as a packed BCD value. <code class="docutils literal notranslate"><span class="pre">E</span></code> is set if overflow occurs.</p>
+</section>
+<section id="deb-decrement-binary">
+<h3>DEB - Decrement Binary<a class="headerlink" href="#deb-decrement-binary" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 1, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Decrements <code class="docutils literal notranslate"><span class="pre">ACC</span></code> as an 8-bit binary number. <code class="docutils literal notranslate"><span class="pre">E</span></code> is set if underflow occurs.</p>
+</section>
+<section id="ded-decrement-decimal">
+<h3>DED - Decrement Decimal<a class="headerlink" href="#ded-decrement-decimal" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 3, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Decrements <code class="docutils literal notranslate"><span class="pre">ACC</span></code> as a packed BCD value. <code class="docutils literal notranslate"><span class="pre">E</span></code> is set if underflow occurs.</p>
+</section>
+<section id="cla-clear-accumulator">
+<h3>CLA - Clear Accumulator<a class="headerlink" href="#cla-clear-accumulator" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 4, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Clears all bits in <code class="docutils literal notranslate"><span class="pre">ACC</span></code> to zero.</p>
+</section>
+<section id="cma-complement-accumulator">
+<h3>CMA - Complement Accumulator<a class="headerlink" href="#cma-complement-accumulator" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 5, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Complements all bits in <code class="docutils literal notranslate"><span class="pre">ACC</span></code> (one’s complement).</p>
+</section>
+<section id="lsa-left-shift-accumulator">
+<h3>LSA - Left-Shift Accumulator<a class="headerlink" href="#lsa-left-shift-accumulator" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 7, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Shifts the bits in <code class="docutils literal notranslate"><span class="pre">ACC</span></code> one place to the left, clearing the least significant bit to zero. <code class="docutils literal notranslate"><span class="pre">E</span></code> is unaffected.</p>
+</section>
+<section id="rsa-right-shift-accumulator">
+<h3>RSA - Right-Shift Accumulator<a class="headerlink" href="#rsa-right-shift-accumulator" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 6, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Shifts the bits in <code class="docutils literal notranslate"><span class="pre">ACC</span></code> one place to the right, clearing the most significant bit to zero. <code class="docutils literal notranslate"><span class="pre">E</span></code> is unaffected.</p>
+</section>
+<section id="ses-skip-on-extend-set">
+<h3>SES - Skip on Extend Set<a class="headerlink" href="#ses-skip-on-extend-set" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 31, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Skips the following two program bytes if <code class="docutils literal notranslate"><span class="pre">E</span></code> is set (one).</p>
+</section>
+<section id="sez-skip-on-extend-zero">
+<h3>SEZ - Skip on Extend Zero<a class="headerlink" href="#sez-skip-on-extend-zero" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 63, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Skips the following two program bytes if <code class="docutils literal notranslate"><span class="pre">E</span></code> is cleared (zero).</p>
+</section>
+<section id="ldr-load-rom-data">
+<h3>LDR - Load ROM Data<a class="headerlink" href="#ldr-load-rom-data" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 207, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "D", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Loads the immediate program data byte <code class="docutils literal notranslate"><span class="pre">D</span></code> into <code class="docutils literal notranslate"><span class="pre">ACC</span></code>. This is a two-byte instruction.</p>
+</section>
+<section id="lda-load-accumulator">
+<h3>LDA - Load Accumulator<a class="headerlink" href="#lda-load-accumulator" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "R", "bits": 4},
+  {"name": 6, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Loads <code class="docutils literal notranslate"><span class="pre">ACC</span></code> with the contents of the general-purpose register <code class="docutils literal notranslate"><span class="pre">R</span></code>.</p>
+</section>
+<section id="sta-store-accumulator">
+<h3>STA - Store Accumulator<a class="headerlink" href="#sta-store-accumulator" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "R", "bits": 4},
+  {"name": 7, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Stores the contents of <code class="docutils literal notranslate"><span class="pre">ACC</span></code> into the general-purpose register <code class="docutils literal notranslate"><span class="pre">R</span></code>.</p>
+</section>
+<section id="ldi-load-indexed">
+<h3>LDI - Load Indexed<a class="headerlink" href="#ldi-load-indexed" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Z", "bits": 4},
+  {"name": 14, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Loads <code class="docutils literal notranslate"><span class="pre">ACC</span></code> with the contents with data from the general-purpose register indexed by <code class="docutils literal notranslate"><span class="pre">Z</span> <span class="pre">|</span> <span class="pre">R0[3:0]</span></code>.</p>
+</section>
+<section id="sti-store-indexed">
+<h3>STI - Store Indexed<a class="headerlink" href="#sti-store-indexed" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Z", "bits": 4},
+  {"name": 15, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Stores the contents of <code class="docutils literal notranslate"><span class="pre">ACC</span></code> into the general-purpose register indexed by <code class="docutils literal notranslate"><span class="pre">Z</span> <span class="pre">|</span> <span class="pre">R0[3:0]</span></code>.</p>
+</section>
+<section id="str-store-rom-data">
+<h3>STR - Store ROM Data<a class="headerlink" href="#str-store-rom-data" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "R", "bits": 4},
+  {"name": 13, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "D", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Stores the immediate program data byte <code class="docutils literal notranslate"><span class="pre">D</span></code> into the general-purpose register <code class="docutils literal notranslate"><span class="pre">R</span></code>. This is a two-byte instruction.</p>
+</section>
+<section id="ste-set-extend">
+<h3>STE - Set Extend<a class="headerlink" href="#ste-set-extend" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 180, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Sets <code class="docutils literal notranslate"><span class="pre">E</span></code>.</p>
+</section>
+<section id="cle-clear-extend">
+<h3>CLE - Clear Extend<a class="headerlink" href="#cle-clear-extend" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 181, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Clears <code class="docutils literal notranslate"><span class="pre">E</span></code> to zero.</p>
+</section>
+<section id="dsi-disable-interrupt">
+<h3>DSI - Disable Interrupt<a class="headerlink" href="#dsi-disable-interrupt" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 175, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Clears <code class="docutils literal notranslate"><span class="pre">INTENA</span></code>. Same as <code class="docutils literal notranslate"><span class="pre">CLC</span> <span class="pre">7</span></code>.</p>
+</section>
+<section id="eni-enable-interrupt">
+<h3>ENI - Enable Interrupt<a class="headerlink" href="#eni-enable-interrupt" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 47, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Sets <code class="docutils literal notranslate"><span class="pre">INTENA</span></code>. Same as <code class="docutils literal notranslate"><span class="pre">STC</span> <span class="pre">7</span></code>.</p>
+</section>
+<section id="slt-skip-on-less-than">
+<h3>SLT - Skip on Less Than<a class="headerlink" href="#slt-skip-on-less-than" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 9, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Skips the following two program bytes if <code class="docutils literal notranslate"><span class="pre">ACC</span></code> is less than <code class="docutils literal notranslate"><span class="pre">R0</span></code>.</p>
+</section>
+<section id="seq-skip-on-equal">
+<h3>SEQ - Skip on Equal<a class="headerlink" href="#seq-skip-on-equal" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 10, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Skips the following two program bytes if <code class="docutils literal notranslate"><span class="pre">ACC</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">R0</span></code>.</p>
+</section>
+<section id="saz-skip-on-accumulator-zero">
+<h3>SAZ - Skip on Accumulator Zero<a class="headerlink" href="#saz-skip-on-accumulator-zero" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 11, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Skips the following two program bytes if <code class="docutils literal notranslate"><span class="pre">ACC</span></code> is equal to zero.</p>
+</section>
+<section id="sle-skip-on-less-equal">
+<h3>SLE - Skip on Less Equal<a class="headerlink" href="#sle-skip-on-less-equal" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 12, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Skips the following two program bytes if <code class="docutils literal notranslate"><span class="pre">ACC</span></code> is less than or equal to <code class="docutils literal notranslate"><span class="pre">R0</span></code>.</p>
+</section>
+<section id="sge-skip-on-greater-equal">
+<h3>SGE - Skip on Greater Equal<a class="headerlink" href="#sge-skip-on-greater-equal" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 13, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Skips the following two program bytes if <code class="docutils literal notranslate"><span class="pre">ACC</span></code> is greater than or equal to <code class="docutils literal notranslate"><span class="pre">R0</span></code>.</p>
+</section>
+<section id="sne-skip-on-not-equal">
+<h3>SNE - Skip on Not Equal<a class="headerlink" href="#sne-skip-on-not-equal" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 14, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Skips the following two program bytes if <code class="docutils literal notranslate"><span class="pre">ACC</span></code> is <em>not</em> equal to <code class="docutils literal notranslate"><span class="pre">R0</span></code>.</p>
+</section>
+<section id="san-skip-on-accumulator-not-zero">
+<h3>SAN - Skip on Accumulator Not zero<a class="headerlink" href="#san-skip-on-accumulator-not-zero" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 15, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Skips the following two program bytes if <code class="docutils literal notranslate"><span class="pre">ACC</span></code> is <em>not</em> equal to zero.</p>
+</section>
+<section id="sgt-skip-on-greater-than">
+<h3>SGT - Skip on Greater Than<a class="headerlink" href="#sgt-skip-on-greater-than" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 16, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Skips the following two program bytes if <code class="docutils literal notranslate"><span class="pre">ACC</span></code> is greater than <code class="docutils literal notranslate"><span class="pre">R0</span></code>.</p>
+</section>
+<section id="ina-input-data-to-accumulator">
+<h3>INA - Input Data to Accumulator<a class="headerlink" href="#ina-input-data-to-accumulator" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "DS", "bits": 4},
+  {"name": 4, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Loads <code class="docutils literal notranslate"><span class="pre">ACC</span></code> with a byte read from the device addressed by <code class="docutils literal notranslate"><span class="pre">DS</span></code>.</p>
+</section>
+<section id="ota-output-accumulator">
+<h3>OTA - Output Accumulator<a class="headerlink" href="#ota-output-accumulator" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "DS", "bits": 4},
+  {"name": 5, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Writes the contents of <code class="docutils literal notranslate"><span class="pre">ACC</span></code> to the device addressed by <code class="docutils literal notranslate"><span class="pre">DS</span></code>. A value of 15 for <code class="docutils literal notranslate"><span class="pre">DS</span></code> is invalid.</p>
+</section>
+<section id="otr-output-rom-data">
+<h3>OTR - Output ROM data<a class="headerlink" href="#otr-output-rom-data" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "DS", "bits": 4},
+  {"name": 12, "bits": 4}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "D", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Writes the immediate program data byte <code class="docutils literal notranslate"><span class="pre">D</span></code> to the device addressed by <code class="docutils literal notranslate"><span class="pre">DS</span></code>. <code class="docutils literal notranslate"><span class="pre">RWn</span></code> and <code class="docutils literal notranslate"><span class="pre">PSG</span></code> are asserted at the same time while the databus remains in a high-impedance state to cause the byte to be transmitted to the device.</p>
+</section>
+<section id="stc-set-control">
+<h3>STC - Set Control<a class="headerlink" href="#stc-set-control" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "K", "bits": 3},
+  {"name": 5, "bits": 5}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Sets bit <code class="docutils literal notranslate"><span class="pre">K</span></code> in the Direct Control port.</p>
+</section>
+<section id="clc-clear-control">
+<h3>CLC - Clear Control<a class="headerlink" href="#clc-clear-control" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "K", "bits": 3},
+  {"name": 37, "bits": 5}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Clears bit <code class="docutils literal notranslate"><span class="pre">K</span></code> in the Direct Control port to zero.</p>
+</section>
+<section id="sfs-skip-on-flag-set">
+<h3>SFS - Skip on Flag Set<a class="headerlink" href="#sfs-skip-on-flag-set" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "J", "bits": 3},
+  {"name": 3, "bits": 5}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Skips the following two program bytes if bit <code class="docutils literal notranslate"><span class="pre">J</span></code> in Direct Control is set (one). Used primarily on Direct Control lines wired as inputs.</p>
+</section>
+<section id="sfz-skip-on-flag-zero">
+<h3>SFZ - Skip on Flag Zero<a class="headerlink" href="#sfz-skip-on-flag-zero" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "J", "bits": 3},
+  {"name": 3, "bits": 5}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Skips the following two program bytes if bit <code class="docutils literal notranslate"><span class="pre">J</span></code> in Direct Control is cleared (zero). Used primarily on Direct Control lines wired as inputs.</p>
+</section>
+<section id="rti-return-from-interrupt">
+<h3>RTI - Return from Interrupt<a class="headerlink" href="#rti-return-from-interrupt" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 144, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Returns from an interrupt by loading the Program Counter with the value of <code class="docutils literal notranslate"><span class="pre">ISR</span></code>. <code class="docutils literal notranslate"><span class="pre">INTENA</span></code> is unaffected.</p>
+</section>
+<section id="rte-return-w-enable">
+<h3>RTE - Return w. Enable<a class="headerlink" href="#rte-return-w-enable" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 177, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Returns from an interrupt by loading the Program Counter with the value of <code class="docutils literal notranslate"><span class="pre">ISR</span></code> and <em>sets</em> <code class="docutils literal notranslate"><span class="pre">INTENA</span></code>.</p>
+</section>
+<section id="nop-no-operation">
+<h3>NOP - No Operation<a class="headerlink" href="#nop-no-operation" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 95, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>No operation is performed.</p>
+</section>
+<section id="jai-jump-through-accumulator-indirect">
+<h3>JAI - Jump through Accumulator Indirect<a class="headerlink" href="#jai-jump-through-accumulator-indirect" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Z", "bits": 3},
+  {"name": 18, "bits": 5}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Performs an indirect jump by loading the Program Counter with a computed value. The page number (3 most-significant bits) are computed through <code class="docutils literal notranslate"><span class="pre">Z</span> <span class="pre">|</span> <span class="pre">R0[2:0]</span></code> and the page offset (8 least-significant bits) are taken directly from the contents of <code class="docutils literal notranslate"><span class="pre">ACC</span></code>.</p>
+</section>
+<section id="jas-jump-through-accumulator-indirect-to-subroutine">
+<h3>JAS - Jump through Accumulator indirect to Subroutine<a class="headerlink" href="#jas-jump-through-accumulator-indirect-to-subroutine" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Z", "bits": 3},
+  {"name": 19, "bits": 5}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Performs an indirect jump by loading the Program Counter with a computed value and copies the address of the instruction byte plus 2 into <code class="docutils literal notranslate"><span class="pre">SSR</span></code>. The page number (3 most-significant bits) are computed through <code class="docutils literal notranslate"><span class="pre">Z</span> <span class="pre">|</span> <span class="pre">R0[2:0]</span></code> and the page offset (8 least-significant bits) are taken directly from the contents of <code class="docutils literal notranslate"><span class="pre">ACC</span></code>.</p>
+</section>
+<section id="jmp-jump">
+<h3>JMP - Jump<a class="headerlink" href="#jmp-jump" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Page Number", "bits": 3},
+  {"name": 16, "bits": 5}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Page Offset", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Loads the Program Counter from immediate program bytes. This is a two-byte instruction.</p>
+</section>
+<section id="jsb-jump-to-subroutine">
+<h3>JSB - Jump to Subroutine<a class="headerlink" href="#jsb-jump-to-subroutine" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Page Number", "bits": 3},
+  {"name": 17, "bits": 5}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": "Page Offset", "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Loads the Program Counter from immediate program bytes and copies the address of the first instruction byte plus 2 into <code class="docutils literal notranslate"><span class="pre">SSR</span></code>. This is a two-byte instruction.</p>
+</section>
+<section id="rts-return-from-subroutine">
+<h3>RTS - Return from Subroutine<a class="headerlink" href="#rts-return-from-subroutine" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 184, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Loads the Program Counter with the contents of <code class="docutils literal notranslate"><span class="pre">SSR</span></code> and loads <code class="docutils literal notranslate"><span class="pre">SSR</span></code> with the address of the instruction byte plus 2.</p>
+</section>
+<section id="rse-return-from-subroutine-and-enable">
+<h3>RSE - Return from Subroutine and Enable<a class="headerlink" href="#rse-return-from-subroutine-and-enable" title="Link to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "reg": [
+  {"name": 185, "bits": 8}],
+  "config": {"hspace": 600}
+}
+</script>
+</div>
+<p>Loads the Program Counter with the contents of <code class="docutils literal notranslate"><span class="pre">SSR</span></code>, loads <code class="docutils literal notranslate"><span class="pre">SSR</span></code> with the address of the instruction byte plus 2 and sets <code class="docutils literal notranslate"><span class="pre">INTENA</span></code>.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="misc.html" class="btn btn-neutral float-left" title="Miscelaneous" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="simplecpu.html" class="btn btn-neutral float-right" title="Simple CPU" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Tholin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,426 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AS65C02/AS65C10 &mdash; WAFER-SPACE-MULTI  documentation</title>
+      <link rel="stylesheet" type="text/css" href="static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="static/custom.css?v=5d8de9f2" />
+
+  
+      <script src="static/jquery.js?v=5d32c60e"></script>
+      <script src="static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="static/documentation_options.js?v=5929fcd5"></script>
+      <script src="static/doctools.js?v=9bcbadda"></script>
+      <script src="static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://wavedrom.com/skins/default.js"></script>
+      <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Commodore 64 PLA" href="pla.html" />
+    <link rel="prev" title="SID" href="sid.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            WAFER-SPACE-MULTI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="multiplexer.html">Multiplexer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html">TinyTapeout VGA Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html#bit-color-vga-demo">24-bit color VGA demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscelaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nanoproc.html">Nanoprocessor Replica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simplecpu.html">Simple CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rv32.html">AS65RV32</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fm.html">SID 2 (SID-compatible FM-Synthesizer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ntsc.html">NTSC Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dramcontroller.html">DRAM Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpio.html">GPIO Chip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sid.html">SID</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AS65C02/AS65C10</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pad-assignments">Pad Assignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#intended-pinouts">Intended Pinouts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dip-40-pinout-for-6502-pad-out">DIP-40 Pinout for 6502 pad-out</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dip-40-pinout-for-6510-pad-out">DIP-40 Pinout for 6510 pad-out</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#detect-instruction">“Detect” Instruction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-instructions">Additional Instructions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sev-set-v">SEV - Set V</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mul-multiply">MUL - Multiply</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chrp-chirp">CHRP - Chirp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cor-corrupt">COR - Corrupt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extend-reserved">EXTEND - Reserved</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pla.html">Commodore 64 PLA</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WAFER-SPACE-MULTI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">AS65C02/AS65C10</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="sources/as65cxx.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="as65c02-as65c10">
+<span id="as65cxx"></span><h1>AS65C02/AS65C10<a class="headerlink" href="#as65c02-as65c10" title="Link to this heading"></a></h1>
+<p>This design is a fully compatible reimplementation of the MOS 6502 CPU core with 6502 or 6510 pinout options, intended to be a drop-in replacement. All instructions from the original are implemented, including all the undocumented opcodes except JAM/KIL, and execute in a cycle-accurate manner. No bugs from the original were fixed either (i.e. behavior on indirect jumps referencing a page border address), providing 100% compatibility with existing systems. Digital input levels are TTL-compatible, but the CPU is implemented in CMOS, providing a maximum clock rate of up to 33MHz.</p>
+<p>Two pad-out configurations are available. Project ID <code class="docutils literal notranslate"><span class="pre">'b11100</span></code> selects the AS65C10 with 6510-compatible pad-out, including the 6-bit GPIO port, while <code class="docutils literal notranslate"><span class="pre">'b11101</span></code> selects the AS65C02 with 6502-compatible pad-out.</p>
+<p>The only major change is that some of the JAM/KIL opcodes were re-purposed to implement actual instructions, providing hardware multiplication support and debugging utilities for the chip designers. To make it possible for software to identify if it is running on a AS65Cxx processor as opposed to a original MOS part, the behavior of one of the undocumented <code class="docutils literal notranslate"><span class="pre">NOP</span> <span class="pre">#</span></code> instructions was changed to set the <code class="docutils literal notranslate"><span class="pre">V</span></code> status bit for a specific immediate value, behavior which is unique to the AS65Cxx parts. This functionality and that of the new instructions are described further below.</p>
+<p>Multiple pads on the die are allocated to provide some configuration options. Due to the fact that there are some behavior differences between existing pin-compatible 6502 models and some ambiguity exists on the exact behavior of the MOS 6502 in certain cases, the AS65Cxx may be configured to behave differently in certain scenarios by hard-wiring select configuration pads low, enabling or disabling them. Outside of prototyping, this should be done during wire-bonding after the correct settings for a target product have been determined.</p>
+<p>Special note: this design is clocked on the <strong>falling edge</strong> of the input clock signal.</p>
+<section id="pad-assignments">
+<h2>Pad Assignments<a class="headerlink" href="#pad-assignments" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="cxx-6502-pad-description">
+<caption><span class="caption-number">Table 17 </span><span class="caption-text">Pad description (6502-compatible)</span><a class="headerlink" href="#cxx-6502-pad-description" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pad</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Summary</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[0]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AEC</span></code></p></td>
+<td><p>I (PU)</p></td>
+<td><p>When low, forcefully tri-states the address and data buses as well as the <code class="docutils literal notranslate"><span class="pre">R/Wn</span></code> control signal (this does not pause the processor)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[1]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MLn</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Indicates that a read-modify-write cycle is in progress</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[2]</span></code></p></td>
+<td><p>Disable write pauses</p></td>
+<td><p>I (PU)</p></td>
+<td><p>Changes the behavior of the <code class="docutils literal notranslate"><span class="pre">RDY</span></code> input. When high, <code class="docutils literal notranslate"><span class="pre">RDY</span></code> can no longer extend memory writes, only reads, as in the original 6502/6510 processors</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[3]</span></code></p></td>
+<td><p>Half write cycle</p></td>
+<td><p>I (PU)</p></td>
+<td><p>When high, the data bus is only an output for half a clock period on write cycles, instead of a full clock period, as in the original 6502/6510 processors</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[4]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NC</span></code></p></td>
+<td><p>NC</p></td>
+<td><p>No connect. Bond/wire to ground.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[5]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SOb</span></code></p></td>
+<td><p>I (PU)</p></td>
+<td><p>A low level on this input sets the <code class="docutils literal notranslate"><span class="pre">V</span></code> flag in the status register</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[6]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PH2OUT</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Phi2 clock output (inverse of input clock)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[7]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RESn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Active-low reset input</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[8]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RDY</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Input that, while low, pauses the processor during a memory access, forcing it to wait for slower memory</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[9]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PH1OUT</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Phi1 clock output</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[10]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">IRQn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Low-level-sensitive external interrupt input</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[11]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VPn</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Output that goes low while the CPU is fetching an interrupt or reset vector</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[12]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NMIn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Non-maskable interrupt trigger, falling-edge triggered</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[13]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SYNC</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Status output indicating that the current bus cycle is an instruction fetch in-progress</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[14]</span></code></p></td>
+<td><p>Sync IRQs</p></td>
+<td><p>I (PU)</p></td>
+<td><p>If high, the <code class="docutils literal notranslate"><span class="pre">IRQn</span></code> and <code class="docutils literal notranslate"><span class="pre">NMIn</span></code> inputs are additionally buffered through a latch and synchronized to the falling edge of the clock</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[26:15]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A[11:0]</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Address bus outputs, multiplexed in extended bus mode</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[27]</span></code></p></td>
+<td><p>Sync <code class="docutils literal notranslate"><span class="pre">RDY</span></code></p></td>
+<td><p>I (PU)</p></td>
+<td><p>If high, the <code class="docutils literal notranslate"><span class="pre">RDY</span></code> input is additionally buffered through a latch and synchronized to the <strong>rising edge</strong> of the clock</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[28]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A[12]</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Part of the address bus outputs</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[29]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">II</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Mirrors the state of the <code class="docutils literal notranslate"><span class="pre">I</span></code> processor status bit (for debugging use)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[32:30]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A[15:13]</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Part of the address bus outputs</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[40:33]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">D[0:7]</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>Bi-directional data bus (note reversed bit order compared to pad numbering)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[41]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">R/Wn</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Indicates if the current bus cycle is a read (high) or a write (low)</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default" id="cxx-6510-pad-description">
+<caption><span class="caption-number">Table 18 </span><span class="caption-text">Pad description (6510-compatible)</span><a class="headerlink" href="#cxx-6510-pad-description" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pad</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Summary</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[0]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">D[1]</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>Bi-directional data bus</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[1]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">D[0]</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>Bi-directional data bus</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[2]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">R/Wn</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Indicates if the current bus cycle is a read (high) or a write (low)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[3]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PH1OUT</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Phi1 clock output</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[4]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RESn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Active-low reset input</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[5]</span></code></p></td>
+<td><p>Half write cycle</p></td>
+<td><p>I (PU)</p></td>
+<td><p>When high, the data bus is only an output for half a clock period on write cycles, instead of a full clock period, as in the original 6502/6510 processors</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[6]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">C64SEL</span></code></p></td>
+<td><p>I</p></td>
+<td><p>When high, the directions of the GPIO port bits are initialized, on reset, to what is required on the Commodore 64 - otherwise, they are cleared to zero (all inputs)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[7]</span></code></p></td>
+<td><p>Disable write pauses</p></td>
+<td><p>I (PU)</p></td>
+<td><p>Changes the behavior of the <code class="docutils literal notranslate"><span class="pre">RDY</span></code> input. When high, <code class="docutils literal notranslate"><span class="pre">RDY</span></code> can no longer extend memory writes, only reads, as in the original 6502/6510 processors</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[8]</span></code></p></td>
+<td><p>Sync IRQs</p></td>
+<td><p>I (PU)</p></td>
+<td><p>If high, the <code class="docutils literal notranslate"><span class="pre">IRQn</span></code> and <code class="docutils literal notranslate"><span class="pre">NMIn</span></code> inputs are additionally buffered through a latch and synchronized to the falling edge of the clock</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[9]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RDY</span></code></p></td>
+<td><p>I (PU)</p></td>
+<td><p>Input that, while low, pauses the processor during a memory access, forcing it to wait for slower memory</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[10]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">IRQn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Low-level-sensitive external interrupt input</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[11]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NMIn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Non-maskable interrupt trigger, falling-edge triggered</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[12]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AEC</span></code></p></td>
+<td><p>I (PU)</p></td>
+<td><p>When low, forcefully tri-states the address and data buses as well as the <code class="docutils literal notranslate"><span class="pre">R/Wn</span></code> control signal (this does not pause the processor)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[26:13]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A[13:0]</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Address bus outputs, multiplexed in extended bus mode</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[27]</span></code></p></td>
+<td><p>Sync <code class="docutils literal notranslate"><span class="pre">RDY</span></code></p></td>
+<td><p>I (PU)</p></td>
+<td><p>If high, the <code class="docutils literal notranslate"><span class="pre">RDY</span></code> input is additionally buffered through a latch and synchronized to the clock</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[29:28]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A[15:14]</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Part of the address bus outputs</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[35:30]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">P[0:5]</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>General-purpose GPIO port</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[41:36]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">D[2:7]</span></code></p></td>
+<td><p>IO</p></td>
+<td><p>Bi-directional data bus</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="intended-pinouts">
+<h2>Intended Pinouts<a class="headerlink" href="#intended-pinouts" title="Link to this heading"></a></h2>
+<p>The pad-out of this design was carefully selected to allow bonding to DIP-40-compatible COB PCBs or DIP-40 ceramic carriers. The intended pinouts are shown below. Just how the project selection pins are intended to be selectively bonded to the ground plane inside the package, the various configuration pins (such as <code class="docutils literal notranslate"><span class="pre">bidir[27]</span></code> on either pad-out option) are also pulled high by default and may be bonded to ground selectively.</p>
+<section id="dip-40-pinout-for-6502-pad-out">
+<h3>DIP-40 Pinout for 6502 pad-out<a class="headerlink" href="#dip-40-pinout-for-6502-pad-out" title="Link to this heading"></a></h3>
+<p>Note here that all three “NC” pins of the original MOS 6502 have been assigned a function. These can be ignored. <code class="docutils literal notranslate"><span class="pre">AEC</span></code> contains a built-in pull-up resistor and <code class="docutils literal notranslate"><span class="pre">MLn</span></code> and <code class="docutils literal notranslate"><span class="pre">VPn</span></code> are outputs.</p>
+<img alt="images/as65cxx_6502_dip-40.png" src="_images/as65cxx_6502_dip-40.png" />
+</section>
+<section id="dip-40-pinout-for-6510-pad-out">
+<h3>DIP-40 Pinout for 6510 pad-out<a class="headerlink" href="#dip-40-pinout-for-6510-pad-out" title="Link to this heading"></a></h3>
+<img alt="static/as65cxx_6510_dip-40.png" src="_static/as65cxx_6510_dip-40.png" />
+</section>
+</section>
+<section id="detect-instruction">
+<h2>“Detect” Instruction<a class="headerlink" href="#detect-instruction" title="Link to this heading"></a></h2>
+<p>To allow software to detect if it is running on AS65Cxx silicon, the so called “detect” instruction may be used. This consists of the bytecode <code class="docutils literal notranslate"><span class="pre">E2</span> <span class="pre">42</span></code>. This is interpreted as <code class="docutils literal notranslate"><span class="pre">NOP</span> <span class="pre">#$42</span></code> by both the AS65Cxx and MOS 6502 parts. However, only on the AS65Cxx does this sequence have the side effect of setting the <code class="docutils literal notranslate"><span class="pre">V</span></code> flag. The sequence must be specific. Different values for the immediate argument or the opcode do not trigger this setting of the <code class="docutils literal notranslate"><span class="pre">V</span></code> flag.</p>
+</section>
+<section id="additional-instructions">
+<h2>Additional Instructions<a class="headerlink" href="#additional-instructions" title="Link to this heading"></a></h2>
+<p>The KIL/JAM opcodes of the original MOS 6502 have been re-purposed to add new behavior to the processor. Some are intended for use by the chip developers, but some provide useful new functionality, like hardware multiplication. All KIL/JAM opcodes which have not been repurposed will function as single-byte no-ops.</p>
+<p>All of the following instructions are one-byte instructions taking 2 clock cycles to execute (including <code class="docutils literal notranslate"><span class="pre">MUL</span></code>).</p>
+<section id="sev-set-v">
+<h3>SEV - Set V<a class="headerlink" href="#sev-set-v" title="Link to this heading"></a></h3>
+<p>Opcode: <code class="docutils literal notranslate"><span class="pre">'h12</span></code></p>
+<p>Sets the <code class="docutils literal notranslate"><span class="pre">V</span></code> flag. Does not affect other flags.</p>
+</section>
+<section id="mul-multiply">
+<h3>MUL - Multiply<a class="headerlink" href="#mul-multiply" title="Link to this heading"></a></h3>
+<p>Opcode: <code class="docutils literal notranslate"><span class="pre">'hB2</span></code></p>
+<p>Multiplies the contents of the <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> registers, storing the full 16-bit result in <code class="docutils literal notranslate"><span class="pre">A</span></code> (LSBs) and <code class="docutils literal notranslate"><span class="pre">Y</span></code> (MSBs). The <code class="docutils literal notranslate"><span class="pre">Z</span></code> flag is set if <code class="docutils literal notranslate"><span class="pre">A</span></code> <strong>and</strong> <code class="docutils literal notranslate"><span class="pre">Y</span></code> are zero after the operation. The <code class="docutils literal notranslate"><span class="pre">N</span></code> flag is set if the most-significant bit of <code class="docutils literal notranslate"><span class="pre">Y</span></code> is set after the operation.</p>
+</section>
+<section id="chrp-chirp">
+<h3>CHRP - Chirp<a class="headerlink" href="#chrp-chirp" title="Link to this heading"></a></h3>
+<p>Opcode: <code class="docutils literal notranslate"><span class="pre">'h02</span></code></p>
+<p>Load debug value into <code class="docutils literal notranslate"><span class="pre">A</span></code>. Does not affect flags.</p>
+</section>
+<section id="cor-corrupt">
+<h3>COR - Corrupt<a class="headerlink" href="#cor-corrupt" title="Link to this heading"></a></h3>
+<p>Opcode: <code class="docutils literal notranslate"><span class="pre">'hF2</span></code></p>
+<p>Corrupts the system state by loading <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">Y</span></code>, <code class="docutils literal notranslate"><span class="pre">SP</span></code> and <code class="docutils literal notranslate"><span class="pre">P</span></code> with random values from a LFSR PRNG. All but one of the LFSR bits are left unitinialized on reset, leaving their flip-flops to settle into truly random states on power-up, meaning the random number sequence is different after each power-up.</p>
+</section>
+<section id="extend-reserved">
+<h3>EXTEND - Reserved<a class="headerlink" href="#extend-reserved" title="Link to this heading"></a></h3>
+<p>Opcode: <code class="docutils literal notranslate"><span class="pre">'h92</span></code></p>
+<p>Reserved opcode. Currently a no-op, but reserved as an instruction prefix to add up to 256 additional instructions in the future.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sid.html" class="btn btn-neutral float-left" title="SID" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pla.html" class="btn btn-neutral float-right" title="Commodore 64 PLA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Tholin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

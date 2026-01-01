@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commodore 64 PLA &mdash; WAFER-SPACE-MULTI  documentation</title>
+      <link rel="stylesheet" type="text/css" href="static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="static/custom.css?v=5d8de9f2" />
+
+  
+      <script src="static/jquery.js?v=5d32c60e"></script>
+      <script src="static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="static/documentation_options.js?v=5929fcd5"></script>
+      <script src="static/doctools.js?v=9bcbadda"></script>
+      <script src="static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://wavedrom.com/skins/default.js"></script>
+      <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="AS65C02/AS65C10" href="as65cxx.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            WAFER-SPACE-MULTI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="multiplexer.html">Multiplexer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html">TinyTapeout VGA Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vga.html#bit-color-vga-demo">24-bit color VGA demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Miscelaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nanoproc.html">Nanoprocessor Replica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simplecpu.html">Simple CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rv32.html">AS65RV32</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fm.html">SID 2 (SID-compatible FM-Synthesizer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ntsc.html">NTSC Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dramcontroller.html">DRAM Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpio.html">GPIO Chip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sid.html">SID</a></li>
+<li class="toctree-l1"><a class="reference internal" href="as65cxx.html">AS65C02/AS65C10</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Commodore 64 PLA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pad-assignments">Pad Assignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#intended-pinout">Intended Pinout</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WAFER-SPACE-MULTI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Commodore 64 PLA</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="sources/pla.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="commodore-64-pla">
+<span id="pla"></span><h1>Commodore 64 PLA<a class="headerlink" href="#commodore-64-pla" title="Link to this heading"></a></h1>
+<p>This design is a replica of the PLA chip used in the Commodore 64 home computer, but implemented through discrete logic rather than an actual PLA. Implementing this circuit in a way that does not cause timing problems with other chips inside the Commodore 64 requires specific input-to-output propagation delays to be met. As this delay was difficult to estimate for this multi-project die, several different delay lengths are selectable through the <code class="docutils literal notranslate"><span class="pre">CASDEL[1:0]</span></code> and <code class="docutils literal notranslate"><span class="pre">DEL</span></code> inputs. The former selects a delay specifically for the <code class="docutils literal notranslate"><span class="pre">CASRAMn</span></code> output, while the latter selects the delay for all other outputs. All of these inputs have built-in pull-ups, meaning any delay can be selected by hardwiring or bonding specific inputs to ground.</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">DEL</span></code> is high, it selects additional delay. Otherwise, no additional delay is added.</p>
+<p><code class="docutils literal notranslate"><span class="pre">CASDEL[1:0]</span></code> features four possible delay settings:</p>
+<table class="docutils align-default" id="casdel-description">
+<caption><span class="caption-number">Table 19 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">CASDEL[1:0]</span></code> settings</span><a class="headerlink" href="#casdel-description" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">CASDEL[1:0]</span></code> value</p></th>
+<th class="head"><p>Setting</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'b00</span></code></p></td>
+<td><p>Short delay</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'b01</span></code></p></td>
+<td><p>Medium delay</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'b10</span></code></p></td>
+<td><p>No delay</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'b11</span></code></p></td>
+<td><p>High delay</p></td>
+</tr>
+</tbody>
+</table>
+<section id="pad-assignments">
+<h2>Pad Assignments<a class="headerlink" href="#pad-assignments" title="Link to this heading"></a></h2>
+<p>PLA Pin descriptions taken from <a class="reference external" href="https://www.c64-wiki.com/wiki/PLA_(C64_chip)">the C64 wiki</a>.</p>
+<p>All unused pads should be hardwired or bonded to ground, if possible.</p>
+<table class="docutils align-default" id="pla-pad-description">
+<caption><span class="caption-number">Table 20 </span><span class="caption-text">Pad description</span><a class="headerlink" href="#pla-pad-description" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pad</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Summary</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[0]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">R/Wn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Connected to R/#W of the bus</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[1]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AECn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>#AEC, connected to inverted version of AEC on the VIC-II</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[2]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BA</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Connected to BA on the VIC-II</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[3]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A12</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Connected to A12 of the address bus</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[7]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FE/NC</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Used for programming field-programmable parts and not connected internally for mask programmable parts.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[8]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A13</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Connected to A13 of the address bus</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[9]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A14</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Connected to A14 of the address bus</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[10]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A15</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Connected to A15 of the address bus</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[12]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VA14n</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Connected to #VA14 on VIC-II</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[13]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CHARENn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Connected to #CHAREN on I/O port of the 6510 CPU</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[14]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">HIRAMn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Connected to #HIRAM on I/O port of the 6510 CPU</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[19]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LORAMn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Connected to #LORAM on I/O port of the 6510 CPU</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[20]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CASn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Connected to #CAS on the VIC-II</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[21]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ROMHn</span></code></p></td>
+<td><p>O</p></td>
+<td><p>#ROMH</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[22]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ROMLn</span></code></p></td>
+<td><p>O</p></td>
+<td><p>#ROML</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[23]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">IOn</span></code></p></td>
+<td><p>O</p></td>
+<td><p>#I/O</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[24]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GRWn</span></code></p></td>
+<td><p>O</p></td>
+<td><p>GR/#W, connected to #WE on the color RAM</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[26]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CHAROMn</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Connected to #CS1 on the #CHAROM</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[27]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">KERNALn</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Connected to #CS on the #KERNAL ROM</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[30]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BASICn</span></code></p></td>
+<td><p>O</p></td>
+<td><p>Connected to #CS on the #BASIC ROM</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[31]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CASRAMn</span></code></p></td>
+<td><p>O</p></td>
+<td><p>#CASRAM, connected to the #CAS pin on the DRAM</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[32]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CEn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Chip Enable / Output Enable (active-low)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[33]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VA12</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Connected to VA12 on VIC-II</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[35]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VA13</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Connected to VA13 on VIC-II</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[37]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DEL</span></code></p></td>
+<td><p>I (PU)</p></td>
+<td><p>Delay select for all outputs except <code class="docutils literal notranslate"><span class="pre">CASRAMn</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[39:38]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CASDEL[1:0]</span></code></p></td>
+<td><p>I (PU)</p></td>
+<td><p>Delay select for the <code class="docutils literal notranslate"><span class="pre">CASRAMn</span></code> output</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[40]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GAMEn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Connected to #GAME on pin 8 of cartridge port</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bidir[41]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">EXROMn</span></code></p></td>
+<td><p>I</p></td>
+<td><p>Connected #EXROM on pin 9 of cartridge port</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="intended-pinout">
+<h2>Intended Pinout<a class="headerlink" href="#intended-pinout" title="Link to this heading"></a></h2>
+<p>The pad-out of this design was carefully selected to allow bonding to DIP-28-compatible COB PCBs or DIP-28 ceramic carriers to form a drop-in replacement for the Commodore 64 PLA chip. The intended pinout is shown below.</p>
+<img alt="images/pla-dip-28.png" src="_images/pla-dip-28.png" />
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="as65cxx.html" class="btn btn-neutral float-left" title="AS65C02/AS65C10" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Tholin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
