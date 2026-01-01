@@ -221,7 +221,7 @@
 <section id="intended-pinout">
 <h2>Intended Pinout<a class="headerlink" href="#intended-pinout" title="Link to this heading"></a></h2>
 <p>The pad-out of this design was carefully selected to allow bonding to DIP-40-compatible COB PCBs or DIP-40 ceramic carriers. The intended pinout is shown below.</p>
-<img alt="images/weh.png" src="_images/weh.png" />
+<img alt="images/weh.png" src="images/weh.png" />
 </section>
 <section id="configuration">
 <h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
@@ -351,7 +351,7 @@
 <section id="memory-access-function">
 <h2>Memory access function<a class="headerlink" href="#memory-access-function" title="Link to this heading"></a></h2>
 <p>To function properly, two support ICs are required, both of which are standard 74HC(T)574s. These form the write and read buffers respectively, buffering the data lines between the host system bus and the DRAM data buses. The simplest possible setup for this is shown below:</p>
-<img alt="images/aaaa.png" src="_images/aaaa.png" />
+<img alt="images/aaaa.png" src="images/aaaa.png" />
 <p>Whenever the controller detects a falling edge on the <code class="docutils literal notranslate"><span class="pre">CSn</span></code> pin (while <code class="docutils literal notranslate"><span class="pre">CONFn</span></code> is high) and is not already serving a memory request, it begins either a memory read or write depending on the state of <code class="docutils literal notranslate"><span class="pre">R/Wn</span></code>. If a refresh cycle is currently in progress, it is completed first before the memory request is served. In any case, <code class="docutils literal notranslate"><span class="pre">RDY/RDYn</span></code> is deasserted immediately. The controller then performs the necessary row and column address strobes to either write a word of data from the buffers to the DRAM or read a word of data from the DRAM to the buffers. As soon as this is complete, <code class="docutils literal notranslate"><span class="pre">RDY/RDYn</span></code> is asserted, signaling to the host system that the memory request has completed.</p>
 <p>In the case of a read, the read word is held in the read latch indefinitely, allowing the host system to retrieve it at any arbitrary time after the read has completed. In the case of a write, the word to be written is latched, triggered by a pulse on the <code class="docutils literal notranslate"><span class="pre">WLC</span></code> pin, which occurs on the same clock cycle as <code class="docutils literal notranslate"><span class="pre">RDY/RDYn</span></code> being deasserted. After this, the host system bus is free to be used for other purposes in the meantime.</p>
 </section>
